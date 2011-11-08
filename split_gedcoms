@@ -1,0 +1,8 @@
+#!/bin/sh
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+
+location="`pwd $1`/"
+
+ruby GedcomSplitter.rb -f $location/SRSUR1.GED -c 10 -o $location/SRSUR1
+ruby GedcomSplitter.rb -f $location/SRSUR2.GED -c 10 -o $location/SRSUR2
