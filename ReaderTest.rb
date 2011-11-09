@@ -20,5 +20,5 @@ end
 f=File.absolute_path Choice.choices[:file]
 r=FamilySearch::GEDCOM::Reader.new(f, true)
 r.parse!
-pp r.records[0..20]
+# pp r.records[0..20]
 r=nil

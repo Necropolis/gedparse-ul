@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>documents</key>
+	<array>
+		<dict>
+			<key>filename</key>
+			<string>GedcomReader.rb</string>
+			<key>lastUsed</key>
+			<date>2011-11-08T22:22:52Z</date>
+		</dict>
+		<dict>
+			<key>filename</key>
+			<string>ReaderTest.rb</string>
+			<key>lastUsed</key>
+			<date>2011-11-08T22:22:53Z</date>
+		</dict>
+		<dict>
+			<key>filename</key>
+			<string>GedcomSplitter.rb</string>
+			<key>lastUsed</key>
+			<date>2011-11-08T22:22:54Z</date>
+			<key>selected</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>filename</key>
+			<string>split_gedcoms</string>
+			<key>lastUsed</key>
+			<date>2011-11-08T22:22:53Z</date>
+		</dict>
+		<dict>
+			<key>filename</key>
+			<string>parse_gedcoms</string>
+			<key>lastUsed</key>
+			<date>2011-11-08T22:22:53Z</date>
+		</dict>
+	</array>
+	<key>fileHierarchyDrawerWidth</key>
+	<integer>200</integer>
+	<key>metaData</key>
+	<dict/>
+	<key>showFileHierarchyDrawer</key>
+	<true/>
+	<key>windowFrame</key>
+	<string>{{1107, 146}, {773, 803}}</string>
+</dict>
+</plist>

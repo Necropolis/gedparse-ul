@@ -38,9 +38,18 @@ module FamilySearch
             :day_month_year => /^([[:digit:]]{1,2})\s+(\w+)\s+([[:digit:]]{4})$/
           },
           :name => {
-            :last => /\s+(\/\w+)$/
+            :first_last => /^(.+)\s+\/(.+)$/,
+            :first => /^([\w\. ^\/]+)$/,
+            :last => /\s?\/(.+)$/
           }
         }
+        
+=begin
+name.first needs to match:
+Thomas
+Mgret.
+... Laird Of Bulthyle
+=end
         
         @highline ||= begin
           require 'highline'
@@ -89,7 +98,7 @@ module FamilySearch
             scanner.back 1
             next
           when /SPOU/
-            spouse_name = scanner.scan_until(/\r/).strip!
+            spouse_name = name_parts scanner.scan_until(/\r/).strip!, scanner
             if scanner.peek(2).strip!.to_i > level
               spouse_detail = parse_helper(scanner, level+1)
               scanner.back 1
@@ -117,25 +126,18 @@ module FamilySearch
             when @r[:date][:year_only]
               date_parsed[:year] = date.to_i
             when @r[:date][:month_year]
-              date_parts = date.match @r[:date][:month_year]
-              if date_parts == nil
-                br scanner
-              end
-              date_parsed[:month] = date_parts[1]
-              date_parsed[:year] = date_parts[2]
+              date_parsed[:month] = $1
+              date_parsed[:year] = $2
             when @r[:date][:day_month]
-              date_parts = date.match @r[:date][:day_month]
-              date_parsed[:day] = date_parts[1]
-              date_parsed[:month] = date_parts[2]
+              date_parsed[:day] = $1
+              date_parsed[:month] = $2
             when @r[:date][:day_year]
-              date_parts = date.match @r[:date][:day_year]
-              date_parsed[:day] = date_parts[1]
-              date_parsed[:year] = date_parts[2]
+              date_parsed[:day] = $1
+              date_parsed[:year] = $2
             when @r[:date][:day_month_year]
-              date_parts = date.match @r[:date][:day_month_year]
-              date_parsed[:day] = date_parts[1]
-              date_parsed[:month] = date_parts[2]
-              date_parsed[:year] = date_parts[3]
+              date_parsed[:day] = $1
+              date_parsed[:month] = $2
+              date_parsed[:year] = $3
             else
               puts "#{Paint["Unknown date format", :red, :yellow]} #{Paint[date, :yellow, :red]}"
               puts "[c]ontinue [ex]it [p]rompt [s]how"
@@ -195,7 +197,7 @@ module FamilySearch
               record[:event] << n
             end
           when /MOTH/
-            name = scanner.scan_until(/\r/).strip!
+            name = name_parts scanner.scan_until(/\r/).strip!, scanner
             if scanner.peek(2).strip!.to_i > level
               name_detail = parse_helper(scanner, level+1)
               scanner.back 1
@@ -209,7 +211,7 @@ module FamilySearch
               record[:mother] << n
             end
           when /FATH/
-            name = scanner.scan_until(/\r/).strip!
+            name = name_parts scanner.scan_until(/\r/).strip!, scanner
             if scanner.peek(2).strip!.to_i > level
               name_detail = parse_helper(scanner, level+1)
               scanner.back 1
@@ -243,19 +245,31 @@ module FamilySearch
       end
       
       def name_parts(name, scanner)
-        puts "[c]ontinue [ex]it [p]rompt [s]how"
-        case @highline.ask('?> ') { |c| c.validate = /^[cexps]$/ }
-        when 'c'
-          return
-        when 'e', 'x'
-          exit
-          return
-        when 'p'
-          Ripl.start :binding => binding
-        when 's'
-          show scanner
+        parts = Hash.new
+        case name
+        when @r[:name][:first_last]
+          parts[:first] = $1
+          parts[:last] = $2
+        when @r[:name][:first]
+          parts[:first] = $1
+        when @r[:name][:last]
+          parts[:last] = $1
         else
-          puts 'Not an answer?'
+          puts "name : '#{name}'"
+          puts "[c]ontinue [ex]it [p]rompt [s]how"
+          case @highline.ask('?> ') { |c| c.validate = /^[cexps]$/ }
+          when 'c'
+            return
+          when 'e', 'x'
+            exit
+            return
+          when 'p'
+            Ripl.start :binding => binding
+          when 's'
+            show scanner
+          else
+            puts 'Not an answer?'
+          end
         end
         name
       end

@@ -4,7 +4,7 @@
 
 location="`pwd $0`"
 
-ruby "$location/ReaderTest.rb" -f "$location/SRSUR1/0.GED"
+# ruby "$location/ReaderTest.rb" -f "$location/SRSUR1/0.GED"
 
-# find "$location/SRSUR1" -name "*.GED" -exec ruby "$location/ReaderTest.rb" -f "{}" \;
-# find "$location/SRSUR2" -name "*.GED" -exec ruby "$location/ReaderTest.rb" -f "{}" \;
+find "$location/SRSUR1" -name "*.GED" -exec ruby "$location/ReaderTest.rb" -f "{}" \;
+find "$location/SRSUR2" -name "*.GED" -exec ruby "$location/ReaderTest.rb" -f "{}" \;
