@@ -39,16 +39,17 @@ module FamilySearch
           },
           :name => {
             :first_last => /^(.+)\s+\/(.+)$/,
-            :first => /^([\w\. ^\/]+)$/,
+            :first => /^([\w\. \-\'^\/]+)$/,
             :last => /\s?\/(.+)$/
           }
         }
         
 =begin
 name.first needs to match:
-Thomas
-Mgret.
-... Laird Of Bulthyle
+  Thomas
+  Mgret.
+  ... Laird Of Bulthyle
+  Helen Margaret-Eeena
 =end
         
         @highline ||= begin
