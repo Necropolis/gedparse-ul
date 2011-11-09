@@ -27,9 +27,11 @@ r.parse!
 
 puts "Inserting records!"
 recs = r.records
+take_amount = 173
 while !recs.empty?
   print "Inserting records... "
-  subrecs = recs.take 50
+  subrecs = recs.take take_amount
   col.insert(subrecs)
+  recs = recs.drop take_amount
   print "#{Paint["%07d" % recs.length, :green]} remaining\n"
 end
