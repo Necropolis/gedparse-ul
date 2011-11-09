@@ -62,7 +62,6 @@ name.first needs to match:
       def parse!
         require 'paint' if @log
         self.log "Parsing GEDCOM #{Paint[@fname, :red, :bright]}"
-        puts @fname
         scanner = StringScanner.new(File.open(@fname, File::RDONLY).read)
         scanner.scan_until(/^0/)
         while !scanner.eos?

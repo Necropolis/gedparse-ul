@@ -2,8 +2,9 @@
 
 require './GedcomReader'
 require 'choice'
-
+require 'mongo'
 require 'pp'
+require 'paint'
 
 Choice.options do
   
@@ -19,6 +20,16 @@ end
 
 f=File.absolute_path Choice.choices[:file]
 r=FamilySearch::GEDCOM::Reader.new(f, true)
+db = Mongo::Connection.new.db('scots')
+col = db['records_low']
+
 r.parse!
-# pp r.records[0..20]
-r=nil
+
+puts "Inserting records!"
+recs = r.records
+while !recs.empty?
+  print "Inserting records... "
+  subrecs = recs.take 50
+  col.insert(subrecs)
+  print "#{Paint["%07d" % recs.length, :green]} remaining\n"
+end

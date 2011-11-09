@@ -4,5 +4,5 @@
 
 location="`pwd $1`/"
 
-ruby GedcomSplitter.rb -f $location/SRSUR1.GED -c 10 -o $location/SRSUR1
-ruby GedcomSplitter.rb -f $location/SRSUR2.GED -c 10 -o $location/SRSUR2
+ruby GedcomSplitter.rb -f "$location/SRSUR1.GED" -c 5 -o "$location/SRSUR1"
+ruby GedcomSplitter.rb -f "$location/SRSUR2.GED" -c 5 -o "$location/SRSUR2"
