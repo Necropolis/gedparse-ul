@@ -1,8 +1,7 @@
 # Reads an GEDCOM
 
-require 'ripl'
 require 'strscan'
-require 'pp'
+require 'ripl'
 
 class StringScanner
   def back(num)
@@ -19,16 +18,14 @@ module FamilySearch
       
       # The file the GEDCOM is being read from
       attr_accessor :fname
-      # Whether or not to print out stuff to the screen
-      attr_accessor :log
       
       attr_accessor :records
       
-      def initialize(fname,log=false)
+      def initialize(fname)
         @fname = File.absolute_path fname
-        @log = log
         @records = Array.new
         
+        name_regex=/[\w\.\'\(\)\- ]+/
         @r = {
           :date => {
             :year_only => /^[[:digit:]]{4}$/,
@@ -41,27 +38,47 @@ module FamilySearch
             :first_last => /^(.+)\s+\/(.+)$/,
             :first => /^([\w\. \-\'^\/]+)$/,
             :last => /\s?\/(.+)$/
+          },
+          :place => {
+            :place => /^(?<countycode>#{name_regex}),\s+(?<country>#{name_regex}),\s+(?<county>#{name_regex}),\s+(?<town>#{name_regex})\s?$/,
+            :ext_place => /^(?<countycode>#{name_regex}),\s+(?<country>#{name_regex}),\s+(?<county>#{name_regex}),\s+(?<borough>#{name_regex}),\s+(?<city>#{name_regex})\s?$/
           }
         }
         
-=begin
-name.first needs to match:
-  Thomas
-  Mgret.
-  ... Laird Of Bulthyle
-  Helen Margaret-Eeena
-=end
-        
-        @highline ||= begin
-          require 'highline'
-          HighLine.new
-        end
-        
       end
       
+      def self.parse fname
+        parser = FamilySearch::GEDCOM::Reader.new fname
+        parser.parse do |filename, record, records_read|
+          yield filename, record, records_read
+        end
+      end
+      
+      # block callback of filename, record, records_read
+      def parse
+        recs=0
+        scanner = StringScanner.new(File.open(@fname, File::RDONLY).read)
+        scanner.scan_until(/^0/)
+        while !scanner.eos?
+          begin
+            record = Hash.new
+            scanner.forward 1
+            record[:type] = scanner.scan(/\w+/)
+            record.merge! parse_helper(scanner, 1)
+            record = coalesce_record(record)
+          rescue
+          end
+          unless record[:type].match /FAM|INDI/
+            puts "aak!"
+            Ripl.start :binding => binding
+          end
+          recs=recs+1
+          yield @fname, record, recs
+        end
+      end
+      
+      # block callback of filename, record, records_read
       def parse!
-        require 'paint' if @log
-        self.log "Parsing GEDCOM #{Paint[@fname, :red, :bright]}"
         scanner = StringScanner.new(File.open(@fname, File::RDONLY).read)
         scanner.scan_until(/^0/)
         while !scanner.eos?
@@ -72,13 +89,9 @@ name.first needs to match:
             record.merge! parse_helper(scanner, 1)
             @records << coalesce_record(record)
           rescue
-            puts "#{Paint["Fatal Error #{$!}", :red, :yellow, :blink]}"
-            br scanner
           end
-          puts "#{Paint['Now serving', :green]} #{Paint["%07d" % @records.length, :yellow]} #{Paint['records in', :green]} #{Paint[@fname, :yellow]}" if @records.length % 7 == 0
-          
+          yield @fname, record, @records.length
         end
-        self.log "Finished parsing GEDCOM #{Paint[@fname, :red, :bright]}"
       end
       
       def parse_helper(scanner, level=0)
@@ -111,7 +124,24 @@ name.first needs to match:
               record[:spouse] << r
             end
           when /PLAC/
-            record[:place] << scanner.scan_until(/\r/).strip!
+            place = scanner.scan_until(/\r/).strip!
+            parsed_place=Hash.new
+            rgx=nil
+            if rgx=place.match(@r[:place][:place])
+              parsed_place[:countycode]=rgx[:countycode]
+              parsed_place[:country]=rgx[:country]
+              parsed_place[:county]=rgx[:county]
+              parsed_place[:town]=rgx[:town]
+            elsif rgx=place.match(@r[:place][:ext_place])
+              parsed_place[:countycode]=rgx[:countycode]
+              parsed_place[:country]=rgx[:country]
+              parsed_place[:county]=rgx[:county]
+              parsed_place[:city]=rgx[:city]
+              parsed_place[:borough]=rgx[:borough]
+            else
+              raise "Unknown location format!"
+            end
+            record[:place] << parsed_place
           when /BATC/
             scanner.scan /\s+/
             record[:batch] << scanner.scan(/\w+/)
@@ -120,7 +150,6 @@ name.first needs to match:
             record[:misc] << scanner.scan_until(/\r/).strip!
           when /DATE/
             date = scanner.scan_until(/\r/).strip!
-            # puts date
             date_parsed = Hash.new
             case date
             when @r[:date][:year_only]
@@ -139,26 +168,7 @@ name.first needs to match:
               date_parsed[:month] = $2
               date_parsed[:year] = $3
             else
-              puts "#{Paint["Unknown date format", :red, :yellow]} #{Paint[date, :yellow, :red]}"
-              puts "[c]ontinue [ex]it [p]rompt [s]how"
-              case @highline.ask('?> ') { |c| c.validate = /^[cexps]$/ }
-              when 'c'
-                return
-              when 'e', 'x'
-                exit
-                return
-              when 'p'
-                Ripl.start :binding => binding
-              when 's'
-                scanner.back 190
-                puts scanner.peek 190
-                puts Paint["CURSOR", :red, :yellow, :blink]
-                scanner.forward 190
-                puts scanner.peek 190
-                br scanner
-              else
-                puts 'Not an answer?'
-              end
+              raise "Unknown date format!"
             end
             record[:date] << date_parsed
           when /NAME/
@@ -169,7 +179,6 @@ name.first needs to match:
               scanner.back 1
               name_detail[:name] << name
               record[:name] << name_detail
-              # record[:name] << 
               scanner.scan_until(/\r/).strip!
               next
             else
@@ -225,8 +234,7 @@ name.first needs to match:
               record[:father] << n
             end
           else
-            puts "#{Paint["Unknown type", :red, :yellow]} #{Paint[type, :yellow, :red]}"
-            br scanner
+            raise "Unknown type!"
           end
           
           l = scanner.scan_until /^[[:digit:]]/
@@ -234,8 +242,7 @@ name.first needs to match:
             scanner.back 1
             l.strip!
             if l.to_i > level
-              puts "#{Paint["Recursion Unexpected!", :yellow, :red]}"
-              br scanner
+              raise "Recursion unexpected"
             end
           end
 
@@ -250,28 +257,15 @@ name.first needs to match:
         when @r[:name][:first_last]
           parts[:first] = $1
           parts[:last] = $2
-        when @r[:name][:first]
-          parts[:first] = $1
         when @r[:name][:last]
           parts[:last] = $1
+        when @r[:name][:first]
+          parts[:first] = $1
         else
-          puts "name : '#{name}'"
-          puts "[c]ontinue [ex]it [p]rompt [s]how"
-          case @highline.ask('?> ') { |c| c.validate = /^[cexps]$/ }
-          when 'c'
-            return
-          when 'e', 'x'
-            exit
-            return
-          when 'p'
-            Ripl.start :binding => binding
-          when 's'
-            show scanner
-          else
-            puts 'Not an answer?'
-          end
+          raise "Unknown name format!"
         end
-        name
+        
+        parts
       end
       
       def coalesce_record(r)
@@ -289,36 +283,6 @@ name.first needs to match:
           end
         end
         r
-      end
-      
-      def show(scanner)
-        scanner.back 190
-        puts scanner.peek 190
-        puts Paint["CURSOR", :red, :yellow, :blink]
-        scanner.forward 190
-        puts scanner.peek 190
-        br scanner
-      end
-      
-      def br(scanner)
-        puts "[c]ontinue [ex]it [p]rompt [s]how"
-        case @highline.ask('?> ') { |c| c.validate = /^[cexps]$/ }
-        when 'c'
-          return
-        when 'e', 'x'
-          exit
-          return
-        when 'p'
-          Ripl.start :binding => binding
-        when 's'
-          show scanner
-        else
-          puts 'Not an answer?'
-        end
-      end
-            
-      def log sz
-        puts sz if @log
       end
       
     end

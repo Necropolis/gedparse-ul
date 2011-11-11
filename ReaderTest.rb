@@ -6,6 +6,13 @@ require 'mongo'
 require 'pp'
 require 'paint'
 
+def pause
+  case STDIN.getc
+  when 'x'
+    exit
+  end
+end
+
 Choice.options do
   
   header 'GEDCOM Parser Options'
@@ -27,11 +34,14 @@ r.parse!
 
 puts "Inserting records!"
 recs = r.records
-take_amount = 173
+r=nil
+take_amount = 5573
 while !recs.empty?
   print "Inserting records... "
   subrecs = recs.take take_amount
-  col.insert(subrecs)
+  pp subrecs
+  pause
+  # col.insert(subrecs)
   recs = recs.drop take_amount
-  print "#{Paint["%07d" % recs.length, :green]} remaining\n"
+  print "#{Paint["%07d" % recs.length, :green]} remaining from #{Paint[f, :green]}\n"
 end
