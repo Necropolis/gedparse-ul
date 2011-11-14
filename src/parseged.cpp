@@ -101,10 +101,10 @@ int main(int argc, char **argv)
 		return 1;
 	}
 
-	std::ifstream inputFile(infile.c_str(), std::ifstream::in);
+	std::auto_ptr<std::ifstream> inputFile(new std::ifstream(infile.c_str(), std::ifstream::in));
+	std::auto_ptr<FamilySearch::GEDCOM::Gedcom> ged(new FamilySearch::GEDCOM::Gedcom());
 	
-	FamilySearch::GEDCOM::Gedcom *ged = new FamilySearch::GEDCOM::Gedcom();
-	inputFile >> *ged;
+	*inputFile >> *ged;
 
 	return 0;
 }

@@ -15,10 +15,8 @@ namespace FamilySearch { namespace GEDCOM {
 		
 	public:
 		/** parse me from a stream */
-		// std::istream& operator>> (std::istream& is);
 		friend std::istream& operator>> (std::istream &is, Gedcom &ged);
 	};
-	
 	
 	std::istream& operator>> (std::istream &is, Gedcom &ged);
 	
