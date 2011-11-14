@@ -15,6 +15,8 @@
 // familysearch gedcom
 #include "Gedcom.hpp"
 
+using namespace FamilySearch::GEDCOM;
+
 /**
  * Tool to parse through an unlinked GEDCOM file and put the data into a Mongo Database.
  *
@@ -101,8 +103,8 @@ int main(int argc, char **argv)
 
 	std::ifstream inputFile(infile.c_str(), std::ifstream::in);
 	
-	std::auto_ptr<FamilySearch::GEDCOM::Gedcom> gedcom(new FamilySearch::GEDCOM::Gedcom(inputFile));
-	gedcom->parse();
+	FamilySearch::GEDCOM::Gedcom *ged = new FamilySearch::GEDCOM::Gedcom();
+	inputFile >> *ged;
 
 	return 0;
 }

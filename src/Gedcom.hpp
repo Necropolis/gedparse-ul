@@ -4,23 +4,25 @@
  */
 
 #include <iostream>
-#include <boost/scoped_ptr.hpp>
 
 #ifndef __GEDCOM_HPP_
 #define __GEDCOM_HPP_
 
 namespace FamilySearch { namespace GEDCOM {
+	
 	class Gedcom {
 	private:
-		boost::scoped_ptr<std::istream> inputStream;
 		
 	public:
-		Gedcom(std::istream& inputStream);
-		
-		void parse();
-		
-		std::istream& getInputStream();
+		/** parse me from a stream */
+		// std::istream& operator>> (std::istream& is);
+		friend std::istream& operator>> (std::istream &is, Gedcom &ged);
 	};
+	
+	
+	std::istream& operator>> (std::istream &is, Gedcom &ged);
+	
 } }
+
 
 #endif
