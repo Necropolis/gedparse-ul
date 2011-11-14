@@ -3,6 +3,8 @@
  * (C) 2011 Chris Miller. All rights reserved.
  */
 
+#include <boost/shared_ptr.hpp>
+
 #include "RecordType.hpp"
 #include "Name.hpp"
 
@@ -14,7 +16,7 @@ namespace FamilySearch { namespace GEDCOM {
 	class Record {
 	private:
 		enum RecordType type;
-		Name* name;
+		boost::shared_ptr<Name> name;
 		
 	public:
 		
