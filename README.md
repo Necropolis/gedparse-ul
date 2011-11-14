@@ -4,7 +4,27 @@ This mess was all written to facilitate the conversion of some old unlinked GEDC
 
 This code is very specialized and wasn't intended for heavy re-use without modification.
 
+## C++
+
+A faster, sexier, altogether more better and tastier parser written in C++. It makes use of C++'s awesome `iostream` library, as well as Boost C++.
+
+You'll need the following:
+
+* Clang. I don't bother working with GCC, so your results may vary. This was tested using Apple LLVM 3.0 on Mac OS X 10.7 "Lion" with Xcode 4.2.
+* Boost C++. If you're on a Mac, the easiest way to get this is Homebrew; just `brew install boost`.
+* Ruby and Rake. I'd suggest using RVM to install Ruby.
+* Mongo's C++ Driver.
+  * Mongo's C++ Driver requires `boost`, `pcre++`, and `scons`. Install those.
+  * It's in a submodule, so once you clone that out using Git's submodule commands all you need to do is run `scons mongoclient` to build the client, and then Rake should be good to go.
+
+Use the `Rakefile` to build it:
+
+    rake
+    ./parseged --if=path/to/my/gedcom.ged --db=scots --col=records_low --ro=false
+    
 ## GedcomReader.rb
+
+*Note that this Ruby reader is fundamentally broken.* Please don't use it. It doesn't work reliably, and it eats RAM like there's no freakin tomorrow.
 
 This is a class, `FamilySearch::GEDCOM::Reader`, which is built to parse unlinked GEDCOM files and generate an array of records. Each record is a hash. An example record would be:
 
