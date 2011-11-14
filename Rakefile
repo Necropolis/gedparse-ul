@@ -11,11 +11,15 @@ CC = 'clang++'
 LD = CC
 
 CFLAGS = [
-  '-I /usr/local/Cellar/boost/1.47.0'
+  '-Imongo'
 ].join(' ')
 
 LIBS = [
-  "-lboost_program_options-mt"
+  "-lboost_program_options-mt",
+  "-lboost_thread-mt",
+  "-lboost_filesystem-mt",
+  "-lboost_system-mt",
+  "-Lmongo -lmongoclient"
 ].join(' ')
 
 CPP_SOURCES = FileList['src/*.cpp']
@@ -34,7 +38,7 @@ CPP_SOURCES.each do |src|
 end
 
 rule '.o' => ['.cpp'] do |t|
-  sh "#{CC} #{t.source} -c -o #{t.name}"
+  sh "#{CC} #{t.source} #{CFLAGS} -c -o #{t.name}"
 end
 
 CLEAN.include("**/*.o")

@@ -3,10 +3,17 @@
  * (C) 2011 Chris Miller. All rights reserved.
  */
 
+// stl
 #include <iostream>
+#include <fstream>
 #include <string>
-
+#include <memory>
+// mongo
+#include "client/dbclient.h"
+// boost
 #include <boost/program_options.hpp>
+// familysearch gedcom
+#include "Gedcom.hpp"
 
 /**
  * Tool to parse through an unlinked GEDCOM file and put the data into a Mongo Database.
@@ -91,6 +98,11 @@ int main(int argc, char **argv)
 		std::cerr << "Exception of unknown type!" << std::endl;
 		return 1;
 	}
+
+	std::ifstream inputFile(infile.c_str(), std::ifstream::in);
+	
+	std::auto_ptr<FamilySearch::GEDCOM::Gedcom> gedcom(new FamilySearch::GEDCOM::Gedcom(inputFile));
+	gedcom->parse();
 
 	return 0;
 }

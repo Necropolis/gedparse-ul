@@ -3,7 +3,7 @@
  * (C) 2011 Chris Miller. All rights reserved.
  */
 
-#include <boost/shared_ptr.hpp>
+#include <boost/scoped_ptr.hpp>
 
 #include "RecordType.hpp"
 #include "Name.hpp"
@@ -16,7 +16,7 @@ namespace FamilySearch { namespace GEDCOM {
 	class Record {
 	private:
 		enum RecordType type;
-		boost::shared_ptr<Name> name;
+		boost::scoped_ptr<Name> name;
 		
 	public:
 		
@@ -24,6 +24,7 @@ namespace FamilySearch { namespace GEDCOM {
 		void setType(enum RecordType type);
 		Name& getName();
 		void setName(Name& name);
+		
 	};
 	
 } }

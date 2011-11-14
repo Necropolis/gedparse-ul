@@ -14,10 +14,10 @@ namespace FamilySearch { namespace GEDCOM {
 		this->type = type;
 	}
 	Name& Record::getName() {
-		return *this->name;
+		return *(this->name);
 	}
 	void Record::setName(Name &name) {
-		this->name = &name;
+		this->name.reset(&name);
 	}
 	
 } }

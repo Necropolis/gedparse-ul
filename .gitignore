@@ -27,3 +27,4 @@ split_gedcoms.sh
 ~$Conversion Data Fields.xlsx
 .depend.mf
 parseged
+*.o
