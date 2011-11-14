@@ -11,11 +11,11 @@ CC = 'clang++'
 LD = CC
 
 CFLAGS = [
-  
+  '-I /usr/local/Cellar/boost/1.47.0'
 ].join(' ')
 
 LIBS = [
-  '-I /usr/local/Cellar/boost/1.47.0'
+  "-lboost_program_options-mt"
 ].join(' ')
 
 CPP_SOURCES = FileList['src/*.cpp']
