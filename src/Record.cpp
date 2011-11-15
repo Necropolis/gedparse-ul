@@ -41,40 +41,35 @@ namespace FamilySearch { namespace GEDCOM {
             if (c=='0') {
                 return is;
             } else if (c=='1') {
-            // one of various record attribute types
-            std::string line_type;
-            is >> line_type;
+                // one of various record attribute types
+                std::string line_type;
+                is >> line_type;
+
+                if (line_type=="SEX") {
+                    Gender *g = new Gender();
+                    is >> *g;
+                    rec.setGender(*g);
+                } else if (line_type=="SPOU") {
+                    Spouse *s = new Spouse();
+                    is >> *s;
+                    rec.spouses->push_back(boost::shared_ptr<Spouse>(s));
+                } else if (line_type=="MARR") {
+                    Marriage *m = new Marriage();
+                    is >> *m;
+                    // note - probably want to store the marraige in the record somehow.
+                } else {
+                    std::cout << "Unknown line type \"" << line_type << "\"" << std::endl;
+                }
               
-            if (line_type=="SEX") {
-                Gender *g = new Gender();
-                is >> *g;
-                rec.setGender(*g);
-            } else if (line_type=="SPOU") {
-                Spouse *s = new Spouse();
-                is >> *s;
-                rec.spouses->push_back(boost::shared_ptr<Spouse>(s));
-            } else if (line_type=="MARR") {
-                
-                
-                
-                
-                
-                
-                
-                
-            } else {
-                std::cout << "Unknown line type \"" << line_type << "\"" << std::endl;
-            }
-              
-            is.ignore(2, '\n');
+                is.ignore(2, '\n');
             
-          } else if (c=='2') {
-              // an unexpected escelation
-          } else {
-              // fubar
-              std::cerr << "Unknown record level (ASCII)" << (int)c << " on line " << __LINE__ << std::endl;
-              return is;
-          }
+            } else if (c=='2') {
+                // an unexpected escelation
+            } else {
+                // fubar
+                std::cerr << "Unknown record level (ASCII)" << (int)c << " on line " << __LINE__ << std::endl;
+                return is;
+            }
           
         }
 

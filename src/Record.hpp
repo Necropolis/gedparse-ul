@@ -10,6 +10,7 @@
 #include <boost/scoped_ptr.hpp>
 #include <boost/shared_ptr.hpp>
 // familysearch
+#include "Marriage.hpp"
 #include "Spouse.hpp"
 #include "Name.hpp"
 #include "Gender.hpp"
