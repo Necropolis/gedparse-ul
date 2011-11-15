@@ -17,80 +17,15 @@
 			<array>
 				<dict>
 					<key>filename</key>
-					<string>Gedcom.thor</string>
-					<key>lastUsed</key>
-					<date>2011-11-14T16:14:00Z</date>
-				</dict>
-				<dict>
-					<key>filename</key>
-					<string>split_gedcoms</string>
-					<key>lastUsed</key>
-					<date>2011-11-11T17:57:38Z</date>
-				</dict>
-				<dict>
-					<key>filename</key>
-					<string>parse_gedcoms</string>
-					<key>lastUsed</key>
-					<date>2011-11-11T18:55:01Z</date>
-				</dict>
-				<dict>
-					<key>filename</key>
-					<string>ChunkyArray.rb</string>
-					<key>lastUsed</key>
-					<date>2011-11-11T20:31:14Z</date>
-				</dict>
-				<dict>
-					<key>filename</key>
-					<string>GedcomReader.rb</string>
-					<key>lastUsed</key>
-					<date>2011-11-14T17:37:07Z</date>
-				</dict>
-				<dict>
-					<key>filename</key>
-					<string>ReaderTest.rb</string>
-					<key>lastUsed</key>
-					<date>2011-11-11T20:31:16Z</date>
-				</dict>
-				<dict>
-					<key>filename</key>
-					<string>GedcomSplitter.rb</string>
-					<key>lastUsed</key>
-					<date>2011-11-11T19:46:53Z</date>
-				</dict>
-				<dict>
-					<key>filename</key>
-					<string>CSVEmitter.rb</string>
-					<key>lastUsed</key>
-					<date>2011-11-11T17:56:27Z</date>
-				</dict>
-				<dict>
-					<key>filename</key>
-					<string>PlaceFixer.rb</string>
-					<key>lastUsed</key>
-					<date>2011-11-11T18:54:59Z</date>
-				</dict>
-			</array>
-			<key>expanded</key>
-			<true/>
-			<key>name</key>
-			<string>Ruby</string>
-		</dict>
-		<dict>
-			<key>children</key>
-			<array>
-				<dict>
-					<key>filename</key>
 					<string>Rakefile</string>
 					<key>lastUsed</key>
-					<date>2011-11-15T18:53:44Z</date>
+					<date>2011-11-15T22:52:43Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
 					<string>src/Gedcom.hpp</string>
 					<key>lastUsed</key>
 					<date>2011-11-15T17:10:02Z</date>
-					<key>selected</key>
-					<true/>
 				</dict>
 				<dict>
 					<key>filename</key>
@@ -220,70 +155,14 @@
 			<true/>
 			<key>name</key>
 			<string>C++</string>
+			<key>selected</key>
+			<true/>
 		</dict>
 	</array>
 	<key>fileHierarchyDrawerWidth</key>
 	<integer>200</integer>
 	<key>metaData</key>
 	<dict>
-		<key>ChunkyArray.rb</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>3</integer>
-				<key>line</key>
-				<integer>14</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>0</integer>
-		</dict>
-		<key>GedcomSplitter.rb</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>24</integer>
-				<key>line</key>
-				<integer>51</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>28</integer>
-		</dict>
-		<key>PlaceFixer.rb</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>5</integer>
-				<key>line</key>
-				<integer>70</integer>
-			</dict>
-			<key>columnSelection</key>
-			<false/>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>38</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>2</integer>
-				<key>line</key>
-				<integer>52</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>5</integer>
-				<key>line</key>
-				<integer>70</integer>
-			</dict>
-		</dict>
 		<key>README.md</key>
 		<dict>
 			<key>caret</key>
@@ -311,36 +190,6 @@
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
 			<integer>4</integer>
-		</dict>
-		<key>ReaderTest.rb</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>0</integer>
-				<key>line</key>
-				<integer>29</integer>
-			</dict>
-			<key>columnSelection</key>
-			<false/>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>5</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>23</integer>
-				<key>line</key>
-				<integer>30</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>0</integer>
-				<key>line</key>
-				<integer>29</integer>
-			</dict>
 		</dict>
 		<key>src/Attribute.hpp</key>
 		<dict>
