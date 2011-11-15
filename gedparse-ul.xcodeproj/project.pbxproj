@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DAB317501472E39800F9F8F5 /* parseged.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAB3174F1472E39800F9F8F5 /* parseged.cpp */; };
+		DAB317501472E39800F9F8F5 /* gedparse-ul.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAB3174F1472E39800F9F8F5 /* gedparse-ul.cpp */; };
 		DAB317701472E40200F9F8F5 /* Date.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAB3175E1472E40200F9F8F5 /* Date.cpp */; };
 		DAB317711472E40200F9F8F5 /* Event.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAB317601472E40200F9F8F5 /* Event.cpp */; };
 		DAB317721472E40200F9F8F5 /* Gedcom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAB317621472E40200F9F8F5 /* Gedcom.cpp */; };
@@ -38,7 +38,7 @@
 
 /* Begin PBXFileReference section */
 		DAB3174B1472E39800F9F8F5 /* gedparse-ul */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "gedparse-ul"; sourceTree = BUILT_PRODUCTS_DIR; };
-		DAB3174F1472E39800F9F8F5 /* parseged.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = parseged.cpp; sourceTree = "<group>"; };
+		DAB3174F1472E39800F9F8F5 /* gedparse-ul.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "gedparse-ul.cpp"; sourceTree = "<group>"; };
 		DAB3175D1472E40200F9F8F5 /* Attribute.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Attribute.hpp; path = src/Attribute.hpp; sourceTree = SOURCE_ROOT; };
 		DAB3175E1472E40200F9F8F5 /* Date.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Date.cpp; path = src/Date.cpp; sourceTree = SOURCE_ROOT; };
 		DAB3175F1472E40200F9F8F5 /* Date.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Date.hpp; path = src/Date.hpp; sourceTree = SOURCE_ROOT; };
@@ -100,7 +100,7 @@
 		DAB3174E1472E39800F9F8F5 /* gedparse-ul */ = {
 			isa = PBXGroup;
 			children = (
-				DAB3174F1472E39800F9F8F5 /* parseged.cpp */,
+				DAB3174F1472E39800F9F8F5 /* gedparse-ul.cpp */,
 				DAB3175D1472E40200F9F8F5 /* Attribute.hpp */,
 				DAB317631472E40200F9F8F5 /* Gedcom.hpp */,
 				DAB317621472E40200F9F8F5 /* Gedcom.cpp */,
@@ -198,7 +198,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DAB317501472E39800F9F8F5 /* parseged.cpp in Sources */,
+				DAB317501472E39800F9F8F5 /* gedparse-ul.cpp in Sources */,
 				DAB317701472E40200F9F8F5 /* Date.cpp in Sources */,
 				DAB317711472E40200F9F8F5 /* Event.cpp in Sources */,
 				DAB317721472E40200F9F8F5 /* Gedcom.cpp in Sources */,
