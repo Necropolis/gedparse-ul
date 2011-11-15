@@ -22,6 +22,7 @@
 		DAB3177E1472E47C00F9F8F5 /* libboost_system-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DAB3177D1472E47C00F9F8F5 /* libboost_system-mt.dylib */; };
 		DAB317801472E4A400F9F8F5 /* libboost_filesystem-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DAB3177F1472E4A400F9F8F5 /* libboost_filesystem-mt.dylib */; };
 		DAB317821472E4AE00F9F8F5 /* libboost_thread-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DAB317811472E4AE00F9F8F5 /* libboost_thread-mt.dylib */; };
+		DAB317881473114F00F9F8F5 /* Marriage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAB317871473114F00F9F8F5 /* Marriage.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -63,6 +64,8 @@
 		DAB3177D1472E47C00F9F8F5 /* libboost_system-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_system-mt.dylib"; path = "usr/local/lib/libboost_system-mt.dylib"; sourceTree = SDKROOT; };
 		DAB3177F1472E4A400F9F8F5 /* libboost_filesystem-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_filesystem-mt.dylib"; path = "usr/local/lib/libboost_filesystem-mt.dylib"; sourceTree = SDKROOT; };
 		DAB317811472E4AE00F9F8F5 /* libboost_thread-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_thread-mt.dylib"; path = "usr/local/lib/libboost_thread-mt.dylib"; sourceTree = SDKROOT; };
+		DAB317871473114F00F9F8F5 /* Marriage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Marriage.cpp; sourceTree = "<group>"; };
+		DAB317891473115E00F9F8F5 /* Marriage.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Marriage.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +140,7 @@
 				DAB317631472E40200F9F8F5 /* Gedcom.hpp */,
 				DAB3176B1472E40200F9F8F5 /* Record.hpp */,
 				DAB317611472E40200F9F8F5 /* Event.hpp */,
+				DAB317891473115E00F9F8F5 /* Marriage.hpp */,
 				DAB3176D1472E40200F9F8F5 /* Spouse.hpp */,
 				DAB3175F1472E40200F9F8F5 /* Date.hpp */,
 				DAB317651472E40200F9F8F5 /* Gender.hpp */,
@@ -153,6 +157,7 @@
 				DAB317621472E40200F9F8F5 /* Gedcom.cpp */,
 				DAB3176A1472E40200F9F8F5 /* Record.cpp */,
 				DAB317601472E40200F9F8F5 /* Event.cpp */,
+				DAB317871473114F00F9F8F5 /* Marriage.cpp */,
 				DAB3176C1472E40200F9F8F5 /* Spouse.cpp */,
 				DAB3175E1472E40200F9F8F5 /* Date.cpp */,
 				DAB317641472E40200F9F8F5 /* Gender.cpp */,
@@ -224,6 +229,7 @@
 				DAB317761472E40200F9F8F5 /* Record.cpp in Sources */,
 				DAB317771472E40200F9F8F5 /* Spouse.cpp in Sources */,
 				DAB317781472E40200F9F8F5 /* StandardisedName.cpp in Sources */,
+				DAB317881473114F00F9F8F5 /* Marriage.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

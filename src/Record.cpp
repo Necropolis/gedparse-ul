@@ -53,6 +53,15 @@ namespace FamilySearch { namespace GEDCOM {
                 Spouse *s = new Spouse();
                 is >> *s;
                 rec.spouses->push_back(boost::shared_ptr<Spouse>(s));
+            } else if (line_type=="MARR") {
+                
+                
+                
+                
+                
+                
+                
+                
             } else {
                 std::cout << "Unknown line type \"" << line_type << "\"" << std::endl;
             }
