@@ -14,8 +14,8 @@ You'll need the following:
 * Boost C++. If you're on a Mac, the easiest way to get this is Homebrew; just `brew install boost`.
 * Ruby and Rake. I'd suggest using RVM to install Ruby.
 * Mongo's C++ Driver.
-  * Mongo's C++ Driver requires `boost`, `pcre++`, and `scons`. Install those.
-  * It's in a submodule, so once you clone that out using Git's submodule commands all you need to do is run `scons mongoclient` to build the client, and then Rake should be good to go.
+  * Mongo's C++ Driver requires `boost`, `pcre++`, and `scons`. Install those - again, Homebrew is your best bet: `for pkg in boost pcre++ scons; do brew install $pkg; done`.
+  * Mongo itself is in a submodule, so once you clone that out using Git's submodule commands all you need to do is run `scons mongoclient` in the `mongo` sub directory to build the client, and then Rake should be good to go.
 
 Use the `Rakefile` to build it:
 

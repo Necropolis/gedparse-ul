@@ -3,64 +3,217 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>GedcomReader.rb</string>
+	<string>src/Gedcom.hpp</string>
 	<key>documents</key>
 	<array>
 		<dict>
 			<key>filename</key>
-			<string>ChunkyArray.rb</string>
+			<string>README.md</string>
 			<key>lastUsed</key>
-			<date>2011-11-11T20:31:14Z</date>
+			<date>2011-11-14T22:23:24Z</date>
 		</dict>
 		<dict>
-			<key>filename</key>
-			<string>Gedcom.thor</string>
-			<key>lastUsed</key>
-			<date>2011-11-11T22:45:28Z</date>
-		</dict>
-		<dict>
-			<key>filename</key>
-			<string>GedcomReader.rb</string>
-			<key>lastUsed</key>
-			<date>2011-11-11T22:45:28Z</date>
-			<key>selected</key>
+			<key>children</key>
+			<array>
+				<dict>
+					<key>filename</key>
+					<string>Gedcom.thor</string>
+					<key>lastUsed</key>
+					<date>2011-11-14T16:14:00Z</date>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>split_gedcoms</string>
+					<key>lastUsed</key>
+					<date>2011-11-11T17:57:38Z</date>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>parse_gedcoms</string>
+					<key>lastUsed</key>
+					<date>2011-11-11T18:55:01Z</date>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>ChunkyArray.rb</string>
+					<key>lastUsed</key>
+					<date>2011-11-11T20:31:14Z</date>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>GedcomReader.rb</string>
+					<key>lastUsed</key>
+					<date>2011-11-14T17:37:07Z</date>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>ReaderTest.rb</string>
+					<key>lastUsed</key>
+					<date>2011-11-11T20:31:16Z</date>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>GedcomSplitter.rb</string>
+					<key>lastUsed</key>
+					<date>2011-11-11T19:46:53Z</date>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>CSVEmitter.rb</string>
+					<key>lastUsed</key>
+					<date>2011-11-11T17:56:27Z</date>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>PlaceFixer.rb</string>
+					<key>lastUsed</key>
+					<date>2011-11-11T18:54:59Z</date>
+				</dict>
+			</array>
+			<key>expanded</key>
 			<true/>
+			<key>name</key>
+			<string>Ruby</string>
 		</dict>
 		<dict>
-			<key>filename</key>
-			<string>ReaderTest.rb</string>
-			<key>lastUsed</key>
-			<date>2011-11-11T20:31:16Z</date>
-		</dict>
-		<dict>
-			<key>filename</key>
-			<string>GedcomSplitter.rb</string>
-			<key>lastUsed</key>
-			<date>2011-11-11T19:46:53Z</date>
-		</dict>
-		<dict>
-			<key>filename</key>
-			<string>CSVEmitter.rb</string>
-			<key>lastUsed</key>
-			<date>2011-11-11T17:56:27Z</date>
-		</dict>
-		<dict>
-			<key>filename</key>
-			<string>PlaceFixer.rb</string>
-			<key>lastUsed</key>
-			<date>2011-11-11T18:54:59Z</date>
-		</dict>
-		<dict>
-			<key>filename</key>
-			<string>split_gedcoms</string>
-			<key>lastUsed</key>
-			<date>2011-11-11T17:57:38Z</date>
-		</dict>
-		<dict>
-			<key>filename</key>
-			<string>parse_gedcoms</string>
-			<key>lastUsed</key>
-			<date>2011-11-11T18:55:01Z</date>
+			<key>children</key>
+			<array>
+				<dict>
+					<key>filename</key>
+					<string>Rakefile</string>
+					<key>lastUsed</key>
+					<date>2011-11-14T22:26:00Z</date>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>src/parseged.cpp</string>
+					<key>lastUsed</key>
+					<date>2011-11-14T23:08:06Z</date>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>src/Gedcom.hpp</string>
+					<key>lastUsed</key>
+					<date>2011-11-14T23:08:06Z</date>
+					<key>selected</key>
+					<true/>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>src/Gedcom.cpp</string>
+					<key>lastUsed</key>
+					<date>2011-11-14T23:05:48Z</date>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>src/RecordType.hpp</string>
+					<key>lastUsed</key>
+					<date>2011-11-14T17:11:27Z</date>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>src/Record.hpp</string>
+					<key>lastUsed</key>
+					<date>2011-11-14T22:08:39Z</date>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>src/Record.cpp</string>
+					<key>lastUsed</key>
+					<date>2011-11-14T18:49:37Z</date>
+				</dict>
+				<dict>
+					<key>children</key>
+					<array>
+						<dict>
+							<key>filename</key>
+							<string>src/Attribute.hpp</string>
+							<key>lastUsed</key>
+							<date>2011-11-14T22:23:39Z</date>
+						</dict>
+						<dict>
+							<key>filename</key>
+							<string>src/Name.hpp</string>
+							<key>lastUsed</key>
+							<date>2011-11-14T21:19:04Z</date>
+						</dict>
+						<dict>
+							<key>filename</key>
+							<string>src/Name.cpp</string>
+							<key>lastUsed</key>
+							<date>2011-11-14T18:52:57Z</date>
+						</dict>
+						<dict>
+							<key>filename</key>
+							<string>src/Date.hpp</string>
+							<key>lastUsed</key>
+							<date>2011-11-14T18:53:03Z</date>
+						</dict>
+						<dict>
+							<key>filename</key>
+							<string>src/Date.cpp</string>
+							<key>lastUsed</key>
+							<date>2011-11-14T18:53:08Z</date>
+						</dict>
+						<dict>
+							<key>filename</key>
+							<string>src/Spouse.hpp</string>
+							<key>lastUsed</key>
+							<date>2011-11-14T18:53:15Z</date>
+						</dict>
+						<dict>
+							<key>filename</key>
+							<string>src/Spouse.cpp</string>
+							<key>lastUsed</key>
+							<date>2011-11-14T18:53:23Z</date>
+						</dict>
+						<dict>
+							<key>filename</key>
+							<string>src/StandardisedName.hpp</string>
+							<key>lastUsed</key>
+							<date>2011-11-14T18:53:39Z</date>
+						</dict>
+						<dict>
+							<key>filename</key>
+							<string>src/StandardisedName.cpp</string>
+							<key>lastUsed</key>
+							<date>2011-11-14T18:53:38Z</date>
+						</dict>
+						<dict>
+							<key>filename</key>
+							<string>src/Place.hpp</string>
+							<key>lastUsed</key>
+							<date>2011-11-14T18:53:44Z</date>
+						</dict>
+						<dict>
+							<key>filename</key>
+							<string>src/Place.cpp</string>
+							<key>lastUsed</key>
+							<date>2011-11-14T18:53:50Z</date>
+						</dict>
+						<dict>
+							<key>filename</key>
+							<string>src/Event.hpp</string>
+							<key>lastUsed</key>
+							<date>2011-11-14T18:53:56Z</date>
+						</dict>
+						<dict>
+							<key>filename</key>
+							<string>src/Event.cpp</string>
+							<key>lastUsed</key>
+							<date>2011-11-14T18:54:03Z</date>
+						</dict>
+					</array>
+					<key>expanded</key>
+					<true/>
+					<key>name</key>
+					<string>Record Pieces</string>
+				</dict>
+			</array>
+			<key>expanded</key>
+			<true/>
+			<key>name</key>
+			<string>C++</string>
 		</dict>
 	</array>
 	<key>fileHierarchyDrawerWidth</key>
@@ -80,34 +233,6 @@
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
-		</dict>
-		<key>Gedcom.thor</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>12</integer>
-				<key>line</key>
-				<integer>40</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>26</integer>
-		</dict>
-		<key>GedcomReader.rb</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>32</integer>
-				<key>line</key>
-				<integer>70</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>58</integer>
 		</dict>
 		<key>GedcomSplitter.rb</key>
 		<dict>
@@ -153,6 +278,20 @@
 				<integer>70</integer>
 			</dict>
 		</dict>
+		<key>Rakefile</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>22</integer>
+				<key>line</key>
+				<integer>20</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>3</integer>
+		</dict>
 		<key>ReaderTest.rb</key>
 		<dict>
 			<key>caret</key>
@@ -183,19 +322,59 @@
 				<integer>29</integer>
 			</dict>
 		</dict>
+		<key>src/Gedcom.cpp</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>12</integer>
+				<key>line</key>
+				<integer>6</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
+		<key>src/Gedcom.hpp</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>3</integer>
+				<key>line</key>
+				<integer>18</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
+		<key>src/parseged.cpp</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>19</integer>
+				<key>line</key>
+				<integer>106</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>68</integer>
+		</dict>
 	</dict>
 	<key>openDocuments</key>
 	<array>
-		<string>Gedcom.thor</string>
-		<string>GedcomReader.rb</string>
-		<string>ChunkyArray.rb</string>
-		<string>ReaderTest.rb</string>
-		<string>GedcomSplitter.rb</string>
-		<string>PlaceFixer.rb</string>
+		<string>Rakefile</string>
+		<string>src/parseged.cpp</string>
+		<string>src/Gedcom.hpp</string>
+		<string>src/Gedcom.cpp</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{1115, 42}, {773, 803}}</string>
+	<string>{{734, 18}, {773, 803}}</string>
 </dict>
 </plist>
