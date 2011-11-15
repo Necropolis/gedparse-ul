@@ -9,14 +9,14 @@
 #define __NAME_HPP_
 
 namespace FamilySearch { namespace GEDCOM {
-	
-	/**
-	 * A name record.
-	 */
-	class Name : Attribute {
-		
-	};
-	
+  
+  /**
+   * A name record.
+   */
+  class Name : Attribute {
+    
+  };
+  
 } }
 
 #endif

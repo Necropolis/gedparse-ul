@@ -4,14 +4,15 @@ require 'rake/loaders/makefile'
 
 import '.depend.mf'
 
-APPLICATION = 'parseged'
+APPLICATION = 'gedparse-ul'
 BOOST_PATH = ''
 
 CC = 'clang++'
 LD = CC
 
 CFLAGS = [
-  '-Imongo'
+  '-Imongo',
+  '-g'
 ].join(' ')
 
 LIBS = [

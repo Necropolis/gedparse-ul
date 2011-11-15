@@ -28,3 +28,5 @@ split_gedcoms.sh
 .depend.mf
 parseged
 *.o
+*.xcodeproj/project.xcworkspace
+*.xcodeproj/xcuserdata

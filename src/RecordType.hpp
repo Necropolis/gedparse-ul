@@ -7,12 +7,12 @@
 #define __RECORD_TYPE_HPP_
 
 namespace FamilySearch { namespace GEDCOM {
-	
-	enum RecordType {
-		FAM,
-		INDI
-	};
-	
+  
+  enum RecordType {
+    FAM,
+    INDI
+  };
+  
 } }
 
 #endif

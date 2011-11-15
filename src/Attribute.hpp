@@ -9,16 +9,16 @@
 #define __ATTRIBUTE_HPP_
 
 namespace FamilySearch { namespace GEDCOM {
-	
-	/**
-	 * Virtual class which defines the interface which all attributes inherit from.
-	 */
-	class Attribute {
-	public:
-		virtual std::istream& operator>> (std::istream& is) = 0;
-		
-	};
-	
+  
+  /**
+   * Virtual class which defines the interface which all attributes inherit from.
+   */
+  class Attribute {
+  public:
+    virtual std::istream& operator>> (std::istream& is) = 0;
+    
+  };
+  
 } }
 
 #endif

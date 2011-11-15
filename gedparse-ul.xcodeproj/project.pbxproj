@@ -1,0 +1,310 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DAB317501472E39800F9F8F5 /* parseged.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAB3174F1472E39800F9F8F5 /* parseged.cpp */; };
+		DAB317701472E40200F9F8F5 /* Date.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAB3175E1472E40200F9F8F5 /* Date.cpp */; };
+		DAB317711472E40200F9F8F5 /* Event.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAB317601472E40200F9F8F5 /* Event.cpp */; };
+		DAB317721472E40200F9F8F5 /* Gedcom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAB317621472E40200F9F8F5 /* Gedcom.cpp */; };
+		DAB317731472E40200F9F8F5 /* Gender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAB317641472E40200F9F8F5 /* Gender.cpp */; };
+		DAB317741472E40200F9F8F5 /* Name.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAB317661472E40200F9F8F5 /* Name.cpp */; };
+		DAB317751472E40200F9F8F5 /* Place.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAB317681472E40200F9F8F5 /* Place.cpp */; };
+		DAB317761472E40200F9F8F5 /* Record.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAB3176A1472E40200F9F8F5 /* Record.cpp */; };
+		DAB317771472E40200F9F8F5 /* Spouse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAB3176C1472E40200F9F8F5 /* Spouse.cpp */; };
+		DAB317781472E40200F9F8F5 /* StandardisedName.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAB3176E1472E40200F9F8F5 /* StandardisedName.cpp */; };
+		DAB3177A1472E45A00F9F8F5 /* libmongoclient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DAB317791472E45A00F9F8F5 /* libmongoclient.a */; };
+		DAB3177C1472E46C00F9F8F5 /* libboost_program_options-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DAB3177B1472E46C00F9F8F5 /* libboost_program_options-mt.dylib */; };
+		DAB3177E1472E47C00F9F8F5 /* libboost_system-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DAB3177D1472E47C00F9F8F5 /* libboost_system-mt.dylib */; };
+		DAB317801472E4A400F9F8F5 /* libboost_filesystem-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DAB3177F1472E4A400F9F8F5 /* libboost_filesystem-mt.dylib */; };
+		DAB317821472E4AE00F9F8F5 /* libboost_thread-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DAB317811472E4AE00F9F8F5 /* libboost_thread-mt.dylib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		DAB317491472E39800F9F8F5 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		DAB3174B1472E39800F9F8F5 /* gedparse-ul */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "gedparse-ul"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DAB3174F1472E39800F9F8F5 /* parseged.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = parseged.cpp; sourceTree = "<group>"; };
+		DAB3175D1472E40200F9F8F5 /* Attribute.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Attribute.hpp; path = src/Attribute.hpp; sourceTree = SOURCE_ROOT; };
+		DAB3175E1472E40200F9F8F5 /* Date.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Date.cpp; path = src/Date.cpp; sourceTree = SOURCE_ROOT; };
+		DAB3175F1472E40200F9F8F5 /* Date.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Date.hpp; path = src/Date.hpp; sourceTree = SOURCE_ROOT; };
+		DAB317601472E40200F9F8F5 /* Event.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Event.cpp; path = src/Event.cpp; sourceTree = SOURCE_ROOT; };
+		DAB317611472E40200F9F8F5 /* Event.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Event.hpp; path = src/Event.hpp; sourceTree = SOURCE_ROOT; };
+		DAB317621472E40200F9F8F5 /* Gedcom.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Gedcom.cpp; path = src/Gedcom.cpp; sourceTree = SOURCE_ROOT; };
+		DAB317631472E40200F9F8F5 /* Gedcom.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Gedcom.hpp; path = src/Gedcom.hpp; sourceTree = SOURCE_ROOT; };
+		DAB317641472E40200F9F8F5 /* Gender.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Gender.cpp; path = src/Gender.cpp; sourceTree = SOURCE_ROOT; };
+		DAB317651472E40200F9F8F5 /* Gender.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Gender.hpp; path = src/Gender.hpp; sourceTree = SOURCE_ROOT; };
+		DAB317661472E40200F9F8F5 /* Name.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Name.cpp; path = src/Name.cpp; sourceTree = SOURCE_ROOT; };
+		DAB317671472E40200F9F8F5 /* Name.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Name.hpp; path = src/Name.hpp; sourceTree = SOURCE_ROOT; };
+		DAB317681472E40200F9F8F5 /* Place.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Place.cpp; path = src/Place.cpp; sourceTree = SOURCE_ROOT; };
+		DAB317691472E40200F9F8F5 /* Place.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Place.hpp; path = src/Place.hpp; sourceTree = SOURCE_ROOT; };
+		DAB3176A1472E40200F9F8F5 /* Record.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Record.cpp; path = src/Record.cpp; sourceTree = SOURCE_ROOT; };
+		DAB3176B1472E40200F9F8F5 /* Record.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Record.hpp; path = src/Record.hpp; sourceTree = SOURCE_ROOT; };
+		DAB3176C1472E40200F9F8F5 /* Spouse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Spouse.cpp; path = src/Spouse.cpp; sourceTree = SOURCE_ROOT; };
+		DAB3176D1472E40200F9F8F5 /* Spouse.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Spouse.hpp; path = src/Spouse.hpp; sourceTree = SOURCE_ROOT; };
+		DAB3176E1472E40200F9F8F5 /* StandardisedName.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = StandardisedName.cpp; path = src/StandardisedName.cpp; sourceTree = SOURCE_ROOT; };
+		DAB3176F1472E40200F9F8F5 /* StandardisedName.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = StandardisedName.hpp; path = src/StandardisedName.hpp; sourceTree = SOURCE_ROOT; };
+		DAB317791472E45A00F9F8F5 /* libmongoclient.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmongoclient.a; path = ../mongo/libmongoclient.a; sourceTree = "<group>"; };
+		DAB3177B1472E46C00F9F8F5 /* libboost_program_options-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_program_options-mt.dylib"; path = "usr/local/lib/libboost_program_options-mt.dylib"; sourceTree = SDKROOT; };
+		DAB3177D1472E47C00F9F8F5 /* libboost_system-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_system-mt.dylib"; path = "usr/local/lib/libboost_system-mt.dylib"; sourceTree = SDKROOT; };
+		DAB3177F1472E4A400F9F8F5 /* libboost_filesystem-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_filesystem-mt.dylib"; path = "usr/local/lib/libboost_filesystem-mt.dylib"; sourceTree = SDKROOT; };
+		DAB317811472E4AE00F9F8F5 /* libboost_thread-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_thread-mt.dylib"; path = "usr/local/lib/libboost_thread-mt.dylib"; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DAB317481472E39800F9F8F5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DAB317821472E4AE00F9F8F5 /* libboost_thread-mt.dylib in Frameworks */,
+				DAB317801472E4A400F9F8F5 /* libboost_filesystem-mt.dylib in Frameworks */,
+				DAB3177E1472E47C00F9F8F5 /* libboost_system-mt.dylib in Frameworks */,
+				DAB3177C1472E46C00F9F8F5 /* libboost_program_options-mt.dylib in Frameworks */,
+				DAB3177A1472E45A00F9F8F5 /* libmongoclient.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DAB317401472E39700F9F8F5 = {
+			isa = PBXGroup;
+			children = (
+				DAB3174E1472E39800F9F8F5 /* gedparse-ul */,
+				DAB3174C1472E39800F9F8F5 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DAB3174C1472E39800F9F8F5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DAB3174B1472E39800F9F8F5 /* gedparse-ul */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DAB3174E1472E39800F9F8F5 /* gedparse-ul */ = {
+			isa = PBXGroup;
+			children = (
+				DAB3174F1472E39800F9F8F5 /* parseged.cpp */,
+				DAB3175D1472E40200F9F8F5 /* Attribute.hpp */,
+				DAB317631472E40200F9F8F5 /* Gedcom.hpp */,
+				DAB317621472E40200F9F8F5 /* Gedcom.cpp */,
+				DAB3176B1472E40200F9F8F5 /* Record.hpp */,
+				DAB3176A1472E40200F9F8F5 /* Record.cpp */,
+				DAB317611472E40200F9F8F5 /* Event.hpp */,
+				DAB317601472E40200F9F8F5 /* Event.cpp */,
+				DAB3176D1472E40200F9F8F5 /* Spouse.hpp */,
+				DAB3176C1472E40200F9F8F5 /* Spouse.cpp */,
+				DAB3175F1472E40200F9F8F5 /* Date.hpp */,
+				DAB3175E1472E40200F9F8F5 /* Date.cpp */,
+				DAB317651472E40200F9F8F5 /* Gender.hpp */,
+				DAB317641472E40200F9F8F5 /* Gender.cpp */,
+				DAB317671472E40200F9F8F5 /* Name.hpp */,
+				DAB317661472E40200F9F8F5 /* Name.cpp */,
+				DAB317691472E40200F9F8F5 /* Place.hpp */,
+				DAB317681472E40200F9F8F5 /* Place.cpp */,
+				DAB3176F1472E40200F9F8F5 /* StandardisedName.hpp */,
+				DAB3176E1472E40200F9F8F5 /* StandardisedName.cpp */,
+				DAB317841472EC0500F9F8F5 /* Boost C++ */,
+				DAB317831472E51000F9F8F5 /* Mongo */,
+			);
+			name = "gedparse-ul";
+			path = src;
+			sourceTree = "<group>";
+		};
+		DAB317831472E51000F9F8F5 /* Mongo */ = {
+			isa = PBXGroup;
+			children = (
+				DAB317791472E45A00F9F8F5 /* libmongoclient.a */,
+			);
+			name = Mongo;
+			sourceTree = "<group>";
+		};
+		DAB317841472EC0500F9F8F5 /* Boost C++ */ = {
+			isa = PBXGroup;
+			children = (
+				DAB317811472E4AE00F9F8F5 /* libboost_thread-mt.dylib */,
+				DAB3177F1472E4A400F9F8F5 /* libboost_filesystem-mt.dylib */,
+				DAB3177D1472E47C00F9F8F5 /* libboost_system-mt.dylib */,
+				DAB3177B1472E46C00F9F8F5 /* libboost_program_options-mt.dylib */,
+			);
+			name = "Boost C++";
+			path = ..;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DAB3174A1472E39800F9F8F5 /* gedparse-ul */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DAB317551472E39800F9F8F5 /* Build configuration list for PBXNativeTarget "gedparse-ul" */;
+			buildPhases = (
+				DAB317471472E39800F9F8F5 /* Sources */,
+				DAB317481472E39800F9F8F5 /* Frameworks */,
+				DAB317491472E39800F9F8F5 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "gedparse-ul";
+			productName = "gedparse-ul";
+			productReference = DAB3174B1472E39800F9F8F5 /* gedparse-ul */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DAB317421472E39700F9F8F5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = FSDEV;
+			};
+			buildConfigurationList = DAB317451472E39700F9F8F5 /* Build configuration list for PBXProject "gedparse-ul" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = DAB317401472E39700F9F8F5;
+			productRefGroup = DAB3174C1472E39800F9F8F5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DAB3174A1472E39800F9F8F5 /* gedparse-ul */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DAB317471472E39800F9F8F5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DAB317501472E39800F9F8F5 /* parseged.cpp in Sources */,
+				DAB317701472E40200F9F8F5 /* Date.cpp in Sources */,
+				DAB317711472E40200F9F8F5 /* Event.cpp in Sources */,
+				DAB317721472E40200F9F8F5 /* Gedcom.cpp in Sources */,
+				DAB317731472E40200F9F8F5 /* Gender.cpp in Sources */,
+				DAB317741472E40200F9F8F5 /* Name.cpp in Sources */,
+				DAB317751472E40200F9F8F5 /* Place.cpp in Sources */,
+				DAB317761472E40200F9F8F5 /* Record.cpp in Sources */,
+				DAB317771472E40200F9F8F5 /* Spouse.cpp in Sources */,
+				DAB317781472E40200F9F8F5 /* StandardisedName.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		DAB317531472E39800F9F8F5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		DAB317541472E39800F9F8F5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		DAB317561472E39800F9F8F5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/mongo\"",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = mongo;
+			};
+			name = Debug;
+		};
+		DAB317571472E39800F9F8F5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/mongo\"",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = mongo;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DAB317451472E39700F9F8F5 /* Build configuration list for PBXProject "gedparse-ul" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DAB317531472E39800F9F8F5 /* Debug */,
+				DAB317541472E39800F9F8F5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DAB317551472E39800F9F8F5 /* Build configuration list for PBXNativeTarget "gedparse-ul" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DAB317561472E39800F9F8F5 /* Debug */,
+				DAB317571472E39800F9F8F5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DAB317421472E39700F9F8F5 /* Project object */;
+}
