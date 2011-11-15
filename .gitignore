@@ -30,3 +30,4 @@ parseged
 *.o
 *.xcodeproj/project.xcworkspace
 *.xcodeproj/xcuserdata
+gedparse-ul
