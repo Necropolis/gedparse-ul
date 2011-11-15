@@ -6,21 +6,26 @@
 #include "Record.hpp"
 
 namespace FamilySearch { namespace GEDCOM {
-  
-    std::string Record::getType() {
-        return *(this->type);
+
+    Record::Record() :spouses(new std::list<boost::shared_ptr<Spouse> >()) {}
+    
+    std::string& Record::getType() {
+        return *this->type;
     }
     void Record::setType(std::string& type) {
         this->type.reset(&type);
     }
+    std::list<boost::shared_ptr<Spouse> >& Record::getSpouses() {
+        return *this->spouses;
+    }
     Name& Record::getName() {
-        return *(this->name);
+        return *this->name;
     }
     void Record::setName(Name &name) {
         this->name.reset(&name);
     }
     Gender& Record::getGender() {
-        return *(this->gender);
+        return *this->gender;
     }
     void Record::setGender(Gender& gender) {
         this->gender.reset(&gender);
@@ -39,12 +44,15 @@ namespace FamilySearch { namespace GEDCOM {
             // one of various record attribute types
             std::string line_type;
             is >> line_type;
-            std::cout << "Encountered line of type \"" << line_type << "\"" << std::endl;
               
             if (line_type=="SEX") {
                 Gender *g = new Gender();
                 is >> *g;
                 rec.setGender(*g);
+            } else if (line_type=="SPOU") {
+                Spouse *s = new Spouse();
+                is >> *s;
+                rec.spouses->push_back(boost::shared_ptr<Spouse>(s));
             } else {
                 std::cout << "Unknown line type \"" << line_type << "\"" << std::endl;
             }
@@ -52,7 +60,7 @@ namespace FamilySearch { namespace GEDCOM {
             is.ignore(2, '\n');
             
           } else if (c=='2') {
-              // an escelation
+              // an unexpected escelation
           } else {
               // fubar
               std::cerr << "Unknown record level (ASCII)" << (int)c << " on line " << __LINE__ << std::endl;

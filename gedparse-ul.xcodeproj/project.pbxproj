@@ -102,24 +102,8 @@
 			children = (
 				DAB3174F1472E39800F9F8F5 /* gedparse-ul.cpp */,
 				DAB3175D1472E40200F9F8F5 /* Attribute.hpp */,
-				DAB317631472E40200F9F8F5 /* Gedcom.hpp */,
-				DAB317621472E40200F9F8F5 /* Gedcom.cpp */,
-				DAB3176B1472E40200F9F8F5 /* Record.hpp */,
-				DAB3176A1472E40200F9F8F5 /* Record.cpp */,
-				DAB317611472E40200F9F8F5 /* Event.hpp */,
-				DAB317601472E40200F9F8F5 /* Event.cpp */,
-				DAB3176D1472E40200F9F8F5 /* Spouse.hpp */,
-				DAB3176C1472E40200F9F8F5 /* Spouse.cpp */,
-				DAB3175F1472E40200F9F8F5 /* Date.hpp */,
-				DAB3175E1472E40200F9F8F5 /* Date.cpp */,
-				DAB317651472E40200F9F8F5 /* Gender.hpp */,
-				DAB317641472E40200F9F8F5 /* Gender.cpp */,
-				DAB317671472E40200F9F8F5 /* Name.hpp */,
-				DAB317661472E40200F9F8F5 /* Name.cpp */,
-				DAB317691472E40200F9F8F5 /* Place.hpp */,
-				DAB317681472E40200F9F8F5 /* Place.cpp */,
-				DAB3176F1472E40200F9F8F5 /* StandardisedName.hpp */,
-				DAB3176E1472E40200F9F8F5 /* StandardisedName.cpp */,
+				DAB317851472FF1400F9F8F5 /* Headers */,
+				DAB317861472FF2200F9F8F5 /* Implementation */,
 				DAB317841472EC0500F9F8F5 /* Boost C++ */,
 				DAB317831472E51000F9F8F5 /* Mongo */,
 			);
@@ -145,6 +129,38 @@
 			);
 			name = "Boost C++";
 			path = ..;
+			sourceTree = "<group>";
+		};
+		DAB317851472FF1400F9F8F5 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				DAB317631472E40200F9F8F5 /* Gedcom.hpp */,
+				DAB3176B1472E40200F9F8F5 /* Record.hpp */,
+				DAB317611472E40200F9F8F5 /* Event.hpp */,
+				DAB3176D1472E40200F9F8F5 /* Spouse.hpp */,
+				DAB3175F1472E40200F9F8F5 /* Date.hpp */,
+				DAB317651472E40200F9F8F5 /* Gender.hpp */,
+				DAB317671472E40200F9F8F5 /* Name.hpp */,
+				DAB317691472E40200F9F8F5 /* Place.hpp */,
+				DAB3176F1472E40200F9F8F5 /* StandardisedName.hpp */,
+			);
+			name = Headers;
+			sourceTree = "<group>";
+		};
+		DAB317861472FF2200F9F8F5 /* Implementation */ = {
+			isa = PBXGroup;
+			children = (
+				DAB317621472E40200F9F8F5 /* Gedcom.cpp */,
+				DAB3176A1472E40200F9F8F5 /* Record.cpp */,
+				DAB317601472E40200F9F8F5 /* Event.cpp */,
+				DAB3176C1472E40200F9F8F5 /* Spouse.cpp */,
+				DAB3175E1472E40200F9F8F5 /* Date.cpp */,
+				DAB317641472E40200F9F8F5 /* Gender.cpp */,
+				DAB317661472E40200F9F8F5 /* Name.cpp */,
+				DAB317681472E40200F9F8F5 /* Place.cpp */,
+				DAB3176E1472E40200F9F8F5 /* StandardisedName.cpp */,
+			);
+			name = Implementation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

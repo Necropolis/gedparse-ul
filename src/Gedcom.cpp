@@ -27,10 +27,6 @@ namespace FamilySearch { namespace GEDCOM {
       is.ignore(256, ' '); // fast-forward to the record type
       std::string* str = new std::string();
       is >> *str; // read one word
-
-      // debugging code
-      std::cout << "Record type: " << *str << std::endl;
-      // end of debugging code
     
       if (str->compare("FAM")||str->compare("INDI")) {
         // all is well in zion
