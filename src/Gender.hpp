@@ -6,28 +6,31 @@
 // stl
 #include <iostream>
 #include <string>
-// boost
-#include <boost/scoped_ptr.hpp>
 
 #ifndef __GENDER_HPP_
 #define __GENDER_HPP_
 
 namespace FamilySearch { namespace GEDCOM {
   
-class Gender {
-private:
-  boost::scoped_ptr<std::string> gender;
-public:
-    Gender();
-    Gender(std::string&);
+    class Gender {
+    private:
+        std::string gender;
+        bool _isSet;
+        
+    public:
+        Gender();
+      
+        friend std::ostream& operator<< (std::ostream&, Gender&);
+        friend std::istream& operator>> (std::istream&, Gender&);
+      
+        std::string& getGender();
+        void setGender(std::string);
+        bool isSet();
+    };
   
-    friend std::istream& operator>> (std::istream&, Gender&);
-  
-    std::string& getGender();
-    void setGender(std::string&);
-};
-  
-std::istream& operator>> (std::istream&, Gender&);
+    /* outputs line ending, eg "SEX F\r\n" */
+    std::ostream& operator<< (std::ostream&, Gender&);
+    std::istream& operator>> (std::istream&, Gender&);
   
 }}
 

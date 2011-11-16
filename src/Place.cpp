@@ -5,55 +5,30 @@
 
 #include "Place.hpp"
 
+#include "Util.hpp"
+
 namespace FamilySearch { namespace GEDCOM {
 
-    std::string& Place::getCountyCode() {
-        return *countyCode;
-    }
+    Place::Place() :countyCode(""), country(""), county(""), town(""), borough(""), _isSet(false) {}
     
-    void Place::setCountyCode(std::string& countyCode) {
-        this->countyCode.reset(&countyCode);
-    }
-    
-    std::string& Place::getCountry() {
-        return *country;
-    }
-    
-    void Place::setCountry(std::string& country) {
-        this->country.reset(&country);
-    }
-    
-    std::string& Place::getCounty() {
-        return *county;
-    }
-    
-    void Place::setCounty(std::string& county) {
-        this->county.reset(&county);
-    }
-    
-    std::string& Place::getTown() {
-        return *town;
-    }
-    
-    void Place::setTown(std::string& town) {
-        this->town.reset(&town);
-    }
-    
-    std::string& Place::getBorough() {
-        return *borough;
-    }
-    
-    void Place::setBorough(std::string& borough) {
-        this->borough.reset(&borough);
-    }
+    std::string& Place::getCountyCode() { return countyCode; }
+    void Place::setCountyCode(std::string countyCode) { this->countyCode = countyCode; _isSet = true; }
+    std::string& Place::getCountry() { return country; }
+    void Place::setCountry(std::string country) { this->country = country; _isSet = true; }
+    std::string& Place::getCounty() { return county; }
+    void Place::setCounty(std::string county) { this->county = county; _isSet = true; }
+    std::string& Place::getTown() { return town; }
+    void Place::setTown(std::string town) { this->town = town; _isSet = true; }
+    std::string& Place::getBorough() { return borough; }
+    void Place::setBorough(std::string borough) { this->borough = borough; _isSet = true; }
+    bool Place::isSet() { return _isSet; }
     
     std::ostream& operator<< (std::ostream& os, Place& place) {
         
-        if (place.borough.get()!=NULL&&place.getBorough()=="") {
-            os << *place.borough << ", ";
-        }
-        
-        os << *place.town << ", " << *place.county << ", " << *place.country << " [CC:" << *place.countyCode << "]";
+        os << "PLACE " << place.countyCode << ", " << place.country << ", " << place.county << ", ";
+        if (place.borough!="")
+            os << place.borough << ", ";
+        os << place.town << "\r\n";
         
         return os;
     }
@@ -73,38 +48,26 @@ namespace FamilySearch { namespace GEDCOM {
      */
     std::istream& operator>> (std::istream& is, Place& place) {
         
-        std::string *buff;
+        char sentinels[] = ",\r";
+        size_t sl = 2;
         
         // cc
-        buff = new std::string();
-        getline(is, *buff, ',');
-        if (buff->at(0)==' ') buff->erase(0,1);
-        place.setCountyCode(*buff);
+        place.setCountyCode(trim(read_until_one_of(is, sentinels, sl)));
         
-        buff = new std::string();
-        getline(is, *buff, ',');
-        if (buff->at(0)==' ') buff->erase(0,1);
-        place.setCountry(*buff);
+        // country
+        place.setCountry(trim(read_until_one_of(is, sentinels, sl)));
         
-        buff = new std::string();
-        getline(is, *buff, ',');
-        if (buff->at(0)==' ') buff->erase(0,1);
-        place.setCounty(*buff);
-        
-        buff = new std::string();
-        getline(is, *buff, ',');
-        if (buff->at(0)==' ') buff->erase(0,1);
-        place.setTown(*buff);
-        
-        if (is.peek()!='\r') {
-            place.setBorough(place.getTown());
-            buff = new std::string();
-            getline(is, *buff, ',');
-            if (buff->at(0)==' ') buff->erase(0,1);
-            place.setTown(*buff);
+        // county
+        place.setCounty(trim(read_until_one_of(is, sentinels, sl)));
+
+        // borough or town
+        std::string buff = trim(read_until_one_of(is, sentinels, sl));
+        if (is.peek()=='\n') {
+            place.setTown(buff); // town
+        } else {
+            place.setBorough(buff); // borough
+            place.setTown(trim(read_until_one_of(is, sentinels, sl))); // town
         }
-        
-        std::cout << place << std::endl;
         
         return is;
     }

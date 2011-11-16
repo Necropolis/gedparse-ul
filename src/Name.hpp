@@ -6,9 +6,6 @@
 // stl
 #include <iostream>
 #include <list>
-// boost
-#include <boost/scoped_ptr.hpp>
-#include <boost/shared_ptr.hpp>
 
 #ifndef __NAME_HPP_
 #define __NAME_HPP_
@@ -20,8 +17,9 @@ namespace FamilySearch { namespace GEDCOM {
     */
     class Name {
     private:
-        boost::scoped_ptr<std::list<boost::shared_ptr<std::string> > > givenNames;
-        boost::scoped_ptr<std::string> surname;
+        std::list<std::string> givenNames;
+        std::string surname;
+        bool _isSet;
         
     public:
         Name();
@@ -29,11 +27,13 @@ namespace FamilySearch { namespace GEDCOM {
         friend std::ostream& operator<< (std::ostream&, Name&);
         friend std::istream& operator>> (std::istream&, Name&);
         
-        std::list<boost::shared_ptr<std::string> >& getGivenNames();
+        std::list<std::string>& getGivenNames();
         std::string& getSurname();
-        void setSurname(std::string&);
+        void setSurname(std::string);
+        bool isSet();
     };
     
+    /* just a piece; no line begin or newline */
     std::ostream& operator<< (std::ostream&, Name&);
     std::istream& operator>> (std::istream&, Name&);
   

@@ -6,8 +6,6 @@
 // stl
 #include <iostream>
 #include <string>
-// boost
-#include <boost/scoped_ptr.hpp>
 
 #ifndef __PLACE_HPP_
 #define __PLACE_HPP_
@@ -29,29 +27,33 @@ namespace FamilySearch { namespace GEDCOM {
      */
     class Place {
     private:
-        boost::scoped_ptr<std::string> countyCode;
-        boost::scoped_ptr<std::string> country;
-        boost::scoped_ptr<std::string> county;
-        boost::scoped_ptr<std::string> town;
-        boost::scoped_ptr<std::string> borough;
+        std::string countyCode;
+        std::string country;
+        std::string county;
+        std::string town;
+        std::string borough;
+        bool _isSet;
         
     public:
+        Place();
         
         friend std::ostream& operator<< (std::ostream&, Place&);
         friend std::istream& operator>> (std::istream&, Place&);
     
         std::string& getCountyCode();
-        void setCountyCode(std::string&);
+        void setCountyCode(std::string);
         std::string& getCountry();
-        void setCountry(std::string&);
+        void setCountry(std::string);
         std::string& getCounty();
-        void setCounty(std::string&);
+        void setCounty(std::string);
         std::string& getTown();
-        void setTown(std::string&);
+        void setTown(std::string);
         std::string& getBorough();
-        void setBorough(std::string&);
+        void setBorough(std::string);
+        bool isSet();
     };
     
+    /* outputs header and newlines, eg "PLACE Fife, Scotland, Fife, Kingsbarns\r\n" */
     std::ostream& operator<< (std::ostream&, Place&);
     std::istream& operator>> (std::istream&, Place&);
     

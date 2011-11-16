@@ -5,25 +5,25 @@
 
 #include "Spouse.hpp"
 
+#include "Util.hpp"
+
 namespace FamilySearch { namespace GEDCOM {
     
     Name& Spouse::getName() {
-        return *(this->name);
+        return this->name;
     }
-    void Spouse::setName(Name& name) {
-        this->name.reset(&name);
+    void Spouse::setName(Name name) {
+        this->name = name;
     }
     
     std::ostream& operator<< (std::ostream& os, Spouse& spouse) {
-        os << " Spouse: " << std::endl;
-        os << "  Name: " << spouse.name << std::endl;
+        os << "1 SPOU " << spouse.name << "\r\n";
         return os;
     }
     
     std::istream& operator>> (std::istream& is, Spouse& spouse) {
         // stream is now a NAME part
-        spouse.name.reset(new Name());
-        is >> *spouse.name;
+        is >> spouse.name;
         
         return is;
     }

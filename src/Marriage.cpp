@@ -7,15 +7,16 @@
 
 namespace FamilySearch { namespace GEDCOM {
 
-    Place& Marriage::getPlace() {
-        return *this->place;
-    }
-    
-    void Marriage::setPlace(Place& place) {
-        this->place.reset(&place);
-    }
+    Place& Marriage::getPlace() { return this->place; }
+    void Marriage::setPlace(Place place) { this->place = place; }
+    Date& Marriage::getDate() { return date; }
+    void Marriage::setDate(Date date) { this->date = date; }
     
     std::ostream& operator<< (std::ostream& os, Marriage& marr) {
+        
+        os << "1 MARR\r\n";
+        if (marr.place.isSet()) os << "2 " << marr.place;
+        if (marr.date.isSet()) os << "2 " << marr.date;
         
         return os;
     }
@@ -23,6 +24,7 @@ namespace FamilySearch { namespace GEDCOM {
     std::istream& operator>> (std::istream& is, Marriage& marr) {
         
         while (is.good()) {
+            while (is.peek()<'0'||is.peek()>'9') {is.get();} // precondition: at line start
             std::string line_level;
             is >> line_level;
             
@@ -34,9 +36,13 @@ namespace FamilySearch { namespace GEDCOM {
                 is >> line_type;
                 
                 if (line_type=="PLAC") {
-                    Place *p = new Place();
-                    is >> *p;
-                    marr.setPlace(*p);
+                    Place p;
+                    is >> p;
+                    marr.setPlace(p);
+                } else if (line_type=="DATE") {
+                    Date d;
+                    is >> d;
+                    marr.setDate(d);
                 } else {
                     std::cerr << "Unknown line type of " << line_type << std::endl;
                 }

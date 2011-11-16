@@ -23,12 +23,12 @@ namespace FamilySearch { namespace GEDCOM {
      */
     class Spouse {
     private:
-        boost::scoped_ptr<Name> name;        
+        Name name;        
         
     public:
         
         Name& getName();
-        void setName(Name&);
+        void setName(Name);
         
         friend std::ostream& operator<< (std::ostream&, Spouse&);
         friend std::istream& operator>> (std::istream&, Spouse&);

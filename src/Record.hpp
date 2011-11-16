@@ -6,14 +6,15 @@
 // stl
 #include <string>
 #include <list>
-// boost
-#include <boost/scoped_ptr.hpp>
-#include <boost/shared_ptr.hpp>
 // familysearch
 #include "Marriage.hpp"
 #include "Spouse.hpp"
 #include "Name.hpp"
 #include "Gender.hpp"
+#include "Miscelleneous.hpp"
+#include "Batch.hpp"
+#include "Date.hpp"
+#include "Util.hpp"
 
 #ifndef __RECORD_HPP_
 #define __RECORD_HPP_
@@ -30,26 +31,42 @@ namespace FamilySearch { namespace GEDCOM {
      */  
     class Record {
     private:
-        boost::scoped_ptr<std::string> type;
-        boost::scoped_ptr<std::list<boost::shared_ptr<Spouse> > > spouses;
-        boost::scoped_ptr<Name> name;
-        boost::scoped_ptr<Gender> gender;
+        std::string type;
+        std::list<Spouse> spouses;
+        std::list<Marriage> marriages;
+        Name name;
+        Gender gender;
+        Miscelleneous misc;
+        Batch batch;
+        Date date;
+#ifdef DEBUG
+        std::string raw;
+        std::iostream::pos_type begin;
+        std::iostream::pos_type end;
+#endif
       
     public:
-        Record();
         
+        friend std::ostream& operator<< (std::ostream&, Record&);
         friend std::istream& operator>> (std::istream&, Record&);
       
         std::string& getType();
-        void setType(std::string&);
-        std::list<boost::shared_ptr<Spouse> >& getSpouses();
+        void setType(std::string);
+        std::list<Spouse>& getSpouses();
+        std::list<Marriage>& getMarriages();
         Name& getName();
-        void setName(Name&);
+        void setName(Name);
         Gender& getGender();
-        void setGender(Gender&);
-      
+        void setGender(Gender);
+        Miscelleneous& getMiscelleneous();
+        void setMiscelleneous(Miscelleneous);
+        Batch& getBatch();
+        void setBatch(Batch);
+        Date& getDate();
+        void setDate(Date);
     };
 
+    std::ostream& operator<< (std::ostream&, Record&);
     std::istream& operator>> (std::istream&, Record&);
   
 } }

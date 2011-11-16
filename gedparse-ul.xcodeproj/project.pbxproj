@@ -23,6 +23,9 @@
 		DAB317801472E4A400F9F8F5 /* libboost_filesystem-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DAB3177F1472E4A400F9F8F5 /* libboost_filesystem-mt.dylib */; };
 		DAB317821472E4AE00F9F8F5 /* libboost_thread-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DAB317811472E4AE00F9F8F5 /* libboost_thread-mt.dylib */; };
 		DAB317881473114F00F9F8F5 /* Marriage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAB317871473114F00F9F8F5 /* Marriage.cpp */; };
+		DAC0C56314740F2600130A60 /* Miscelleneous.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAC0C56214740F2600130A60 /* Miscelleneous.cpp */; };
+		DAC0C56614744C1600130A60 /* Util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAC0C56514744C1600130A60 /* Util.cpp */; };
+		DAC0C569147451CD00130A60 /* Batch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAC0C568147451CD00130A60 /* Batch.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -66,6 +69,12 @@
 		DAB317811472E4AE00F9F8F5 /* libboost_thread-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_thread-mt.dylib"; path = "usr/local/lib/libboost_thread-mt.dylib"; sourceTree = SDKROOT; };
 		DAB317871473114F00F9F8F5 /* Marriage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Marriage.cpp; sourceTree = "<group>"; };
 		DAB317891473115E00F9F8F5 /* Marriage.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Marriage.hpp; sourceTree = "<group>"; };
+		DAC0C56014740DC700130A60 /* Miscelleneous.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Miscelleneous.hpp; sourceTree = "<group>"; };
+		DAC0C56214740F2600130A60 /* Miscelleneous.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Miscelleneous.cpp; sourceTree = "<group>"; };
+		DAC0C56414744BDF00130A60 /* Util.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Util.hpp; sourceTree = "<group>"; };
+		DAC0C56514744C1600130A60 /* Util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Util.cpp; sourceTree = "<group>"; };
+		DAC0C5671474513F00130A60 /* Batch.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Batch.hpp; sourceTree = "<group>"; };
+		DAC0C568147451CD00130A60 /* Batch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Batch.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +156,9 @@
 				DAB317671472E40200F9F8F5 /* Name.hpp */,
 				DAB317691472E40200F9F8F5 /* Place.hpp */,
 				DAB3176F1472E40200F9F8F5 /* StandardisedName.hpp */,
+				DAC0C56014740DC700130A60 /* Miscelleneous.hpp */,
+				DAC0C5671474513F00130A60 /* Batch.hpp */,
+				DAC0C56414744BDF00130A60 /* Util.hpp */,
 			);
 			name = Headers;
 			sourceTree = "<group>";
@@ -164,6 +176,9 @@
 				DAB317661472E40200F9F8F5 /* Name.cpp */,
 				DAB317681472E40200F9F8F5 /* Place.cpp */,
 				DAB3176E1472E40200F9F8F5 /* StandardisedName.cpp */,
+				DAC0C56214740F2600130A60 /* Miscelleneous.cpp */,
+				DAC0C568147451CD00130A60 /* Batch.cpp */,
+				DAC0C56514744C1600130A60 /* Util.cpp */,
 			);
 			name = Implementation;
 			sourceTree = "<group>";
@@ -230,6 +245,9 @@
 				DAB317771472E40200F9F8F5 /* Spouse.cpp in Sources */,
 				DAB317781472E40200F9F8F5 /* StandardisedName.cpp in Sources */,
 				DAB317881473114F00F9F8F5 /* Marriage.cpp in Sources */,
+				DAC0C56314740F2600130A60 /* Miscelleneous.cpp in Sources */,
+				DAC0C56614744C1600130A60 /* Util.cpp in Sources */,
+				DAC0C569147451CD00130A60 /* Batch.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
