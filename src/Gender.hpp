@@ -6,16 +6,17 @@
 // stl
 #include <iostream>
 #include <string>
+// familysearch
+#include "Attribute.hpp"
 
 #ifndef __GENDER_HPP_
 #define __GENDER_HPP_
 
 namespace FamilySearch { namespace GEDCOM {
   
-    class Gender {
+    class Gender : public Attribute {
     private:
         std::string gender;
-        bool _isSet;
         
     public:
         Gender();
@@ -25,7 +26,6 @@ namespace FamilySearch { namespace GEDCOM {
       
         std::string& getGender();
         void setGender(std::string);
-        bool isSet();
     };
   
     /* outputs line ending, eg "SEX F\r\n" */

@@ -6,6 +6,10 @@
 #include "Record.hpp"
 
 #include <exception>
+#ifdef DEBUG
+#include <sstream>
+#include <vector>
+#endif
 
 namespace FamilySearch { namespace GEDCOM {
     
@@ -23,7 +27,52 @@ namespace FamilySearch { namespace GEDCOM {
     void Record::setBatch(Batch batch) { this->batch = batch; }
     Date& Record::getDate() { return date; }
     void Record::setDate(Date date) { this->date = date; }
+#ifdef DEBUG
+    std::string& Record::getRaw() { return raw; }
+    void Record::setRaw(std::string raw) { this->raw = raw; }
+    std::iostream::pos_type& Record::getBegin() { return begin; }
+    void Record::setBegin(std::iostream::pos_type begin) { this->begin = begin; }
+    std::iostream::pos_type& Record::getEnd() { return end; }
+    void Record::setEnd(std::iostream::pos_type end) { this->end = end; }
+#endif
 
+#ifdef DEBUG
+    void Record::output_debug_info(std::ostream& os) {
+        os << std::endl << "Parsed Record: " << std::endl << *this;
+        os << std::endl << "Raw bytes: " << std::endl << raw << std::endl;
+        os << "Beginning Location: " << begin << std::endl << "Ending Location: " << end << std::endl;
+    }
+    bool Record::validate_parse() {
+        std::stringstream orig(raw, std::stringstream::in|std::stringstream::out);
+        std::stringstream pars(std::string(), std::stringstream::in|std::stringstream::out);
+        pars << *this;
+        
+        std::vector<std::string> orig_vec; orig.seekg(0, std::ios_base::beg);
+        std::vector<std::string> pars_vec; pars.seekg(0, std::ios_base::beg);
+        while (orig.good()) { std::string str; orig >> str; orig_vec.push_back(str); }
+        while (pars.good()) { std::string str; pars >> str; pars_vec.push_back(str); }
+        
+        if (orig_vec.size()!=pars_vec.size()) {
+            std::cerr << "Wordcount of original does not equal parsed!" << std::endl;
+            std::cerr << "Wordcount of Original: " << orig_vec.size() << std::endl;
+            std::cerr << "Wordcount of Parsed  : " << pars_vec.size() << std::endl;
+            return false;
+        }
+        
+        for (size_t i=0; i < pars_vec.size(); ++i) {
+            if (pars_vec[i]!=orig_vec[i]) {
+                std::cerr << "          orig      pars" << std::endl;
+                for (size_t j=0; j < pars_vec.size(); ++j)
+                    std::cerr << "Word " << j << ": " << orig_vec[j] << "  " << pars_vec[j] << std::endl;
+                std::cerr << "Word at index " << i << " is not the same in both the original stream and the generated output!" << std::endl;
+                return false;
+            }
+        }
+        
+        return true;
+    }
+#endif
+    
     std::ostream& operator<< (std::ostream& os, Record& rec) {
         os << "0 " << rec.type << "\r\n";
         if (rec.getName().isSet()) os << "1 NAME " << rec.name << "\r\n";
@@ -34,11 +83,6 @@ namespace FamilySearch { namespace GEDCOM {
             os << *it;
         if (rec.misc.isSet()) os << "1 " << rec.misc;
         if (rec.batch.isSet()) os << "1 " << rec.batch;
-        
-#ifdef DEBUG
-        std::cout << std::endl << std::endl << "Raw bytes: " << std::endl << rec.raw << std::endl;
-        std::cout << "Beginning Location: " << rec.begin << std::endl << "Ending Location: " << rec.end << std::endl << std::endl;
-#endif
         return os;
     }
     

@@ -7,6 +7,9 @@
 
 #include "Util.hpp"
 
+// the parser is proven up until this record:
+#define PARSE_SUCCESS_UNTIL 5
+
 namespace FamilySearch { namespace GEDCOM {
   
     Gedcom::Gedcom()
@@ -39,23 +42,31 @@ namespace FamilySearch { namespace GEDCOM {
         
                 ged.records->push_back(r);
           
-                std::cout << "Just parsed: " << std::endl;
-                std::cout << *r << std::endl;
-        
+#ifdef DEBUG
+                std::cout << "Just parsed record No. " << ged.records->size() << ": " << std::endl;
+                r->output_debug_info(std::cout);
+                if (r->validate_parse())
+                    std::cout << "All is well in Zion, yea, Zion prospereth. The parse went well and validates." << std::endl;
+                else {
+                    fail("Crap, a parse failed.", is);
+                }
+#endif
             } else {
                 // all is not well in zion, yea, zion doth not prosper.
-                std::cout << "Record found which is not of type FAM or INDI" << std::endl;
+                fail("Record found which is not of type FAM or INDI", is);
             }
 
-            // debugging code
-            std::cout << "Hit the any key to continue, or x to die" << std::endl;
-            c=std::cin.get();
-            switch (c) {
-                case 'x':
-                    std::cout << "Exiting..." << std::endl;
-                    return is;
+#ifdef DEBUG
+            if (ged.records->size()>=PARSE_SUCCESS_UNTIL) {
+                std::cout << "Hit the any key to continue, or x to die" << std::endl;
+                c=std::cin.get();
+                switch (c) {
+                    case 'x':
+                        std::cout << "Exiting..." << std::endl;
+                        return is;
+                }
             }
-            // end of debugging code
+#endif
         }
     
         return is;

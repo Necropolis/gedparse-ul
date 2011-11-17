@@ -6,6 +6,8 @@
 // stl
 #include <iostream>
 #include <list>
+// familysearch
+#include "Attribute.hpp"
 
 #ifndef __NAME_HPP_
 #define __NAME_HPP_
@@ -15,11 +17,10 @@ namespace FamilySearch { namespace GEDCOM {
     /**
     * A name record.
     */
-    class Name {
+    class Name : public Attribute {
     private:
         std::list<std::string> givenNames;
         std::string surname;
-        bool _isSet;
         
     public:
         Name();
@@ -30,7 +31,6 @@ namespace FamilySearch { namespace GEDCOM {
         std::list<std::string>& getGivenNames();
         std::string& getSurname();
         void setSurname(std::string);
-        bool isSet();
     };
     
     /* just a piece; no line begin or newline */

@@ -9,15 +9,14 @@ namespace FamilySearch { namespace GEDCOM {
     
     void setPart(std::string&, Date&);
     
-    Date::Date() :day(""), month(""), year(""), _isSet(false) {}
+    Date::Date(): day(""), month(""), year(""), Attribute() {}
     
     std::string& Date::getDay() { return day; }
-    void Date::setDay(std::string day) { this->day = day; _isSet = true; }
+    void Date::setDay(std::string day) { this->day = day; set(true); }
     std::string& Date::getMonth() { return month; }
-    void Date::setMonth(std::string month) { this->month = month; _isSet = true; }
+    void Date::setMonth(std::string month) { this->month = month; set(true); }
     std::string& Date::getYear() { return year; }
-    void Date::setYear(std::string year) { this->year = year; _isSet = true; }
-    bool Date::isSet() { return _isSet; }
+    void Date::setYear(std::string year) { this->year = year; set(true); }
     
     std::ostream& operator<< (std::ostream& os, Date& date) {
         os << "DATE ";

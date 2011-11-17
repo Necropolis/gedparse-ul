@@ -15,8 +15,8 @@ namespace FamilySearch { namespace GEDCOM {
     std::ostream& operator<< (std::ostream& os, Marriage& marr) {
         
         os << "1 MARR\r\n";
-        if (marr.place.isSet()) os << "2 " << marr.place;
         if (marr.date.isSet()) os << "2 " << marr.date;
+        if (marr.place.isSet()) os << "2 " << marr.place;
         
         return os;
     }

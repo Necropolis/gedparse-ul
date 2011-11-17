@@ -6,6 +6,8 @@
 // stl
 #include <iostream>
 #include <string>
+// familysearch
+#include "Attribute.hpp"
 
 #ifndef __PLACE_HPP_
 #define __PLACE_HPP_
@@ -25,14 +27,13 @@ namespace FamilySearch { namespace GEDCOM {
      *                 country               borough
      *     PLACE Mlot, Scotland, Midlothian, Canongate, Edinburgh
      */
-    class Place {
+    class Place : public Attribute {
     private:
         std::string countyCode;
         std::string country;
         std::string county;
         std::string town;
         std::string borough;
-        bool _isSet;
         
     public:
         Place();
@@ -50,7 +51,6 @@ namespace FamilySearch { namespace GEDCOM {
         void setTown(std::string);
         std::string& getBorough();
         void setBorough(std::string);
-        bool isSet();
     };
     
     /* outputs header and newlines, eg "PLACE Fife, Scotland, Fife, Kingsbarns\r\n" */

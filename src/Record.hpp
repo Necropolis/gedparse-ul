@@ -49,6 +49,13 @@ namespace FamilySearch { namespace GEDCOM {
         
         friend std::ostream& operator<< (std::ostream&, Record&);
         friend std::istream& operator>> (std::istream&, Record&);
+        
+#ifdef DEBUG
+        /* show the original stream against what gedparse-ul can recreate */
+        void output_debug_info(std::ostream&);
+        /* try to word-for-word validate the record against the original stream */
+        bool validate_parse();
+#endif
       
         std::string& getType();
         void setType(std::string);
@@ -64,6 +71,14 @@ namespace FamilySearch { namespace GEDCOM {
         void setBatch(Batch);
         Date& getDate();
         void setDate(Date);
+#ifdef DEBUG
+        std::string& getRaw();
+        void setRaw(std::string);
+        std::iostream::pos_type& getBegin();
+        void setBegin(std::iostream::pos_type);
+        std::iostream::pos_type& getEnd();
+        void setEnd(std::iostream::pos_type);
+#endif
     };
 
     std::ostream& operator<< (std::ostream&, Record&);

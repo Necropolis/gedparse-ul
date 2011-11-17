@@ -9,12 +9,11 @@
 
 namespace FamilySearch { namespace GEDCOM {
     
-    Name::Name() :surname(""), givenNames(std::list<std::string>()), _isSet(false) {}
+    Name::Name(): surname(""), givenNames(std::list<std::string>()), Attribute() {}
     
     std::list<std::string>& Name::getGivenNames() { return this->givenNames; }
     std::string& Name::getSurname() { return this->surname; }
-    void Name::setSurname(std::string surname) { this->surname = surname; }
-    bool Name::isSet() { return _isSet; }
+    void Name::setSurname(std::string surname) { this->surname = surname; set(true); }
     
     std::ostream& operator<< (std::ostream& os, Name& name) {
         std::list<std::string>::iterator iter;
@@ -38,7 +37,7 @@ namespace FamilySearch { namespace GEDCOM {
             }
         }
         
-        name._isSet = true;
+        name.set(true);
         
         return is;
     }

@@ -3,20 +3,22 @@
  * (C) 2011 Chris Miller. All rights reserved.
  */
 
+// stl
 #include <iostream>
 #include <string>
+// familysearch
+#include "Attribute.hpp"
 
 #ifndef __DATE_HPP_
 #define __DATE_HPP_
 
 namespace FamilySearch { namespace GEDCOM {
     
-    class Date {
+    class Date : public Attribute {
     private:
         std::string day;
         std::string month;
         std::string year;
-        bool _isSet;
         
     public:
         Date();
@@ -27,7 +29,6 @@ namespace FamilySearch { namespace GEDCOM {
         void setMonth(std::string);
         std::string& getYear();
         void setYear(std::string);
-        bool isSet();
         
         friend std::ostream& operator<< (std::ostream&, Date&);
         friend std::istream& operator>> (std::istream&, Date&);

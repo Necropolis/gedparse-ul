@@ -16,6 +16,7 @@ namespace FamilySearch { namespace GEDCOM {
     std::string trim(std::string);
     void inspect_stream(std::istream&, long long);
     void inspect_stream(std::istream&);
+    void fail(const char*, std::istream&);
 } }
 
 #endif

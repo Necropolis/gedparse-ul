@@ -26,6 +26,7 @@
 		DAC0C56314740F2600130A60 /* Miscelleneous.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAC0C56214740F2600130A60 /* Miscelleneous.cpp */; };
 		DAC0C56614744C1600130A60 /* Util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAC0C56514744C1600130A60 /* Util.cpp */; };
 		DAC0C569147451CD00130A60 /* Batch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAC0C568147451CD00130A60 /* Batch.cpp */; };
+		DAC12B7F14755D7400DE7292 /* Attribute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAC12B7E14755D7400DE7292 /* Attribute.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -75,6 +76,7 @@
 		DAC0C56514744C1600130A60 /* Util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Util.cpp; sourceTree = "<group>"; };
 		DAC0C5671474513F00130A60 /* Batch.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Batch.hpp; sourceTree = "<group>"; };
 		DAC0C568147451CD00130A60 /* Batch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Batch.cpp; sourceTree = "<group>"; };
+		DAC12B7E14755D7400DE7292 /* Attribute.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Attribute.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,7 +115,6 @@
 			isa = PBXGroup;
 			children = (
 				DAB3174F1472E39800F9F8F5 /* gedparse-ul.cpp */,
-				DAB3175D1472E40200F9F8F5 /* Attribute.hpp */,
 				DAB317851472FF1400F9F8F5 /* Headers */,
 				DAB317861472FF2200F9F8F5 /* Implementation */,
 				DAB317841472EC0500F9F8F5 /* Boost C++ */,
@@ -151,6 +152,7 @@
 				DAB317611472E40200F9F8F5 /* Event.hpp */,
 				DAB317891473115E00F9F8F5 /* Marriage.hpp */,
 				DAB3176D1472E40200F9F8F5 /* Spouse.hpp */,
+				DAB3175D1472E40200F9F8F5 /* Attribute.hpp */,
 				DAB3175F1472E40200F9F8F5 /* Date.hpp */,
 				DAB317651472E40200F9F8F5 /* Gender.hpp */,
 				DAB317671472E40200F9F8F5 /* Name.hpp */,
@@ -171,6 +173,7 @@
 				DAB317601472E40200F9F8F5 /* Event.cpp */,
 				DAB317871473114F00F9F8F5 /* Marriage.cpp */,
 				DAB3176C1472E40200F9F8F5 /* Spouse.cpp */,
+				DAC12B7E14755D7400DE7292 /* Attribute.cpp */,
 				DAB3175E1472E40200F9F8F5 /* Date.cpp */,
 				DAB317641472E40200F9F8F5 /* Gender.cpp */,
 				DAB317661472E40200F9F8F5 /* Name.cpp */,
@@ -248,6 +251,7 @@
 				DAC0C56314740F2600130A60 /* Miscelleneous.cpp in Sources */,
 				DAC0C56614744C1600130A60 /* Util.cpp in Sources */,
 				DAC0C569147451CD00130A60 /* Batch.cpp in Sources */,
+				DAC12B7F14755D7400DE7292 /* Attribute.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

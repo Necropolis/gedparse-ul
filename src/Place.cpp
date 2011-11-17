@@ -9,23 +9,22 @@
 
 namespace FamilySearch { namespace GEDCOM {
 
-    Place::Place() :countyCode(""), country(""), county(""), town(""), borough(""), _isSet(false) {}
+    Place::Place(): countyCode(""), country(""), county(""), town(""), borough(""), Attribute() {}
     
     std::string& Place::getCountyCode() { return countyCode; }
-    void Place::setCountyCode(std::string countyCode) { this->countyCode = countyCode; _isSet = true; }
+    void Place::setCountyCode(std::string countyCode) { this->countyCode = countyCode; set(true); }
     std::string& Place::getCountry() { return country; }
-    void Place::setCountry(std::string country) { this->country = country; _isSet = true; }
+    void Place::setCountry(std::string country) { this->country = country; set(true); }
     std::string& Place::getCounty() { return county; }
-    void Place::setCounty(std::string county) { this->county = county; _isSet = true; }
+    void Place::setCounty(std::string county) { this->county = county; set(true); }
     std::string& Place::getTown() { return town; }
-    void Place::setTown(std::string town) { this->town = town; _isSet = true; }
+    void Place::setTown(std::string town) { this->town = town; set(true); }
     std::string& Place::getBorough() { return borough; }
-    void Place::setBorough(std::string borough) { this->borough = borough; _isSet = true; }
-    bool Place::isSet() { return _isSet; }
+    void Place::setBorough(std::string borough) { this->borough = borough; set(true); }
     
     std::ostream& operator<< (std::ostream& os, Place& place) {
         
-        os << "PLACE " << place.countyCode << ", " << place.country << ", " << place.county << ", ";
+        os << "PLAC " << place.countyCode << ", " << place.country << ", " << place.county << ", ";
         if (place.borough!="")
             os << place.borough << ", ";
         os << place.town << "\r\n";

@@ -52,5 +52,17 @@ namespace FamilySearch { namespace GEDCOM {
     void inspect_stream(std::istream& is) {
         inspect_stream(is, 100);
     }
+    
+    void fail(const char* msg, std::istream& is) {
+        std::cout << msg << std::endl;
+        inspect_stream(is, 100);
+        std::cout << "Hit the any key to continue, or x to die" << std::endl;
+        char c=std::cin.get();
+        switch (c) {
+            case 'x':
+                std::cout << "Exiting..." << std::endl;
+                exit(1);
+        }
+    }
 
 } }

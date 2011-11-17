@@ -7,11 +7,10 @@
 
 namespace FamilySearch { namespace GEDCOM {
 
-    Gender::Gender() :gender(""), _isSet(false) {}
+    Gender::Gender(): gender(""), Attribute() {}
     
     std::string& Gender::getGender() { return this->gender; }
-    void Gender::setGender(std::string gender) { this->gender = gender; _isSet = true; }
-    bool Gender::isSet() { return _isSet; }
+    void Gender::setGender(std::string gender) { this->gender = gender; set(true); }
 
     std::ostream& operator<< (std::ostream& os, Gender& gender) {
         os << "SEX " << gender.gender << "\r\n";
