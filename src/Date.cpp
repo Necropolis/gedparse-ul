@@ -44,10 +44,12 @@ namespace FamilySearch { namespace GEDCOM {
         
         is >> str;
         setPart(str, date);
+        while (is.peek()==' ') is.get();
         if (is.peek()=='\r') return is;
         
         is >> str;
         setPart(str, date);
+        while (is.peek()==' ') is.get();
         if (is.peek()=='\r') return is;
         
         is >> str;

@@ -21,10 +21,15 @@ namespace FamilySearch { namespace GEDCOM {
         is.seekg(0, std::istream::end);
         std::istream::pos_type length = is.tellg();
         is.seekg(tmp);
+        size_t records = 0;
         
         while (is.good()) {
+            std::ios::pos_type loc = is.tellg();
             char c = is.get();
-            if (c!='0') {
+            if (!is.good()) {
+                std::cout << "End of GEDCOM" << std::endl;
+                break;                
+            } else if (c!='0') {
                 std::cout << "Breaking because of precondition fail on line " << __LINE__ << std::endl;
                 inspect_stream(is);
                 break;
@@ -39,15 +44,17 @@ namespace FamilySearch { namespace GEDCOM {
                 r->setType(str);
           
                 is >> *r;
-        
+#ifndef DEBUG
                 ged.records->push_back(r);
+#endif
+                ++records;
           
 #ifdef DEBUG
                 if (r->validate_parse()) {
-                    if (ged.records->size()%71==0) {
-                        std::cout << "[[ WIN ]] Record No. " << ged.records->size() << " Parsed Successfully ";
+//                    if (ged.records->size()%1071==0) {
+                        std::cout << "[[ WIN ]] Record No. " << records << " Parsed Successfully ";
                         std::cout << (double)is.tellg()/(double)length*100.0f << "% of the way done" << std::endl;
-                    }
+//                    }
                 } else {
                     std::cout << "[[ FAIL ]] Record No. " << ged.records->size() << " Didn't Parse Right" << std::endl;
                     r->output_debug_info(std::cout);

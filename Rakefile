@@ -12,6 +12,7 @@ LD = CC
 
 CFLAGS = [
   '-Imongo',
+  '-DDEBUG'
 ].join(' ')
 
 LIBS = [

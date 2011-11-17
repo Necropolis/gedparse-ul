@@ -58,27 +58,42 @@ namespace FamilySearch { namespace GEDCOM {
         
         std::vector<std::string> orig_vec; orig.seekg(0, std::ios_base::beg);
         std::vector<std::string> pars_vec; pars.seekg(0, std::ios_base::beg);
-        while (orig.good()) { std::string str; orig >> str; orig_vec.push_back(str); }
-        while (pars.good()) { std::string str; pars >> str; pars_vec.push_back(str); }
+        while (orig.good()) { std::string str; orig >> str; if (str!="") orig_vec.push_back(str); }
+        while (pars.good()) { std::string str; pars >> str; if (str!="") pars_vec.push_back(str); }
         
+        std::vector<std::string> smaller, larger;
+        if (orig_vec.size()<pars_vec.size()) { smaller = orig_vec; larger = pars_vec; }
+        else { smaller = pars_vec; larger = orig_vec; }
+        
+        bool retval = true;
         if (orig_vec.size()!=pars_vec.size()) {
             std::cerr << "Wordcount of original does not equal parsed!" << std::endl;
             std::cerr << "Wordcount of Original: " << orig_vec.size() << std::endl;
             std::cerr << "Wordcount of Parsed  : " << pars_vec.size() << std::endl;
-            return false;
+                            
+            std::cerr << "          orig      pars" << std::endl;
+            for (size_t j=0; j < smaller.size(); ++j)
+                std::cerr << "Word " << j << ": " << orig_vec[j] << "  " << pars_vec[j] << std::endl;
+            for (size_t j=smaller.size(); j < larger.size(); ++j) {
+                if (smaller==orig_vec)
+                    std::cerr << "Word " << j << ": " << "NULL  " << pars_vec[j] << std::endl;
+                else
+                    std::cerr << "Word " << j << ": " << orig_vec[j] << "  NULL"  << std::endl;
+            }
+            
+            retval = false;
         }
+
         
-        for (size_t i=0; i < pars_vec.size(); ++i) {
-            if (pars_vec[i]!=orig_vec[i]) {
-                std::cerr << "          orig      pars" << std::endl;
-                for (size_t j=0; j < pars_vec.size(); ++j)
-                    std::cerr << "Word " << j << ": " << orig_vec[j] << "  " << pars_vec[j] << std::endl;
-                std::cerr << "Word at index " << i << " is not the same in both the original stream and the generated output!" << std::endl;
-                return false;
+        for (size_t i=0; i < smaller.size(); ++i) {
+            std::string st0 = pars_vec[i];
+            std::string st1 = orig_vec[i];
+            if (st0!=st1) {
+                retval= false;
             }
         }
-        
-        return true;
+                
+        return retval;
     }
 #endif
     
@@ -105,7 +120,7 @@ namespace FamilySearch { namespace GEDCOM {
         is.ignore(2, '\n');
 
         while (is.good()) {
-            while (is.peek()<'0'||is.peek()>'9') {is.get();} // precondition: at line start
+            while (is.peek()<'0'||is.peek()>'9') { is.get();} // precondition: at line start
             char c = is.get();
             if (c=='0') {
                 is.unget();
@@ -161,13 +176,17 @@ namespace FamilySearch { namespace GEDCOM {
         }
         
 #ifdef DEBUG
+        if (!is.good()) {
+            is.clear();
+            is.seekg(0,std::ios_base::end);
+        }
         rec.end = is.tellg();
-        
         is.seekg(rec.begin);
-        std::streamsize len= rec.end - rec.begin;
-        char* _raw = (char*)malloc(sizeof(char)*len);
-        is.readsome(_raw, len);
-        rec.raw = std::string(_raw, len);
+        std::streamsize len = rec.end - rec.begin;
+        char* sz = (char*)malloc(sizeof(char)*len);
+        is.read(sz, len);
+        rec.raw=std::string(sz, len);
+        free(sz);
         std::string raw_pfx("0 ");
         raw_pfx.append(rec.type);
         rec.raw.insert(0, raw_pfx);

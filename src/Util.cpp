@@ -7,7 +7,7 @@
 
 namespace FamilySearch { namespace GEDCOM {
 
-    /* probably leaks like a seive */
+    /* after running a bazillion times, this does not leak */
     std::string read_until_one_of(std::istream& is, char* sentinels, size_t len) {
         std::istream::pos_type orig = is.tellg();
         
@@ -19,6 +19,7 @@ namespace FamilySearch { namespace GEDCOM {
             getline(is, sz, sentinels[i]);
             results.push_back(sz);
             result_ends.push_back(is.tellg());
+            if (!is.good()) is.clear();
         }
         size_t smallest_idx = 0;
         for (size_t i=0; i<results.size(); ++i) {
