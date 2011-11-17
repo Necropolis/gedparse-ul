@@ -8,6 +8,7 @@
 #include <list>
 // familysearch
 #include "Attribute.hpp"
+#include "StandardisedName.hpp"
 
 #ifndef __NAME_HPP_
 #define __NAME_HPP_
@@ -21,6 +22,8 @@ namespace FamilySearch { namespace GEDCOM {
     private:
         std::list<std::string> givenNames;
         std::string surname;
+        std::list<StandardisedName> standardisedNames;
+        bool standalone;
         
     public:
         Name();
@@ -31,6 +34,9 @@ namespace FamilySearch { namespace GEDCOM {
         std::list<std::string>& getGivenNames();
         std::string& getSurname();
         void setSurname(std::string);
+        std::list<StandardisedName>& getStandardisedNames();
+        bool isStandalone();
+        void setStandalone(bool);
     };
     
     /* just a piece; no line begin or newline */

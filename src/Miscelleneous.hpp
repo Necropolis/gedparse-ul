@@ -6,23 +6,23 @@
 // stl
 #include <iostream>
 #include <string>
+// familysearch
+#include "Attribute.hpp"
 
 #ifndef __MISCELLENEOUS_HPP_
 #define __MISCELLENEOUS_HPP_
 
 namespace FamilySearch { namespace GEDCOM {
   
-    class Miscelleneous {
+    class Miscelleneous : public Attribute {
     private:
         std::string note;
-        bool _isSet;
         
     public:
         Miscelleneous();
         
         std::string& getNote();
         void setNote(std::string);
-        bool isSet();
         
         friend std::ostream& operator<< (std::ostream&, Miscelleneous&);
         friend std::istream& operator>> (std::istream&, Miscelleneous&);

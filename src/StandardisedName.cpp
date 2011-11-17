@@ -21,7 +21,11 @@ namespace FamilySearch { namespace GEDCOM {
     }
     
     std::istream& operator>> (std::istream& is, StandardisedName& standardised_name) {
-        
+        while (is.peek()!='\r') {
+            std::string str;
+            is >> str;
+            standardised_name.standardisedName.append(str);
+        }
         
         return is;
     }

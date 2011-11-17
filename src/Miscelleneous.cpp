@@ -7,11 +7,10 @@
 
 namespace FamilySearch { namespace GEDCOM {
     
-    Miscelleneous::Miscelleneous() :note(""), _isSet(false) {}
+    Miscelleneous::Miscelleneous(): note(""), Attribute() {}
 
     std::string& Miscelleneous::getNote() { return this->note; }
     void Miscelleneous::setNote(std::string note) { this->note = note; }
-    bool Miscelleneous::isSet() { return _isSet; }
     
     std::ostream& operator<< (std::ostream& os, Miscelleneous& misc) {
         os << "MISC " << misc.note << "\r\n";
@@ -23,9 +22,10 @@ namespace FamilySearch { namespace GEDCOM {
         while (is.peek()!='\r') {
             is >> str;
             misc.note.append(str);
+            misc.note.append(" ");
         }
         
-        misc._isSet = true;
+        misc.set(true);
         
         return is;
     }

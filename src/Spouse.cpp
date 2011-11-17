@@ -26,7 +26,6 @@ namespace FamilySearch { namespace GEDCOM {
     std::istream& operator>> (std::istream& is, Spouse& spouse) {
         // stream is now a NAME part
         is >> spouse.name;
-        is.ignore(2, '\n');
         while (is.good()) {
             while (is.peek()<'0'||is.peek()>'9') {is.get();} // precondition: at line start
             char c = is.get();

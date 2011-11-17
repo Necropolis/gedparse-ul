@@ -8,18 +8,13 @@
 #include "Util.hpp"
 
 // the parser is proven up until this record:
-#define PARSE_SUCCESS_UNTIL 5
+#define PARSE_SUCCESS_UNTIL 16431
 
 namespace FamilySearch { namespace GEDCOM {
   
-    Gedcom::Gedcom()
-        :records(new std::list<boost::shared_ptr<Record> >()) {
-      
-        }
+    Gedcom::Gedcom(): records(new std::vector<boost::shared_ptr<Record> >()) { }
   
-    std::list<boost::shared_ptr<Record> >& Gedcom::getRecords() {
-        return *records;
-    }
+    std::vector<boost::shared_ptr<Record> >& Gedcom::getRecords() { return *records; }
   
     std::istream& operator>> (std::istream &is, Gedcom &ged) {
         while (is.good()) {
@@ -43,11 +38,12 @@ namespace FamilySearch { namespace GEDCOM {
                 ged.records->push_back(r);
           
 #ifdef DEBUG
-                std::cout << "Just parsed record No. " << ged.records->size() << ": " << std::endl;
-                r->output_debug_info(std::cout);
-                if (r->validate_parse())
-                    std::cout << "All is well in Zion, yea, Zion prospereth. The parse went well and validates." << std::endl;
-                else {
+                if (r->validate_parse()) {
+                    if (ged.records->size()%71==0)
+                        std::cout << "[[ WIN ]] Record No. " << ged.records->size() << " Parsed Successfully" << std::endl;
+                } else {
+                    std::cout << "[[ FAIL ]] Record No. " << ged.records->size() << " Didn't Parse Right" << std::endl;
+                    r->output_debug_info(std::cout);
                     fail("Crap, a parse failed.", is);
                 }
 #endif
@@ -57,15 +53,15 @@ namespace FamilySearch { namespace GEDCOM {
             }
 
 #ifdef DEBUG
-            if (ged.records->size()>=PARSE_SUCCESS_UNTIL) {
-                std::cout << "Hit the any key to continue, or x to die" << std::endl;
-                c=std::cin.get();
-                switch (c) {
-                    case 'x':
-                        std::cout << "Exiting..." << std::endl;
-                        return is;
-                }
-            }
+//            if (ged.records->size()>=PARSE_SUCCESS_UNTIL) {
+//                std::cout << "Hit the any key to continue, or x to die" << std::endl;
+//                c=std::cin.get();
+//                switch (c) {
+//                    case 'x':
+//                        std::cout << "Exiting..." << std::endl;
+//                        return is;
+//                }
+//            }
 #endif
         }
     

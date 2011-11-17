@@ -6,6 +6,7 @@
 // stl
 #include <iostream>
 #include <list>
+#include <vector>
 // boost
 #include <boost/shared_ptr.hpp>
 #include <boost/scoped_ptr.hpp>
@@ -37,14 +38,14 @@ namespace FamilySearch { namespace GEDCOM {
  */  
 class Gedcom {
 private:
-  boost::scoped_ptr<std::list<boost::shared_ptr<Record> > > records;
+  boost::scoped_ptr<std::vector<boost::shared_ptr<Record> > > records;
   
 public:
   Gedcom();
   /** parse from a stream */
   friend std::istream& operator>> (std::istream &is, Gedcom &ged);
   
-  std::list<boost::shared_ptr<Record> >& getRecords();
+  std::vector<boost::shared_ptr<Record> >& getRecords();
 };
 
 std::istream& operator>> (std::istream &is, Gedcom &ged);

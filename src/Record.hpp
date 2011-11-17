@@ -9,6 +9,7 @@
 // familysearch
 #include "Marriage.hpp"
 #include "Spouse.hpp"
+#include "Event.hpp"
 #include "Name.hpp"
 #include "Gender.hpp"
 #include "Miscelleneous.hpp"
@@ -34,6 +35,7 @@ namespace FamilySearch { namespace GEDCOM {
         std::string type;
         std::list<Spouse> spouses;
         std::list<Marriage> marriages;
+        std::list<Event> events;
         Name name;
         Gender gender;
         Miscelleneous misc;
@@ -61,6 +63,7 @@ namespace FamilySearch { namespace GEDCOM {
         void setType(std::string);
         std::list<Spouse>& getSpouses();
         std::list<Marriage>& getMarriages();
+        std::list<Event>& getEvents();
         Name& getName();
         void setName(Name);
         Gender& getGender();

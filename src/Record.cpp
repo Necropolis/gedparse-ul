@@ -17,6 +17,7 @@ namespace FamilySearch { namespace GEDCOM {
     void Record::setType(std::string type) { this->type = type; }
     std::list<Spouse>& Record::getSpouses() { return spouses; }
     std::list<Marriage>& Record::getMarriages() { return marriages; }
+    std::list<Event>& Record::getEvents() { return events; }
     Name& Record::getName() { return name; }
     void Record::setName(Name name) { this->name = name; }
     Gender& Record::getGender() { return gender; }
@@ -38,9 +39,13 @@ namespace FamilySearch { namespace GEDCOM {
 
 #ifdef DEBUG
     void Record::output_debug_info(std::ostream& os) {
+        os << "Beginning Location: ";
+        std::ios_base::fmtflags flags = os.flags();
+        os.flags(std::ios::hex| std::ios::showbase);
+        os << begin << std::endl << "Ending Location: " << end << std::endl;
+        os.flags(flags);
         os << std::endl << "Parsed Record: " << std::endl << *this;
         os << std::endl << "Raw bytes: " << std::endl << raw << std::endl;
-        os << "Beginning Location: " << begin << std::endl << "Ending Location: " << end << std::endl;
     }
     bool Record::validate_parse() {
         std::stringstream orig(raw, std::stringstream::in|std::stringstream::out);
@@ -105,30 +110,27 @@ namespace FamilySearch { namespace GEDCOM {
                 std::string line_type;
                 is >> line_type;
 
-                if (line_type=="SEX") {
-                    Gender g;
-                    is >> g;
-                    rec.setGender(g);
-                } else if (line_type=="SPOU") {
+                if (line_type=="SEX") { // Gender
+                    is >> rec.gender;
+                } else if (line_type=="SPOU") { // Spouse
                     Spouse s;
                     is >> s;
                     rec.spouses.push_back(s);
-                } else if (line_type=="MARR") {
+                } else if (line_type=="MARR") { // Marriage
                     Marriage m;
                     is >> m;
                     rec.marriages.push_back(m);
-                } else if (line_type=="MISC") {
-                    Miscelleneous m;
-                    is >> m;
-                    rec.setMiscelleneous(m);
-                } else if (line_type=="BATC") {
-                    Batch b;
-                    is >> b;
-                    rec.setBatch(b);
-                } else if (line_type=="NAME") {
-                    Name n;
-                    is >> n;
-                    rec.setName(n);
+                } else if (line_type=="MISC") { // Miscellenous
+                    is >> rec.misc;
+                } else if (line_type=="BATC") { // Batch Number
+                    is >> rec.batch;
+                } else if (line_type=="NAME") { // Name
+                    rec.name.setStandalone(true);
+                    is >> rec.name;
+                } else if (line_type=="EVEN") { // Event
+                    Event e;
+                    is >> e;
+                    rec.events.push_back(e);
                 } else {
                     std::cout << "Unknown line type \"" << line_type << "\"" << std::endl;
                     inspect_stream(is);
