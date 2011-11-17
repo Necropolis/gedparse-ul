@@ -17,6 +17,11 @@ namespace FamilySearch { namespace GEDCOM {
     std::vector<boost::shared_ptr<Record> >& Gedcom::getRecords() { return *records; }
   
     std::istream& operator>> (std::istream &is, Gedcom &ged) {
+        std::istream::pos_type tmp = is.tellg();
+        is.seekg(0, std::istream::end);
+        std::istream::pos_type length = is.tellg();
+        is.seekg(tmp);
+        
         while (is.good()) {
             char c = is.get();
             if (c!='0') {
@@ -39,8 +44,10 @@ namespace FamilySearch { namespace GEDCOM {
           
 #ifdef DEBUG
                 if (r->validate_parse()) {
-                    if (ged.records->size()%71==0)
-                        std::cout << "[[ WIN ]] Record No. " << ged.records->size() << " Parsed Successfully" << std::endl;
+                    if (ged.records->size()%71==0) {
+                        std::cout << "[[ WIN ]] Record No. " << ged.records->size() << " Parsed Successfully ";
+                        std::cout << (double)is.tellg()/(double)length*100.0f << "% of the way done" << std::endl;
+                    }
                 } else {
                     std::cout << "[[ FAIL ]] Record No. " << ged.records->size() << " Didn't Parse Right" << std::endl;
                     r->output_debug_info(std::cout);

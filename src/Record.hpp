@@ -36,7 +36,7 @@ namespace FamilySearch { namespace GEDCOM {
         std::list<Spouse> spouses;
         std::list<Marriage> marriages;
         std::list<Event> events;
-        Name name;
+        Name name, father, mother;
         Gender gender;
         Miscelleneous misc;
         Batch batch;
@@ -74,6 +74,10 @@ namespace FamilySearch { namespace GEDCOM {
         void setBatch(Batch);
         Date& getDate();
         void setDate(Date);
+        Name& getFather();
+        void setFather(Name);
+        Name& getMother();
+        void setMother(Name);
 #ifdef DEBUG
         std::string& getRaw();
         void setRaw(std::string);

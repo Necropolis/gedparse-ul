@@ -19,7 +19,7 @@ namespace FamilySearch { namespace GEDCOM {
     void Event::setPlace(Place place) { this->place = place; set(true); }
     
     std::ostream& operator<< (std::ostream& os, Event& event) {
-        os << "EVEN " << event.type << "\r\n";
+        os << "1 EVEN " << event.type << "\r\n";
         if (event.date.isSet()) os << "2 " << event.date;
         if (event.place.isSet()) os << "2 " << event.place;
         return os;

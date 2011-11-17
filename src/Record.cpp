@@ -28,6 +28,10 @@ namespace FamilySearch { namespace GEDCOM {
     void Record::setBatch(Batch batch) { this->batch = batch; }
     Date& Record::getDate() { return date; }
     void Record::setDate(Date date) { this->date = date; }
+    Name& Record::getFather() { return father; }
+    void Record::setFather(Name father) { this->father = father; }
+    Name& Record::getMother() { return mother; }
+    void Record::setMother(Name mother) { this->mother = mother; }
 #ifdef DEBUG
     std::string& Record::getRaw() { return raw; }
     void Record::setRaw(std::string raw) { this->raw = raw; }
@@ -80,12 +84,13 @@ namespace FamilySearch { namespace GEDCOM {
     
     std::ostream& operator<< (std::ostream& os, Record& rec) {
         os << "0 " << rec.type << "\r\n";
-        if (rec.getName().isSet()) os << "1 NAME " << rec.name << "\r\n";
+        if (rec.getName().isSet()) os << "1 NAME " << rec.name;
         if (rec.gender.isSet()) os << "1 " << rec.gender;
-        for (std::list<Spouse>::iterator it = rec.spouses.begin(); it != rec.spouses.end(); ++it)
-            os << *it;
-        for (std::list<Marriage>::iterator it = rec.marriages.begin(); it != rec.marriages.end(); ++it)
-            os << *it;
+        if (rec.father.isSet()) os << "1 FATH " << rec.father;
+        if (rec.mother.isSet()) os << "1 MOTH " << rec.mother;
+        for (std::list<Event>::iterator it = rec.events.begin(); it != rec.events.end(); ++it) os << *it;
+        for (std::list<Spouse>::iterator it = rec.spouses.begin(); it != rec.spouses.end(); ++it) os << *it;
+        for (std::list<Marriage>::iterator it = rec.marriages.begin(); it != rec.marriages.end(); ++it) os << *it;
         if (rec.misc.isSet()) os << "1 " << rec.misc;
         if (rec.batch.isSet()) os << "1 " << rec.batch;
         return os;
@@ -127,6 +132,12 @@ namespace FamilySearch { namespace GEDCOM {
                 } else if (line_type=="NAME") { // Name
                     rec.name.setStandalone(true);
                     is >> rec.name;
+                } else if (line_type=="FATH") {
+                    rec.father.setStandalone(true);
+                    is >> rec.father;
+                } else if (line_type=="MOTH") {
+                    rec.mother.setStandalone(true);
+                    is >> rec.mother;
                 } else if (line_type=="EVEN") { // Event
                     Event e;
                     is >> e;
