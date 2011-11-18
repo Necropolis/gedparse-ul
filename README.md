@@ -15,17 +15,18 @@ You'll need the following:
 * Clang. I don't bother working with GCC, so your results may vary. This was tested using Apple LLVM 3.0 on Mac OS X 10.7 "Lion" with Xcode 4.2.
 * Boost C++. If you're on a Mac, the easiest way to get this is Homebrew; just `brew install boost`.
 * Ruby and Rake. I'd suggest using RVM to install Ruby:  
-  ```
-  rvm install 1.9.3
-  rvm use --default 1.9.3 # omit the --default if you don't want to use 1.9.3 by default
-  gem install rake
-  ```
   
-  If you want to mess around with the Ruby code, then you'll also want Thor:
+    ```
+    rvm install 1.9.3
+    rvm use --default 1.9.3 # omit the --default if you don't want to use 1.9.3 by default
+    gem install rake
+    ```
   
-  ```
-  gem install thor
-  ```
+    If you want to mess around with the Ruby code, then you'll also want Thor:
+  
+    ```
+    gem install thor
+    ```
 * Mongo's C++ Driver.
   * Mongo's C++ Driver requires `boost`, `pcre++`, and `scons`. Install those - again, Homebrew is your best bet: `for pkg in boost pcre++ scons; do brew install $pkg; done`.
   * Mongo itself is in a submodule, so once you clone that out using Git's submodule commands all you need to do is run `scons mongoclient` in the `mongo` sub directory to build the client, and then Rake should be good to go.
