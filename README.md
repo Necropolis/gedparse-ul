@@ -15,15 +15,12 @@ You'll need the following:
 * Clang. I don't bother working with GCC, so your results may vary. This was tested using Apple LLVM 3.0 on Mac OS X 10.7 "Lion" with Xcode 4.2.
 * Boost C++. If you're on a Mac, the easiest way to get this is Homebrew; just `brew install boost`.
 * Ruby and Rake. I'd suggest using RVM to install Ruby:
-  
   ```
   rvm install 1.9.3
   rvm use --default 1.9.3 # omit the --default if you don't want to use 1.9.3 by default
   gem install rake
   ```
-  
   If you want to mess around with the Ruby code, then you'll also want Thor:
-  
   ```
   gem install thor
   ```
