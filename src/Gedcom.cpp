@@ -44,19 +44,16 @@ namespace FamilySearch { namespace GEDCOM {
                 r->setType(str);
           
                 is >> *r;
-#ifndef DEBUG
                 ged.records->push_back(r);
-#endif
                 ++records;
           
 #ifdef DEBUG
                 if (r->validate_parse()) {
-//                    if (ged.records->size()%1071==0) {
-                        std::cout << "[[ WIN ]] Record No. " << records << " Parsed Successfully ";
-                        std::cout << (double)is.tellg()/(double)length*100.0f << "% of the way done" << std::endl;
-//                    }
+                    std::cout << "[[ WIN ]] Record No. " << records << " Parsed Successfully ";
+                    std::cout << (double)is.tellg()/(double)length*100.0f << "% of the way done\r";
+                    r->clearRaw();
                 } else {
-                    std::cout << "[[ FAIL ]] Record No. " << ged.records->size() << " Didn't Parse Right" << std::endl;
+                    std::cout << std::endl << "[[ FAIL ]] Record No. " << ged.records->size() << " Didn't Parse Right" << std::endl;
                     r->output_debug_info(std::cout);
                     fail("Crap, a parse failed.", is);
                 }
@@ -65,19 +62,10 @@ namespace FamilySearch { namespace GEDCOM {
                 // all is not well in zion, yea, zion doth not prosper.
                 fail("Record found which is not of type FAM or INDI", is);
             }
-
-#ifdef DEBUG
-//            if (ged.records->size()>=PARSE_SUCCESS_UNTIL) {
-//                std::cout << "Hit the any key to continue, or x to die" << std::endl;
-//                c=std::cin.get();
-//                switch (c) {
-//                    case 'x':
-//                        std::cout << "Exiting..." << std::endl;
-//                        return is;
-//                }
-//            }
-#endif
         }
+#ifdef DEBUG
+        std::cout << std::endl;
+#endif
     
         return is;
     }

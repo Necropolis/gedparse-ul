@@ -6,12 +6,17 @@
 // stl
 #include <iostream>
 #include <list>
+// mongo
+#include "bson/bson.h"
 // familysearch
 #include "Attribute.hpp"
 #include "StandardisedName.hpp"
 
 #ifndef __NAME_HPP_
 #define __NAME_HPP_
+
+using namespace std;
+using namespace mongo;
 
 namespace FamilySearch { namespace GEDCOM {
   
@@ -20,28 +25,36 @@ namespace FamilySearch { namespace GEDCOM {
     */
     class Name : public Attribute {
     private:
-        std::list<std::string> givenNames;
-        std::string surname;
-        std::list<StandardisedName> standardisedNames;
+        list<string> givenNames;
+        string surname;
+        list<StandardisedName> standardisedNames;
         bool standalone;
         
     public:
         Name();
         
-        friend std::ostream& operator<< (std::ostream&, Name&);
-        friend std::istream& operator>> (std::istream&, Name&);
+        // gedcom serialisation
+        friend ostream& operator<< (ostream&, Name&);
+        friend istream& operator>> (istream&, Name&);
         
-        std::list<std::string>& getGivenNames();
-        std::string& getSurname();
-        void setSurname(std::string);
-        std::list<StandardisedName>& getStandardisedNames();
+        // bson serialisation
+        friend BSONObjBuilder& operator<< (BSONObjBuilderValueStream&, Name&);
+        friend BSONObj& operator>> (BSONObj&, Name&);
+        
+        list<string>& getGivenNames();
+        string& getSurname();
+        void setSurname(string);
+        list<StandardisedName>& getStandardisedNames();
         bool isStandalone();
         void setStandalone(bool);
     };
     
     /* just a piece; no line begin or newline */
-    std::ostream& operator<< (std::ostream&, Name&);
-    std::istream& operator>> (std::istream&, Name&);
+    ostream& operator<< (ostream&, Name&);
+    istream& operator>> (istream&, Name&);
+    
+    BSONObjBuilder& operator<< (BSONObjBuilderValueStream&, Name&);
+    BSONObj& operator>> (BSONObj&, Name&);
   
 } }
 

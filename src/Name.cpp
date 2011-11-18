@@ -9,31 +9,33 @@
 
 namespace FamilySearch { namespace GEDCOM {
     
-    Name::Name(): surname(""), givenNames(std::list<std::string>()), Attribute(), standardisedNames(std::list<StandardisedName>()), standalone(false) {}
+    Name::Name(): surname(""), givenNames(list<string>()), Attribute(), standardisedNames(list<StandardisedName>()), standalone(false) {
+        
+    }
     
-    std::list<std::string>& Name::getGivenNames() { return givenNames; }
-    std::string& Name::getSurname() { return surname; }
-    void Name::setSurname(std::string surname) { this->surname = surname; set(true); }
-    std::list<StandardisedName>& Name::getStandardisedNames() { return standardisedNames; }
+    list<string>& Name::getGivenNames() { return givenNames; }
+    string& Name::getSurname() { return surname; }
+    void Name::setSurname(string surname) { this->surname = surname; set(true); }
+    list<StandardisedName>& Name::getStandardisedNames() { return standardisedNames; }
     bool Name::isStandalone() { return standalone; }
     void Name::setStandalone(bool standalone) { this->standalone = standalone; }
     
-    std::ostream& operator<< (std::ostream& os, Name& name) {
-        std::list<std::string>::iterator iter;
+    ostream& operator<< (ostream& os, Name& name) {
+        list<string>::iterator iter;
         for (iter = name.givenNames.begin(); iter != name.givenNames.end(); iter++)
             os << *iter << " ";
         if (name.surname!="") os << "/" << name.surname;
         if (name.standalone) {
             os << "\r\n";
-            std::list<StandardisedName>::iterator it;
+            list<StandardisedName>::iterator it;
             for (it = name.standardisedNames.begin(); it != name.standardisedNames.end(); it++)
                 os << "2 " << *it;
         }
         return os;
     }
     
-    std::istream& operator>> (std::istream& is, Name& name) {
-        std::string str;
+    istream& operator>> (istream& is, Name& name) {
+        string str;
         bool surname=false;
         while (is.peek()!='\r') {
             is >> str;
@@ -58,7 +60,7 @@ namespace FamilySearch { namespace GEDCOM {
                     is.unget();
                     break;
                 } else if (c=='2') {
-                    std::string line_type;
+                    string line_type;
                     is >> line_type;
                     if (line_type=="STGN") {
                         StandardisedName stgn;
@@ -71,14 +73,14 @@ namespace FamilySearch { namespace GEDCOM {
                         stsn.setGivenName(false);
                         name.standardisedNames.push_back(stsn);
                     } else {
-                        std::cout << "Unknown line type \"" << line_type << "\"" << std::endl;
+                        cout << "Unknown line type \"" << line_type << "\"" << endl;
                         inspect_stream(is);
-                        throw new std::exception();
+                        throw new exception();
                     }
                 } else {
-                    std::cout << "Unknown escalation type!" << std::endl;
+                    cout << "Unknown escalation type!" << endl;
                     inspect_stream(is);
-                    throw new std::exception();
+                    throw new exception();
                 }
             }
         }
@@ -87,6 +89,20 @@ namespace FamilySearch { namespace GEDCOM {
         name.set(true);
         
         return is;
+    }
+    
+    BSONObjBuilder& operator<< (BSONObjBuilderValueStream& builder, Name& name) {
+        BSONObjBuilder b;
+        b   << "given_names" << name.getGivenNames()
+            << "surname" << name.getSurname()
+            << "standardised_names" << name.getStandardisedNames()
+            << "standalone" << name.isStandalone();
+        return builder << b.obj();
+    }
+    
+    BSONObj& operator>> (BSONObj& obj, Name& name) {
+        
+        return obj;
     }
     
 } }

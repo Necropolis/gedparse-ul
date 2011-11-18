@@ -6,6 +6,8 @@
 // stl
 #include <string>
 #include <list>
+// mongo
+#include "client/dbclient.h"
 // familysearch
 #include "Marriage.hpp"
 #include "Spouse.hpp"
@@ -49,8 +51,13 @@ namespace FamilySearch { namespace GEDCOM {
       
     public:
         
+        // gedcom serialisation
         friend std::ostream& operator<< (std::ostream&, Record&);
         friend std::istream& operator>> (std::istream&, Record&);
+        
+        // bson serialisation
+        friend mongo::BSONObjBuilder& operator<< (mongo::BSONObjBuilder&, Record&);
+        friend mongo::BSONObj& operator>> (mongo::BSONObj&, Record&);
         
 #ifdef DEBUG
         /* show the original stream against what gedparse-ul can recreate */
@@ -85,11 +92,17 @@ namespace FamilySearch { namespace GEDCOM {
         void setBegin(std::iostream::pos_type);
         std::iostream::pos_type& getEnd();
         void setEnd(std::iostream::pos_type);
+        void clearRaw();
 #endif
     };
 
+    // gedcom serialisation
     std::ostream& operator<< (std::ostream&, Record&);
     std::istream& operator>> (std::istream&, Record&);
+    
+    // bson serialisation
+    mongo::BSONObjBuilder& operator<< (mongo::BSONObjBuilder&, Record&);
+    mongo::BSONObj& operator>> (mongo::BSONObj&, Record&);
   
 } }
 

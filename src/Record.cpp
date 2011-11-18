@@ -39,6 +39,7 @@ namespace FamilySearch { namespace GEDCOM {
     void Record::setBegin(std::iostream::pos_type begin) { this->begin = begin; }
     std::iostream::pos_type& Record::getEnd() { return end; }
     void Record::setEnd(std::iostream::pos_type end) { this->end = end; }
+    void Record::clearRaw() { raw.clear(); }
 #endif
 
 #ifdef DEBUG
@@ -193,6 +194,19 @@ namespace FamilySearch { namespace GEDCOM {
 #endif
         
         return is;
+    }
+    
+    /* serialise a Record to a BSONObjBuilder, fit for becoming a BSONObj */
+    mongo::BSONObjBuilder& operator<< (mongo::BSONObjBuilder& builder, Record& rec) {
+        builder << "type" << rec.getType();
+        
+        return builder;
+    }
+
+    /* pull a Record out of a BSONObj */
+    mongo::BSONObj& operator>> (mongo::BSONObj& obj, Record& rec) {
+        
+        return obj;
     }
   
 } }
