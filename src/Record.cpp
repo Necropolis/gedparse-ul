@@ -15,10 +15,10 @@ namespace FamilySearch { namespace GEDCOM {
     
     Record::Record() { }
     
-    Record::Record(BSONElement elem): type(elem["type"].String()), name(elem["name"]), father(elem["father"]), mother(elem["mother"]) {
+    Record::Record(BSONElement elem): type(elem["type"].String()), name(elem["name"]), father(elem["father"]), mother(elem["mother"]), gender(elem["gender"]) {
     }
     
-    Record::Record(BSONObj obj): type(obj["type"].String()), name(obj["name"]), father(obj["father"]), mother(obj["mother"]) {
+    Record::Record(BSONObj obj): type(obj["type"].String()), name(obj["name"]), father(obj["father"]), mother(obj["mother"]), gender(obj["gender"]) {
     }
     
     string& Record::getType() { return type; }
@@ -209,7 +209,8 @@ namespace FamilySearch { namespace GEDCOM {
         return bv << BSON( "type" << rec.getType()
                           << "name" << rec.getName()
                           << "father" << rec.getFather()
-                          << "mother" << rec.getMother() );
+                          << "mother" << rec.getMother()
+                          << "gender" << rec.getGender() );
     }
       
 } }

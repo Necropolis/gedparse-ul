@@ -8,10 +8,8 @@
 namespace FamilySearch { namespace GEDCOM {
   
     StandardisedName::StandardisedName(): standardisedName(""), givenName(true), Attribute() {}
-    StandardisedName::StandardisedName(BSONObj obj): standardisedName(obj["standardised_name"].String()), givenName(obj["given_name"].Bool()), Attribute(obj["attribute"].Obj()) {}
-    StandardisedName::StandardisedName(BSONElement elem): standardisedName(elem["standardised_name"].String()), givenName(elem["given_name"].Bool()), Attribute(elem["attribute"].Obj()) {
-        
-    }
+    StandardisedName::StandardisedName(BSONObj obj): standardisedName(obj["standardised_name"].String()), givenName(obj["given_name"].Bool()), Attribute(obj["attribute"]) {}
+    StandardisedName::StandardisedName(BSONElement elem): standardisedName(elem["standardised_name"].String()), givenName(elem["given_name"].Bool()), Attribute(elem["attribute"]) {}
     
     string& StandardisedName::getStandardisedName() { return standardisedName; }
     void StandardisedName::setStandardisedName(string standardisedName) { this->standardisedName = standardisedName; set(true); }
