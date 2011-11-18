@@ -15,11 +15,19 @@ namespace FamilySearch { namespace GEDCOM {
     
     Name::Name(BSONObj obj): surname(obj["surname"].String()), standalone(obj["standalone"].Bool()), Attribute(obj["attribute"]) {
         // pull given names and standardised names out of lists
-        
+        vector<BSONElement> _givenNames = obj["given_names"].Array();
+        vector<BSONElement>::iterator it;
+        for (it = _givenNames.begin(); it != _givenNames.end(); ++it) givenNames.push_back(it->String());
+        vector<BSONElement> _stadardisedNames = obj["standardised_names"].Array();
+        for (it = _stadardisedNames.begin(); it != _stadardisedNames.end(); ++it) standardisedNames.push_back(StandardisedName(it->Obj()));
     }
     
     Name::Name(BSONElement elem): surname(elem["surname"].String()), standalone(elem["standalone"].Bool()), Attribute(elem["attribute"]) {
-        // TODO: Write me!
+        vector<BSONElement> _givenNames = elem["given_names"].Array();
+        vector<BSONElement>::iterator it;
+        for (it = _givenNames.begin(); it != _givenNames.end(); ++it) givenNames.push_back(it->String());
+        vector<BSONElement> _standardisedNames = elem["standardised_names"].Array();
+        for (it = _standardisedNames.begin(); it != _standardisedNames.end(); ++it) standardisedNames.push_back(StandardisedName(it->Obj()));
     }
     
     list<string>& Name::getGivenNames() { return givenNames; }
@@ -103,9 +111,11 @@ namespace FamilySearch { namespace GEDCOM {
     BSONObjBuilder& operator<< (BSONObjBuilderValueStream& builder, Name& name) {
         BSONObjBuilder b;
         b   << "given_names" << name.getGivenNames()
-            << "surname" << name.getSurname()
-            << "standardised_names" << name.getStandardisedNames()
-            << "standalone" << name.isStandalone()
+            << "surname" << name.getSurname();
+        BSONArrayBuilder a;
+        a<<name.getStandardisedNames();
+        b.appendArray("standardised_names", a.done());
+        b   << "standalone" << name.isStandalone()
             << "attribute" << (Attribute&)name;
         return builder << b.obj();
     }

@@ -8,6 +8,10 @@
 namespace FamilySearch { namespace GEDCOM {
   
     StandardisedName::StandardisedName(): standardisedName(""), givenName(true), Attribute() {}
+    StandardisedName::StandardisedName(BSONObj obj): standardisedName(obj["standardised_name"].String()), givenName(obj["given_name"].Bool()), Attribute(obj["attribute"].Obj()) {}
+    StandardisedName::StandardisedName(BSONElement elem): standardisedName(elem["standardised_name"].String()), givenName(elem["given_name"].Bool()), Attribute(elem["attribute"].Obj()) {
+        
+    }
     
     string& StandardisedName::getStandardisedName() { return standardisedName; }
     void StandardisedName::setStandardisedName(string standardisedName) { this->standardisedName = standardisedName; set(true); }
@@ -30,29 +34,27 @@ namespace FamilySearch { namespace GEDCOM {
         return is;
     }
     
-    BSONObj StandardisedName::asBSON() {
-        return BSON("given_name" << givenName << "standardised_name" << standardisedName);
-    }
-    
     BSONObjBuilder& operator<< (BSONObjBuilderValueStream& stream,
                                 StandardisedName& standardised_name) {
-        return stream << standardised_name.asBSON();
+        return stream << BSON("given_name" << standardised_name.givenName << "standardised_name" << standardised_name.standardisedName << "attribute" << (Attribute&)standardised_name );
     }
     
     BSONArrayBuilder& operator<< (BSONArrayBuilder& builder,
                                   StandardisedName& standardised_name) {
-        return builder << standardised_name.asBSON();
+        return builder << BSON("given_name" << standardised_name.givenName << "standardised_name" << standardised_name.standardisedName << "attribute" << (Attribute&)standardised_name );
     }
     
-    BSONObjBuilder& operator<< (BSONObjBuilderValueStream& builder,
-                                list<StandardisedName>& standardised_names) {
-        BSONArrayBuilder a;
-        list<StandardisedName>::iterator it;
-        for (it=standardised_names.begin(); it!=standardised_names.end(); ++it)
-            a << *it;
-        return builder << a.done();
+    BSONArrayBuilder& operator<< (BSONArrayBuilder& builder,
+                                  list<StandardisedName>& standardised_names) {
+        for (list<StandardisedName>::iterator it = standardised_names.begin();
+             it != standardised_names.end();
+             ++it) {
+            StandardisedName standardised_name = *it;
+            builder.append(BSON("given_name" << standardised_name.isGivenName() << "standardised_name" << standardised_name.getStandardisedName() << "attribute" << (Attribute&)standardised_name ));
+        }
+        return builder;
     }
-    
+        
     BSONObj& operator>> (BSONObj& obj,
                          StandardisedName& standardised_name) {
         standardised_name.setGivenName(obj["given_name"].boolean());

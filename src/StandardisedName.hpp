@@ -27,6 +27,8 @@ namespace FamilySearch { namespace GEDCOM {
         
     public:
         StandardisedName();
+        StandardisedName(BSONObj);
+        StandardisedName(BSONElement);
         
         string& getStandardisedName();
         void setStandardisedName(string);
@@ -38,7 +40,6 @@ namespace FamilySearch { namespace GEDCOM {
         friend istream& operator>> (istream&, StandardisedName&);
         
         // bson serialisation
-        BSONObj asBSON();
         friend BSONObjBuilder& operator<< (BSONObjBuilderValueStream&, StandardisedName&);
         friend BSONArrayBuilder& operator<< (BSONArrayBuilder&, StandardisedName&);
         friend BSONObj& operator>> (BSONObj&, StandardisedName&);
@@ -51,8 +52,8 @@ namespace FamilySearch { namespace GEDCOM {
     istream& operator>> (istream&, StandardisedName&);
     
     BSONObjBuilder& operator<< (BSONObjBuilderValueStream&, StandardisedName&);
+    BSONArrayBuilder& operator<< (BSONArrayBuilder&, list<StandardisedName>&);
     BSONArrayBuilder& operator<< (BSONArrayBuilder&, StandardisedName&);
-    BSONObjBuilder& operator<< (BSONObjBuilderValueStream&, list<StandardisedName>&);
     BSONObj& operator>> (BSONObj&, StandardisedName&);
   
 } }
