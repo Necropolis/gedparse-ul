@@ -13,6 +13,15 @@ namespace FamilySearch { namespace GEDCOM {
         
     }
     
+    Name::Name(BSONObj obj): surname(obj["surname"].String()), standalone(obj["standalone"].Bool()), Attribute(obj["attribute"]) {
+        // pull given names and standardised names out of lists
+        
+    }
+    
+    Name::Name(BSONElement elem): surname(elem["surname"].String()), standalone(elem["standalone"].Bool()), Attribute(elem["attribute"]) {
+        // TODO: Write me!
+    }
+    
     list<string>& Name::getGivenNames() { return givenNames; }
     string& Name::getSurname() { return surname; }
     void Name::setSurname(string surname) { this->surname = surname; set(true); }
@@ -96,13 +105,9 @@ namespace FamilySearch { namespace GEDCOM {
         b   << "given_names" << name.getGivenNames()
             << "surname" << name.getSurname()
             << "standardised_names" << name.getStandardisedNames()
-            << "standalone" << name.isStandalone();
+            << "standalone" << name.isStandalone()
+            << "attribute" << (Attribute&)name;
         return builder << b.obj();
-    }
-    
-    BSONObj& operator>> (BSONObj& obj, Name& name) {
-        
-        return obj;
     }
     
 } }

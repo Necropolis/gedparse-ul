@@ -14,6 +14,7 @@
 #include <boost/program_options.hpp>
 // familysearch gedcom
 #include "Gedcom.hpp"
+#include "Record.hpp"
 
 using namespace FamilySearch::GEDCOM;
 
@@ -112,6 +113,14 @@ int main(int argc, char **argv)
   *inputFile >> *ged;
 
   std::cout << "Record count: " << ged->getRecords().size() << std::endl;
+    
+    FamilySearch::GEDCOM::Record rec = *ged->getRecords()[0];
+    std::cout << "Record: " << std::endl << rec << std::endl;
+    mongo::BSONObj rec_low = BSON( "record" << rec );
+    std::cout << "JSON: " << rec_low.jsonString() << std::endl;
+    FamilySearch::GEDCOM::Record unrec(rec_low["record"]);
+    std::cout << "Record From BSON: " << std::endl;
+    std::cout << unrec << std::endl;
 
   return 0;
 }

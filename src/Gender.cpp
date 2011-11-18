@@ -8,20 +8,26 @@
 namespace FamilySearch { namespace GEDCOM {
 
     Gender::Gender(): gender(""), Attribute() {}
+    Gender::Gender(BSONElement elem): gender(elem["gender"].String()), Attribute(elem["attribute"]) { }
+    Gender::Gender(BSONObj obj): gender(obj["gender"].String()), Attribute(obj["attribute"]) { }
     
-    std::string& Gender::getGender() { return this->gender; }
-    void Gender::setGender(std::string gender) { this->gender = gender; set(true); }
+    string& Gender::getGender() { return this->gender; }
+    void Gender::setGender(string gender) { this->gender = gender; set(true); }
 
-    std::ostream& operator<< (std::ostream& os, Gender& gender) {
+    ostream& operator<< (ostream& os, Gender& gender) {
         os << "SEX " << gender.gender << "\r\n";
         return os;
     }
     
-    std::istream& operator>> (std::istream& is, Gender& gender) {
-        std::string str;
+    istream& operator>> (istream& is, Gender& gender) {
+        string str;
         is >> str;
         gender.setGender(str);
         return is;
+    }
+    
+    BSONObjBuilder& operator<< (BSONObjBuilderValueStream& bv, Gender& gender) {
+        return bv << BSON( "gender" << gender.gender << "attribute" << (Attribute&)gender );
     }
   
 }}

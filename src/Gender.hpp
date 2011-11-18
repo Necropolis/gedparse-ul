@@ -6,31 +6,42 @@
 // stl
 #include <iostream>
 #include <string>
+// mongo
+#include "bson/bson.h"
 // familysearch
 #include "Attribute.hpp"
 
 #ifndef __GENDER_HPP_
 #define __GENDER_HPP_
 
+using namespace std;
+using namespace mongo;
+
 namespace FamilySearch { namespace GEDCOM {
   
     class Gender : public Attribute {
     private:
-        std::string gender;
+        string gender;
         
     public:
         Gender();
+        Gender(BSONElement);
+        Gender(BSONObj);
       
-        friend std::ostream& operator<< (std::ostream&, Gender&);
-        friend std::istream& operator>> (std::istream&, Gender&);
+        friend ostream& operator<< (ostream&, Gender&);
+        friend istream& operator>> (istream&, Gender&);
+        
+        friend BSONObjBuilder& operator<< (BSONObjBuilderValueStream&, Gender&);
       
-        std::string& getGender();
-        void setGender(std::string);
+        string& getGender();
+        void setGender(string);
     };
   
     /* outputs line ending, eg "SEX F\r\n" */
-    std::ostream& operator<< (std::ostream&, Gender&);
-    std::istream& operator>> (std::istream&, Gender&);
+    ostream& operator<< (ostream&, Gender&);
+    istream& operator>> (istream&, Gender&);
+    
+    BSONObjBuilder& operator<< (BSONObjBuilderValueStream&, Gender&);
   
 }}
 

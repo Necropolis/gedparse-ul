@@ -7,7 +7,7 @@
 #include <string>
 #include <list>
 // mongo
-#include "client/dbclient.h"
+#include "bson/bson.h"
 // familysearch
 #include "Marriage.hpp"
 #include "Spouse.hpp"
@@ -22,6 +22,9 @@
 #ifndef __RECORD_HPP_
 #define __RECORD_HPP_
 
+using namespace std;
+using namespace mongo;
+
 namespace FamilySearch { namespace GEDCOM {
 
     /**
@@ -34,43 +37,45 @@ namespace FamilySearch { namespace GEDCOM {
      */  
     class Record {
     private:
-        std::string type;
-        std::list<Spouse> spouses;
-        std::list<Marriage> marriages;
-        std::list<Event> events;
+        string type;
+        list<Spouse> spouses;
+        list<Marriage> marriages;
+        list<Event> events;
         Name name, father, mother;
         Gender gender;
         Miscelleneous misc;
         Batch batch;
         Date date;
 #ifdef DEBUG
-        std::string raw;
-        std::iostream::pos_type begin;
-        std::iostream::pos_type end;
+        string raw;
+        iostream::pos_type begin;
+        iostream::pos_type end;
 #endif
       
     public:
+        Record();
+        Record(BSONElement);
+        Record(BSONObj);
         
         // gedcom serialisation
-        friend std::ostream& operator<< (std::ostream&, Record&);
-        friend std::istream& operator>> (std::istream&, Record&);
+        friend ostream& operator<< (ostream&, Record&);
+        friend istream& operator>> (istream&, Record&);
         
         // bson serialisation
-        friend mongo::BSONObjBuilder& operator<< (mongo::BSONObjBuilder&, Record&);
-        friend mongo::BSONObj& operator>> (mongo::BSONObj&, Record&);
+        friend BSONObjBuilder& operator<< (BSONObjBuilderValueStream&, Record&);
         
 #ifdef DEBUG
         /* show the original stream against what gedparse-ul can recreate */
-        void output_debug_info(std::ostream&);
+        void output_debug_info(ostream&);
         /* try to word-for-word validate the record against the original stream */
         bool validate_parse();
 #endif
       
-        std::string& getType();
-        void setType(std::string);
-        std::list<Spouse>& getSpouses();
-        std::list<Marriage>& getMarriages();
-        std::list<Event>& getEvents();
+        string& getType();
+        void setType(string);
+        list<Spouse>& getSpouses();
+        list<Marriage>& getMarriages();
+        list<Event>& getEvents();
         Name& getName();
         void setName(Name);
         Gender& getGender();
@@ -86,23 +91,22 @@ namespace FamilySearch { namespace GEDCOM {
         Name& getMother();
         void setMother(Name);
 #ifdef DEBUG
-        std::string& getRaw();
-        void setRaw(std::string);
-        std::iostream::pos_type& getBegin();
-        void setBegin(std::iostream::pos_type);
-        std::iostream::pos_type& getEnd();
-        void setEnd(std::iostream::pos_type);
+        string& getRaw();
+        void setRaw(string);
+        iostream::pos_type& getBegin();
+        void setBegin(iostream::pos_type);
+        iostream::pos_type& getEnd();
+        void setEnd(iostream::pos_type);
         void clearRaw();
 #endif
     };
 
     // gedcom serialisation
-    std::ostream& operator<< (std::ostream&, Record&);
-    std::istream& operator>> (std::istream&, Record&);
+    ostream& operator<< (ostream&, Record&);
+    istream& operator>> (istream&, Record&);
     
     // bson serialisation
-    mongo::BSONObjBuilder& operator<< (mongo::BSONObjBuilder&, Record&);
-    mongo::BSONObj& operator>> (mongo::BSONObj&, Record&);
+    BSONObjBuilder& operator<< (BSONObjBuilderValueStream&, Record&);
   
 } }
 

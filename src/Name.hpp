@@ -32,6 +32,8 @@ namespace FamilySearch { namespace GEDCOM {
         
     public:
         Name();
+        Name(BSONObj);
+        Name(BSONElement);
         
         // gedcom serialisation
         friend ostream& operator<< (ostream&, Name&);
