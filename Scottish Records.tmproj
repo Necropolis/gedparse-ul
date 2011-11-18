@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>Rakefile</string>
+	<string>old-broken-ruby/Gedcom.thor</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -19,7 +19,7 @@
 					<key>filename</key>
 					<string>Rakefile</string>
 					<key>lastUsed</key>
-					<date>2011-11-16T22:56:49Z</date>
+					<date>2011-11-17T22:07:48Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
@@ -155,8 +155,16 @@
 			<true/>
 			<key>name</key>
 			<string>C++</string>
-			<key>selected</key>
+		</dict>
+		<dict>
+			<key>expanded</key>
 			<true/>
+			<key>name</key>
+			<string>old-broken-ruby</string>
+			<key>regexFolderFilter</key>
+			<string>!.*/(\.[^/]*|CVS|_darcs|_MTN|\{arch\}|blib|.*~\.nib|.*\.(framework|app|pbproj|pbxproj|xcode(proj)?|bundle))$</string>
+			<key>sourceDirectory</key>
+			<string>old-broken-ruby</string>
 		</dict>
 	</array>
 	<key>fileHierarchyDrawerWidth</key>
@@ -182,14 +190,28 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>35</integer>
+				<integer>10</integer>
 				<key>line</key>
-				<integer>24</integer>
+				<integer>14</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
 			<integer>4</integer>
+		</dict>
+		<key>old-broken-ruby/Gedcom.thor</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>12</integer>
+				<key>line</key>
+				<integer>40</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>7</integer>
 		</dict>
 		<key>src/Attribute.hpp</key>
 		<dict>
@@ -523,6 +545,7 @@
 	<key>openDocuments</key>
 	<array>
 		<string>Rakefile</string>
+		<string>old-broken-ruby/Gedcom.thor</string>
 		<string>src/Gedcom.hpp</string>
 		<string>README.md</string>
 		<string>src/Gedcom.cpp</string>
