@@ -8,17 +8,19 @@
 namespace FamilySearch { namespace GEDCOM {
     
     Miscelleneous::Miscelleneous(): note(""), Attribute() {}
+    Miscelleneous::Miscelleneous(BSONElement elem): note(elem["note"].String()), Attribute(elem["attribute"]) { }
+    Miscelleneous::Miscelleneous(BSONObj obj): note(obj["note"].String()), Attribute(obj["attribute"]) { }
 
-    std::string& Miscelleneous::getNote() { return this->note; }
-    void Miscelleneous::setNote(std::string note) { this->note = note; }
+    string& Miscelleneous::getNote() { return this->note; }
+    void Miscelleneous::setNote(string note) { this->note = note; }
     
-    std::ostream& operator<< (std::ostream& os, Miscelleneous& misc) {
+    ostream& operator<< (ostream& os, Miscelleneous& misc) {
         os << "MISC " << misc.note << "\r\n";
         return os;
     }
     
-    std::istream& operator>> (std::istream& is, Miscelleneous& misc) {
-        std::string str;
+    istream& operator>> (istream& is, Miscelleneous& misc) {
+        string str;
         while (is.peek()!='\r') {
             is >> str;
             misc.note.append(str);
@@ -28,6 +30,17 @@ namespace FamilySearch { namespace GEDCOM {
         misc.set(true);
         
         return is;
+    }
+    
+    BSONObj Miscelleneous::asBSON() {
+        BSONObjBuilder b;
+        b   << "note"       << note
+            << "attribute"  << (Attribute&)*this;
+        return b.obj();
+    }
+    
+    BSONObjBuilder& operator<< (BSONObjBuilderValueStream& bv, Miscelleneous& misc) {
+        return bv << misc.asBSON();
     }
 
 } }

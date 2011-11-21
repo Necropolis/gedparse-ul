@@ -15,7 +15,7 @@ namespace FamilySearch { namespace GEDCOM {
     
     Record::Record() { }
     
-    Record::Record(BSONElement elem): type(elem["type"].String()), name(elem["name"]), father(elem["father"]), mother(elem["mother"]), gender(elem["gender"]) {
+    Record::Record(BSONElement elem): type(elem["type"].String()), name(elem["name"]), father(elem["father"]), mother(elem["mother"]), gender(elem["gender"]), misc(elem["misc"]), batch(elem["batch"]) {
         // spouses
         /*
          vector<BSONElement> _givenNames = obj["given_names"].Array();
@@ -35,9 +35,14 @@ namespace FamilySearch { namespace GEDCOM {
              it != _marriages.end();
              ++it)
             marriages.push_back(Marriage(*it));
+        vector<BSONElement> _events = elem["events"].Array();
+        for (vector<BSONElement>::iterator it = _events.begin();
+             it != _events.end();
+             ++it)
+            events.push_back(Event(*it));
     }
     
-    Record::Record(BSONObj obj): type(obj["type"].String()), name(obj["name"]), father(obj["father"]), mother(obj["mother"]), gender(obj["gender"]) {
+    Record::Record(BSONObj obj): type(obj["type"].String()), name(obj["name"]), father(obj["father"]), mother(obj["mother"]), gender(obj["gender"]), misc(obj["misc"]), batch(obj["batch"]) {
         // spouses
         vector<BSONElement> _spouses = obj["spouses"].Array();
         for (vector<BSONElement>::iterator it = _spouses.begin();
@@ -49,6 +54,11 @@ namespace FamilySearch { namespace GEDCOM {
              it != _marriages.end();
              ++it)
             marriages.push_back(Marriage(*it));
+        vector<BSONElement> _events = obj["events"].Array();
+        for (vector<BSONElement>::iterator it = _events.begin();
+             it != _events.end();
+             ++it)
+            events.push_back(Event(*it));
     }
     
     string& Record::getType() { return type; }
@@ -247,6 +257,11 @@ namespace FamilySearch { namespace GEDCOM {
         BSONArrayBuilder am;
         am << marriages;
         b.appendArray("marriages", am.done());
+        BSONArrayBuilder ae;
+        ae << events;
+        b.appendArray("events", ae.done());
+        b   << "misc"       << misc
+            << "batch"      << batch;
         return b.obj();
     }
     

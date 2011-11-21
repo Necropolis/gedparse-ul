@@ -10,23 +10,35 @@
 
 namespace FamilySearch { namespace GEDCOM {
     
-    Batch::Batch() :batch(""), _isSet(false) {}
+    Batch::Batch(): batch(""), Attribute() {}
+    Batch::Batch(BSONElement elem): batch(elem["batch"].String()), Attribute(elem["attribute"]) { }
+    Batch::Batch(BSONObj obj): batch(obj["batch"].String()), Attribute(obj["attribute"]) { }
     
-    std::string& Batch::getBatch() { return batch; }
-    void Batch::setBatch(std::string batch) { this->batch = batch; _isSet = true; }
-    bool Batch::isSet() { return _isSet; }
+    string& Batch::getBatch() { return batch; }
+    void Batch::setBatch(string batch) { this->batch = batch; set(true); }
     
-    std::ostream& operator<< (std::ostream& os, Batch& batch) {
+    ostream& operator<< (ostream& os, Batch& batch) {
         os << "BATC " << batch.batch << "\r\n";
         return os;
     }
     
-    std::istream& operator>> (std::istream& is, Batch& batch) {
+    istream& operator>> (istream& is, Batch& batch) {
         is.ignore();
-        std::string st;
+        string st;
         getline(is, st);
         batch.setBatch(st);
         return is;
+    }
+    
+    BSONObj Batch::asBSON() {
+        BSONObjBuilder b;
+        b   << "batch"      << batch
+            << "attribute"  << (Attribute&)*this;
+        return b.obj();
+    }
+    
+    BSONObjBuilder& operator<< (BSONObjBuilderValueStream& bv, Batch& batch) {
+        return bv << batch.asBSON();
     }
     
 } }

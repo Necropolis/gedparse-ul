@@ -6,6 +6,9 @@
 // stl
 #include <iostream>
 #include <string>
+#include <list>
+// mongo
+#include "bson/bson.h"
 // familysearch
 #include "Attribute.hpp"
 #include "Date.hpp"
@@ -14,30 +17,45 @@
 #ifndef __EVENT_HPP_
 #define __EVENT_HPP_
 
+using namespace std;
+using namespace mongo;
+
 namespace FamilySearch { namespace GEDCOM {
     
     class Event : public Attribute {
     private:
-        std::string type;
+        string type;
         Date date;
         Place place;
         
     public:
         Event();
+        Event(BSONElement);
+        Event(BSONObj);
         
-        friend std::ostream& operator<< (std::ostream&, Event&);
-        friend std::istream& operator>> (std::istream&, Event&);
+        // gedcom serialisation
+        friend ostream& operator<< (ostream&, Event&);
+        friend istream& operator>> (istream&, Event&);
         
-        std::string& getType();
-        void setType(std::string);
+        // bson serialisation
+        BSONObj asBSON();
+        friend BSONArrayBuilder& operator<< (BSONArrayBuilder&, Event&);
+        friend BSONObjBuilder& operator<< (BSONObjBuilderValueStream&, Event&);
+        
+        string& getType();
+        void setType(string);
         Date& getDate();
         void setDate(Date);
         Place& getPlace();
         void setPlace(Place);
     };
     
-    std::ostream& operator<< (std::ostream&, Event&);
-    std::istream& operator>> (std::istream&, Event&);
+    ostream& operator<< (ostream&, Event&);
+    istream& operator>> (istream&, Event&);
+    
+    BSONArrayBuilder& operator<< (BSONArrayBuilder&, list<Event>&);
+    BSONArrayBuilder& operator<< (BSONArrayBuilder&, Event&);
+    BSONObjBuilder& operator<< (BSONObjBuilderValueStream&, Event&);
     
 } }
 

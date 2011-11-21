@@ -9,30 +9,44 @@
 // stl
 #include <iostream>
 #include <string>
+// mongo
+#include "bson/bson.h"
+// familysearch
+#include "Attribute.hpp"
 
 #ifndef __BATCH_HPP_
 #define __BATCH_HPP_
 
+using namespace std;
+using namespace mongo;
+
 namespace FamilySearch { namespace GEDCOM {
    
-    class Batch {
+    class Batch : public Attribute {
     private:
-        std::string batch;
-        bool _isSet;
+        string batch;
         
     public:
         Batch();
+        Batch(BSONElement);
+        Batch(BSONObj);
         
-        std::string& getBatch();
-        void setBatch(std::string);
-        bool isSet();
+        string& getBatch();
+        void setBatch(string);
         
-        friend std::ostream& operator<< (std::ostream&, Batch&);
-        friend std::istream& operator>> (std::istream&, Batch&);
+        // gedcom serialisation
+        friend ostream& operator<< (ostream&, Batch&);
+        friend istream& operator>> (istream&, Batch&);
+        
+        // bson serialisation
+        BSONObj asBSON();
+        friend BSONObjBuilder& operator<< (BSONObjBuilderValueStream&, Batch&);
     };
     
-    std::ostream& operator<< (std::ostream&, Batch&);
-    std::istream& operator>> (std::istream&, Batch&);
+    ostream& operator<< (ostream&, Batch&);
+    istream& operator>> (istream&, Batch&);
+    
+    BSONObjBuilder& operator<< (BSONObjBuilderValueStream&, Batch&);
     
 } }
 

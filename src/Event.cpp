@@ -10,6 +10,8 @@
 namespace FamilySearch { namespace GEDCOM {
    
     Event::Event(): type(""), date(Date()), place(Place()), Attribute() {}
+    Event::Event(BSONElement elem): type(elem["type"].String()), date(elem["date"]), place(elem["place"]), Attribute(elem["attribute"]) { }
+    Event::Event(BSONObj obj): type(obj["type"].String()), date(obj["date"]), place(obj["place"]), Attribute(obj["attribute"]) { }
     
     std::string& Event::getType() { return type; }
     void Event::setType(std::string type) { this->type = type; set(true); }
@@ -57,6 +59,31 @@ namespace FamilySearch { namespace GEDCOM {
         }
         
         return is;
+    }
+    
+    BSONObj Event::asBSON() {
+        BSONObjBuilder b;
+        b   << "type"       << type
+            << "date"       << date
+            << "place"      << place
+            << "attribute"  << (Attribute&)*this;
+        return b.obj();
+    }
+    
+    BSONArrayBuilder& operator<< (BSONArrayBuilder& a, list<Event>& events) {
+        for (list<Event>::iterator it = events.begin();
+             it != events.end();
+             ++it)
+            a << *it;
+        return a;
+    }
+    
+    BSONArrayBuilder& operator<< (BSONArrayBuilder& a, Event& event) {
+        return a << event.asBSON();
+    }
+    
+    BSONObjBuilder& operator<< (BSONObjBuilderValueStream& bv, Event& event) {
+        return bv << event.asBSON();
     }
     
 } }
