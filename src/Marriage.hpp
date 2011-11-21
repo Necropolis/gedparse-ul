@@ -5,12 +5,18 @@
 
 // stl
 #include <iostream>
+#include <list>
+// mongo
+#include "bson/bson.h"
 // familysearch
 #include "Place.hpp"
 #include "Date.hpp"
 
 #ifndef __MARRIAGE_HPP_
 #define __MARRIAGE_HPP_
+
+using namespace std;
+using namespace mongo;
 
 namespace FamilySearch { namespace GEDCOM {
     
@@ -19,10 +25,18 @@ namespace FamilySearch { namespace GEDCOM {
         Place place;
         Date date;
     public:
+        Marriage();
+        Marriage(BSONElement);
+        Marriage(BSONObj);
         
+        // gedcom serialisation
+        friend ostream& operator<< (ostream&, Marriage&);
+        friend istream& operator>> (istream&, Marriage&);
         
-        friend std::ostream& operator<< (std::ostream&, Marriage&);
-        friend std::istream& operator>> (std::istream&, Marriage&);
+        // bson serialisation
+        BSONObj asBSON();
+        friend BSONArrayBuilder& operator<< (BSONArrayBuilder&, Marriage&);
+        friend BSONObjBuilder& operator<< (BSONObjBuilderValueStream&, Marriage&);
         
         Place& getPlace();
         void setPlace(Place);
@@ -30,8 +44,12 @@ namespace FamilySearch { namespace GEDCOM {
         void setDate(Date);
     };
     
-    std::ostream& operator<< (std::ostream&, Marriage&);
-    std::istream& operator>> (std::istream&, Marriage&);
+    ostream& operator<< (ostream&, Marriage&);
+    istream& operator>> (istream&, Marriage&);
+    
+    BSONArrayBuilder& operator<< (BSONArrayBuilder&, list<Marriage>&);
+    BSONArrayBuilder& operator<< (BSONArrayBuilder&, Marriage&);
+    BSONObjBuilder& operator<< (BSONObjBuilderValueStream&, Marriage&);
     
 } }
 

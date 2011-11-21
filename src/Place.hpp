@@ -6,11 +6,16 @@
 // stl
 #include <iostream>
 #include <string>
+// mongo
+#include "bson/bson.h"
 // familysearch
 #include "Attribute.hpp"
 
 #ifndef __PLACE_HPP_
 #define __PLACE_HPP_
+
+using namespace std;
+using namespace mongo;
 
 namespace FamilySearch { namespace GEDCOM {
     
@@ -29,33 +34,42 @@ namespace FamilySearch { namespace GEDCOM {
      */
     class Place : public Attribute {
     private:
-        std::string countyCode;
-        std::string country;
-        std::string county;
-        std::string town;
-        std::string borough;
+        string countyCode;
+        string country;
+        string county;
+        string town;
+        string borough;
         
     public:
         Place();
+        Place(BSONElement);
+        Place(BSONObj);
         
-        friend std::ostream& operator<< (std::ostream&, Place&);
-        friend std::istream& operator>> (std::istream&, Place&);
+        // gedcom serialisation
+        friend ostream& operator<< (ostream&, Place&);
+        friend istream& operator>> (istream&, Place&);
+        
+        // bson serialisation
+        BSONObj asBSON();
+        friend BSONObjBuilder& operator<< (BSONObjBuilderValueStream&, Place&);
     
-        std::string& getCountyCode();
-        void setCountyCode(std::string);
-        std::string& getCountry();
-        void setCountry(std::string);
-        std::string& getCounty();
-        void setCounty(std::string);
-        std::string& getTown();
-        void setTown(std::string);
-        std::string& getBorough();
-        void setBorough(std::string);
+        string& getCountyCode();
+        void setCountyCode(string);
+        string& getCountry();
+        void setCountry(string);
+        string& getCounty();
+        void setCounty(string);
+        string& getTown();
+        void setTown(string);
+        string& getBorough();
+        void setBorough(string);
     };
     
     /* outputs header and newlines, eg "PLACE Fife, Scotland, Fife, Kingsbarns\r\n" */
-    std::ostream& operator<< (std::ostream&, Place&);
-    std::istream& operator>> (std::istream&, Place&);
+    ostream& operator<< (ostream&, Place&);
+    istream& operator>> (istream&, Place&);
+    
+    BSONObjBuilder& operator<< (BSONObjBuilderValueStream&, Place&);
     
 } }
 

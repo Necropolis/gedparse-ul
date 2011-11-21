@@ -6,34 +6,51 @@
 // stl
 #include <iostream>
 #include <string>
+// mongo
+#include "bson/bson.h"
 // familysearch
 #include "Attribute.hpp"
 
 #ifndef __DATE_HPP_
 #define __DATE_HPP_
 
+using namespace std;
+using namespace mongo;
+
 namespace FamilySearch { namespace GEDCOM {
     
     class Date : public Attribute {
     private:
-        std::string day;
-        std::string month;
-        std::string year;
+        string day;
+        string month;
+        string year;
         
     public:
         Date();
+        Date(BSONElement);
+        Date(BSONObj);
         
-        std::string& getDay();
-        void setDay(std::string);
-        std::string& getMonth();
-        void setMonth(std::string);
-        std::string& getYear();
-        void setYear(std::string);
+        string& getDay();
+        void setDay(string);
+        string& getMonth();
+        void setMonth(string);
+        string& getYear();
+        void setYear(string);
         
-        friend std::ostream& operator<< (std::ostream&, Date&);
-        friend std::istream& operator>> (std::istream&, Date&);
+        // gedcom serialisation
+        friend ostream& operator<< (ostream&, Date&);
+        friend istream& operator>> (istream&, Date&);
+        
+        // bson serialisation
+        BSONObj asBSON();
+        friend BSONObjBuilder& operator<< (BSONObjBuilderValueStream&, Date&);
         
     };
+    
+    ostream& operator<< (ostream&, Date&);
+    istream& operator>> (istream&, Date&);
+    
+    BSONObjBuilder& operator<< (BSONObjBuilderValueStream&, Date&);
     
 } }
 

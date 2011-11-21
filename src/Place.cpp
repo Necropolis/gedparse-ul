@@ -10,19 +10,21 @@
 namespace FamilySearch { namespace GEDCOM {
 
     Place::Place(): countyCode(""), country(""), county(""), town(""), borough(""), Attribute() {}
+    Place::Place(BSONElement elem): countyCode(elem["countyCode"].String()), country(elem["country"].String()), county(elem["county"].String()), town(elem["town"].String()), borough(elem["borough"].String()), Attribute(elem["attribute"]) { }
+    Place::Place(BSONObj obj): countyCode(obj["countyCode"].String()), country(obj["country"].String()), county(obj["county"].String()), town(obj["town"].String()), borough(obj["borough"].String()), Attribute(obj["attribute"]) { }
     
-    std::string& Place::getCountyCode() { return countyCode; }
-    void Place::setCountyCode(std::string countyCode) { this->countyCode = countyCode; set(true); }
-    std::string& Place::getCountry() { return country; }
-    void Place::setCountry(std::string country) { this->country = country; set(true); }
-    std::string& Place::getCounty() { return county; }
-    void Place::setCounty(std::string county) { this->county = county; set(true); }
-    std::string& Place::getTown() { return town; }
-    void Place::setTown(std::string town) { this->town = town; set(true); }
-    std::string& Place::getBorough() { return borough; }
-    void Place::setBorough(std::string borough) { this->borough = borough; set(true); }
+    string& Place::getCountyCode() { return countyCode; }
+    void Place::setCountyCode(string countyCode) { this->countyCode = countyCode; set(true); }
+    string& Place::getCountry() { return country; }
+    void Place::setCountry(string country) { this->country = country; set(true); }
+    string& Place::getCounty() { return county; }
+    void Place::setCounty(string county) { this->county = county; set(true); }
+    string& Place::getTown() { return town; }
+    void Place::setTown(string town) { this->town = town; set(true); }
+    string& Place::getBorough() { return borough; }
+    void Place::setBorough(string borough) { this->borough = borough; set(true); }
     
-    std::ostream& operator<< (std::ostream& os, Place& place) {
+    ostream& operator<< (ostream& os, Place& place) {
         
         os << "PLAC " << place.countyCode << ", " << place.country << ", " << place.county << ", ";
         if (place.borough!="")
@@ -45,7 +47,7 @@ namespace FamilySearch { namespace GEDCOM {
      *                 country               borough
      *     PLACE Mlot, Scotland, Midlothian, Canongate, Edinburgh
      */
-    std::istream& operator>> (std::istream& is, Place& place) {
+    istream& operator>> (istream& is, Place& place) {
         
         char sentinels[] = ",\r";
         size_t sl = 2;
@@ -60,7 +62,7 @@ namespace FamilySearch { namespace GEDCOM {
         place.setCounty(trim(read_until_one_of(is, sentinels, sl)));
 
         // borough or town
-        std::string buff = trim(read_until_one_of(is, sentinels, sl));
+        string buff = trim(read_until_one_of(is, sentinels, sl));
         if (is.peek()=='\n') {
             place.setTown(buff); // town
         } else {
@@ -69,6 +71,21 @@ namespace FamilySearch { namespace GEDCOM {
         }
         
         return is;
+    }
+    
+    BSONObj Place::asBSON() {
+        BSONObjBuilder b;
+        b   << "countyCode" << countyCode
+            << "country"    << country
+            << "county"     << county
+            << "town"       << town
+            << "borough"    << borough
+            << "attribute"  << (Attribute&)*this;
+        return b.obj();
+    }
+    
+    BSONObjBuilder& operator<< (BSONObjBuilderValueStream& bv, Place& place) {
+        return bv << place.asBSON();
     }
     
 } }

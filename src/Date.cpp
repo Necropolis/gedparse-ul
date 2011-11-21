@@ -7,18 +7,20 @@
 
 namespace FamilySearch { namespace GEDCOM {
     
-    void setPart(std::string&, Date&);
+    void setPart(string&, Date&);
     
     Date::Date(): day(""), month(""), year(""), Attribute() {}
+    Date::Date(BSONElement elem): day(elem["day"].String()), month(elem["month"].String()), year(elem["year"].String()), Attribute(elem["attribute"]) { }
+    Date::Date(BSONObj obj): day(obj["day"].String()), month(obj["month"].String()), year(obj["year"].String()), Attribute(obj["attribute"]) { }
     
-    std::string& Date::getDay() { return day; }
-    void Date::setDay(std::string day) { this->day = day; set(true); }
-    std::string& Date::getMonth() { return month; }
-    void Date::setMonth(std::string month) { this->month = month; set(true); }
-    std::string& Date::getYear() { return year; }
-    void Date::setYear(std::string year) { this->year = year; set(true); }
+    string& Date::getDay() { return day; }
+    void Date::setDay(string day) { this->day = day; set(true); }
+    string& Date::getMonth() { return month; }
+    void Date::setMonth(string month) { this->month = month; set(true); }
+    string& Date::getYear() { return year; }
+    void Date::setYear(string year) { this->year = year; set(true); }
     
-    std::ostream& operator<< (std::ostream& os, Date& date) {
+    ostream& operator<< (ostream& os, Date& date) {
         os << "DATE ";
         if (date.day!="") os << date.day << " ";
         if (date.month!="") os << date.month << " ";
@@ -27,7 +29,7 @@ namespace FamilySearch { namespace GEDCOM {
         return os;
     }
     
-    void setPart(std::string& str, Date& date) {
+    void setPart(string& str, Date& date) {
         // is year?
         if (isdigit(str[0])&&str.length()>2) {
             date.setYear(str);
@@ -39,8 +41,8 @@ namespace FamilySearch { namespace GEDCOM {
         }
     }
     
-    std::istream& operator>> (std::istream& is, Date& date) {
-        std::string str;
+    istream& operator>> (istream& is, Date& date) {
+        string str;
         
         is >> str;
         setPart(str, date);
@@ -56,6 +58,19 @@ namespace FamilySearch { namespace GEDCOM {
         setPart(str, date);
         
         return is;
+    }
+    
+    BSONObj Date::asBSON() {
+        BSONObjBuilder b;
+        b   << "day"        << day
+            << "month"      << month
+            << "year"       << year
+            << "attribute"  << (Attribute&)*this;
+        return b.obj();
+    }
+    
+    BSONObjBuilder& operator<< (BSONObjBuilderValueStream& bv, Date& date) {
+        return bv << date.asBSON();
     }
     
 } }

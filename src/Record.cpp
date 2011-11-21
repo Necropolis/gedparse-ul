@@ -30,6 +30,11 @@ namespace FamilySearch { namespace GEDCOM {
              it != _spouses.end();
              ++it)
             spouses.push_back(Spouse(*it));
+        vector<BSONElement> _marriages = elem["marriages"].Array();
+        for (vector<BSONElement>::iterator it = _marriages.begin();
+             it != _marriages.end();
+             ++it)
+            marriages.push_back(Marriage(*it));
     }
     
     Record::Record(BSONObj obj): type(obj["type"].String()), name(obj["name"]), father(obj["father"]), mother(obj["mother"]), gender(obj["gender"]) {
@@ -39,6 +44,11 @@ namespace FamilySearch { namespace GEDCOM {
              it != _spouses.end();
              ++it)
             spouses.push_back(Spouse(*it));
+        vector<BSONElement> _marriages = obj["marriages"].Array();
+        for (vector<BSONElement>::iterator it = _marriages.begin();
+             it != _marriages.end();
+             ++it)
+            marriages.push_back(Marriage(*it));
     }
     
     string& Record::getType() { return type; }
@@ -231,9 +241,12 @@ namespace FamilySearch { namespace GEDCOM {
             << "father"     << father
             << "mother"     << mother
             << "gender"     << gender;
-        BSONArrayBuilder a;
-        a << spouses;
-        b.appendArray("spouses", a.done());
+        BSONArrayBuilder as;
+        as << spouses;
+        b.appendArray("spouses", as.done());
+        BSONArrayBuilder am;
+        am << marriages;
+        b.appendArray("marriages", am.done());
         return b.obj();
     }
     
