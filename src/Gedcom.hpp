@@ -16,39 +16,53 @@
 #ifndef __GEDCOM_HPP_
 #define __GEDCOM_HPP_
 
+using namespace std;
+using namespace boost;
+using namespace mongo;
+
 namespace FamilySearch { namespace GEDCOM {
 
-/**
- * Class representing an unlinked GEDCOM. Unlinked GEDCOMs are right little buggers to parse.
- * They look something like this:
- *
- * \r\n0 FAM
- * \r\n1 SEX F
- * \r\n1 SPOU George /BRUCE
- * \r\n1 MARR
- * \r\n2 PLAC Fife, Scotland, Fife, Kingsbarns
- * \r\n1 MISC FR582
- * \r\n1 BATC M114414
- * \r\n0 FAM
- * ...
- *
- * Defining characteristics are:
- *
- * 1. Every GEDCOM starts with a CR/LF
- */  
-class Gedcom {
-private:
-  boost::scoped_ptr<std::vector<boost::shared_ptr<Record> > > records;
-  
-public:
-  Gedcom();
-  /** parse from a stream */
-  friend std::istream& operator>> (std::istream &is, Gedcom &ged);
-  
-  std::vector<boost::shared_ptr<Record> >& getRecords();
-};
+    class Gedcom;
+    
+    class GedcomParseDelegate {
+    public:
+        virtual void parsedRecord(Gedcom&,
+                                  Record&,
+                                  istream::pos_type,
+                                  istream::pos_type)=0;
+    };
+    
+    /**
+     * Class representing an unlinked GEDCOM. Unlinked GEDCOMs are right little buggers to parse.
+     * They look something like this:
+     *
+     * \r\n0 FAM
+     * \r\n1 SEX F
+     * \r\n1 SPOU George /BRUCE
+     * \r\n1 MARR
+     * \r\n2 PLAC Fife, Scotland, Fife, Kingsbarns
+     * \r\n1 MISC FR582
+     * \r\n1 BATC M114414
+     * \r\n0 FAM
+     * ...
+     *
+     * Defining characteristics are:
+     *
+     * 1. Every GEDCOM starts with a CR/LF
+     */  
+    class Gedcom {
+    private:
+        scoped_ptr<vector<shared_ptr<Record> > > records;
+      
+    public:
+        Gedcom();
+        /** parse from a stream */
+        friend istream& operator>> (istream &is, Gedcom &ged);
+      
+        vector<shared_ptr<Record> >& getRecords();
+    };
 
-std::istream& operator>> (std::istream &is, Gedcom &ged);
+    istream& operator>> (istream &is, Gedcom &ged);
   
 } }
 

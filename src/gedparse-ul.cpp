@@ -8,6 +8,7 @@
 #include <fstream>
 #include <string>
 #include <memory>
+#include <exception>
 // mongo
 #include "client/dbclient.h"
 // boost
@@ -16,6 +17,9 @@
 #include "Gedcom.hpp"
 #include "Record.hpp"
 
+using namespace std;
+using namespace boost;
+using namespace mongo;
 using namespace FamilySearch::GEDCOM;
 
 /**
@@ -32,97 +36,95 @@ using namespace FamilySearch::GEDCOM;
  */
 int main(int argc, char **argv)
 {
-  std::string infile;
-  std::string database;
-  std::string collection;
-  bool readonly=false;
-  bool die=false;
-  try {
-    boost::program_options::options_description desc("Allowed options");
-    desc.add_options()
-      ("if", boost::program_options::value<std::string>(), "input file, probably a GEDCOM")
-      ("db", boost::program_options::value<std::string>(), "database to use in Mongo")
-      ("col",boost::program_options::value<std::string>(), "collection to use in Mongo")
-      ("ro", boost::program_options::value<bool>()->default_value(false), "if yes, just parse and don't write to Mongo")
-      ("help", "produce this here frigg'n help message")
-    ;
+    string infile;
+    string database;
+    string collection;
+    bool readonly=false;
+    bool die=false;
+    try {
+        program_options::options_description desc("Allowed options");
+        desc.add_options()
+            ("if", program_options::value<std::string>(), "input file, probably a GEDCOM")
+            ("db", program_options::value<std::string>(), "database to use in Mongo")
+            ("col",program_options::value<std::string>(), "collection to use in Mongo")
+            ("ro", program_options::value<bool>()->default_value(false), "if yes, just parse and don't write to Mongo")
+            ("help", "produce this here frigg'n help message")
+        ;
     
-    boost::program_options::variables_map vm;
-    boost::program_options::store(boost::program_options::parse_command_line(argc, argv, desc), vm);
+        program_options::variables_map vm;
+        program_options::store(program_options::parse_command_line(argc, argv, desc), vm);
     
-    if (vm.count("help")) {
-      std::cout << desc << std::endl;
-      return 1;
-    }
-    
-    if (vm.count("if")) {
-      infile = vm["if"].as<std::string>();
-      std::cout << "Using file " << infile << std::endl;
-    } else {
-      std::cout << "Input file was not set." << std::endl;
-      die=true;
-    }
-    
-    if (!vm["ro"].as<bool>()) {
-      
-      readonly = vm["ro"].as<bool>();
-      
-      if (!readonly) {
-        
-        if (vm.count("db")) {
-          database = vm["db"].as<std::string>();
-        } else {
-          std::cout << "Database not set." << std::endl;
-          die=true;
+        if (vm.count("help")) {
+            cout << desc << endl;
+            return 1;
         }
-        
-        if (vm.count("col")) {
-          collection = vm["col"].as<std::string>();
+    
+        if (vm.count("if")) {
+            infile = vm["if"].as<string>();
+            cout << "Using file " << infile << endl;
         } else {
-          std::cout << "Collection not set." << std::endl;
-          die=true;
+            cout << "Input file was not set." << endl;
+            die=true;
         }
-        
-      }
+    
+        if (!vm["ro"].as<bool>()) {
       
-    } else {
-      std::cout << "Running in readonly mode, all database args ignored." << std::endl;
-    }
+            readonly = vm["ro"].as<bool>();
+      
+            if (!readonly) {
+        
+                if (vm.count("db")) {
+                    database = vm["db"].as<string>();
+                } else {
+                    cout << "Database not set." << endl;
+                    die=true;
+                }
+        
+                if (vm.count("col")) {
+                    collection = vm["col"].as<string>();
+                } else {
+                    cout << "Collection not set." << endl;
+                    die=true;
+                }
+        
+            }
+      
+        } else {
+            cout << "Running in readonly mode, all database args ignored." << endl;
+        }
     
-    if (die) {
-      std::cout << desc << std::endl;
-      return 1;
-    }
+        if (die) {
+            cout << desc << endl;
+            return 1;
+        }
     
-  } catch(std::exception& e) {
-    std::cerr << "error: " << e.what() << std::endl;
-    return 1;
-  } catch(...) {
-    std::cerr << "Exception of unknown type!" << std::endl;
-    return 1;
-  }
+    } catch(std::exception& e) {
+        cerr << "error: " << e.what() << endl;
+        return 1;
+    } catch(...) {
+        cerr << "Exception of unknown type!" << endl;
+        return 1;
+    }
 
-  std::auto_ptr<std::ifstream> inputFile(new std::ifstream(infile.c_str(), std::ifstream::in));
-  std::auto_ptr<FamilySearch::GEDCOM::Gedcom> ged(new FamilySearch::GEDCOM::Gedcom());
-  inputFile->ignore(2, '\n');
-  if (inputFile->peek()!='0') {
-    std::cerr << "Malformed GEDCOM. It should start with a \\r\\n0!" << std::endl;
-    return 1;
-  }
+    auto_ptr<ifstream> inputFile(new ifstream(infile.c_str(), ifstream::in));
+    auto_ptr<Gedcom> ged(new Gedcom());
+    inputFile->ignore(2, '\n');
+    if (inputFile->peek()!='0') {
+        cerr << "Malformed GEDCOM. It should start with a \\r\\n0!" << endl;
+        return 1;
+    } 
   
-  *inputFile >> *ged;
+    *inputFile >> *ged;
 
-  std::cout << "Record count: " << ged->getRecords().size() << std::endl;
-    
-//    std::cin.get();
+    cout << "Record count: " << ged->getRecords().size() << endl;
     
     FamilySearch::GEDCOM::Record rec = *ged->getRecords()[0];
-    std::cout << "Record: " << std::endl << rec << std::endl;
-    mongo::BSONObj rec_low = BSON( "record" << rec );
-    std::cout << "JSON: " << rec_low.jsonString() << std::endl;
+    cout << "Record: " << endl << rec << endl;
+    BSONObj rec_low = BSON( "record" << rec );
+    cout << "JSON: " << rec_low.jsonString() << endl;
     FamilySearch::GEDCOM::Record unrec(rec_low["record"]);
-    std::cout << "Record From BSON: " << std::endl;
-    std::cout << unrec << std::endl;
+    cout << "Record From BSON: " << endl;
+    cout << unrec << endl;
 
-  return 0;
+    return 0;
 }
