@@ -3,14 +3,14 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>old-broken-ruby/Gedcom.thor</string>
+	<string>Rakefile</string>
 	<key>documents</key>
 	<array>
 		<dict>
 			<key>filename</key>
 			<string>README.md</string>
 			<key>lastUsed</key>
-			<date>2011-11-15T15:25:49Z</date>
+			<date>2011-11-18T16:05:56Z</date>
 		</dict>
 		<dict>
 			<key>children</key>
@@ -19,13 +19,15 @@
 					<key>filename</key>
 					<string>Rakefile</string>
 					<key>lastUsed</key>
-					<date>2011-11-17T22:07:48Z</date>
+					<date>2011-11-18T22:59:32Z</date>
+					<key>selected</key>
+					<true/>
 				</dict>
 				<dict>
 					<key>filename</key>
 					<string>src/Gedcom.hpp</string>
 					<key>lastUsed</key>
-					<date>2011-11-15T17:10:02Z</date>
+					<date>2011-11-18T16:06:00Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
@@ -176,21 +178,37 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>174</integer>
+				<integer>7</integer>
 				<key>line</key>
-				<integer>16</integer>
+				<integer>28</integer>
 			</dict>
+			<key>columnSelection</key>
+			<false/>
 			<key>firstVisibleColumn</key>
-			<integer>94</integer>
+			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>2</integer>
+			<integer>5</integer>
+			<key>selectFrom</key>
+			<dict>
+				<key>column</key>
+				<integer>2</integer>
+				<key>line</key>
+				<integer>18</integer>
+			</dict>
+			<key>selectTo</key>
+			<dict>
+				<key>column</key>
+				<integer>7</integer>
+				<key>line</key>
+				<integer>28</integer>
+			</dict>
 		</dict>
 		<key>Rakefile</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>10</integer>
+				<integer>11</integer>
 				<key>line</key>
 				<integer>14</integer>
 			</dict>
@@ -334,7 +352,7 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>38</integer>
+				<integer>2</integer>
 				<key>line</key>
 				<integer>35</integer>
 			</dict>

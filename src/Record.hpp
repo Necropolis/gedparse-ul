@@ -62,6 +62,7 @@ namespace FamilySearch { namespace GEDCOM {
         friend istream& operator>> (istream&, Record&);
         
         // bson serialisation
+        BSONObj asBSON();
         friend BSONObjBuilder& operator<< (BSONObjBuilderValueStream&, Record&);
         
 #ifdef DEBUG

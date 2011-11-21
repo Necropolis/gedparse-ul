@@ -16,9 +16,29 @@ namespace FamilySearch { namespace GEDCOM {
     Record::Record() { }
     
     Record::Record(BSONElement elem): type(elem["type"].String()), name(elem["name"]), father(elem["father"]), mother(elem["mother"]), gender(elem["gender"]) {
+        // spouses
+        /*
+         vector<BSONElement> _givenNames = obj["given_names"].Array();
+         vector<BSONElement>::iterator it;
+         for (it = _givenNames.begin(); it != _givenNames.end(); ++it) givenNames.push_back(it->String());
+         vector<BSONElement> _stadardisedNames = obj["standardised_names"].Array();
+         for (it = _stadardisedNames.begin(); it != _stadardisedNames.end(); ++it) standardisedNames.push_back(StandardisedName(it->Obj()));
+
+         */
+        vector<BSONElement> _spouses = elem["spouses"].Array();
+        for (vector<BSONElement>::iterator it = _spouses.begin();
+             it != _spouses.end();
+             ++it)
+            spouses.push_back(Spouse(*it));
     }
     
     Record::Record(BSONObj obj): type(obj["type"].String()), name(obj["name"]), father(obj["father"]), mother(obj["mother"]), gender(obj["gender"]) {
+        // spouses
+        vector<BSONElement> _spouses = obj["spouses"].Array();
+        for (vector<BSONElement>::iterator it = _spouses.begin();
+             it != _spouses.end();
+             ++it)
+            spouses.push_back(Spouse(*it));
     }
     
     string& Record::getType() { return type; }
@@ -204,13 +224,22 @@ namespace FamilySearch { namespace GEDCOM {
         return is;
     }
     
+    BSONObj Record::asBSON() {
+        BSONObjBuilder b;
+        b   << "type"       << type
+            << "name"       << name
+            << "father"     << father
+            << "mother"     << mother
+            << "gender"     << gender;
+        BSONArrayBuilder a;
+        a << spouses;
+        b.appendArray("spouses", a.done());
+        return b.obj();
+    }
+    
     /* serialise a Record to a BSONObjBuilder, fit for becoming a BSONObj */
     BSONObjBuilder& operator<< (BSONObjBuilderValueStream& bv, Record& rec) {
-        return bv << BSON( "type" << rec.getType()
-                          << "name" << rec.getName()
-                          << "father" << rec.getFather()
-                          << "mother" << rec.getMother()
-                          << "gender" << rec.getGender() );
+        return bv << rec.asBSON();
     }
       
 } }

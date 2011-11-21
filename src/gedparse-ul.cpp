@@ -114,6 +114,8 @@ int main(int argc, char **argv)
 
   std::cout << "Record count: " << ged->getRecords().size() << std::endl;
     
+//    std::cin.get();
+    
     FamilySearch::GEDCOM::Record rec = *ged->getRecords()[0];
     std::cout << "Record: " << std::endl << rec << std::endl;
     mongo::BSONObj rec_low = BSON( "record" << rec );

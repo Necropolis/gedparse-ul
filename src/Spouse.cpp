@@ -9,21 +9,37 @@
 
 namespace FamilySearch { namespace GEDCOM {
     
-    Spouse::Spouse(): standardisedNames(std::list<StandardisedName>()), name(Name()), Attribute() {}
+    Spouse::Spouse(): standardisedNames(list<StandardisedName>()), name(Name()), Attribute() {}
+    Spouse::Spouse(BSONElement elem): name(elem["name"]), Attribute(elem["attribute"]) {
+        // standardised names?
+        vector<BSONElement> _standardised_names = elem["standardisedNames"].Array();
+        for (vector<BSONElement>::iterator it = _standardised_names.begin();
+             it != _standardised_names.end();
+             ++it)
+            standardisedNames.push_back(StandardisedName(*it));
+    }
+    Spouse::Spouse(BSONObj obj): name(obj["name"]), Attribute(obj["name"]) {
+        // standardised names?
+        vector<BSONElement> _standardised_names = obj["standardisedNames"].Array();
+        for (vector<BSONElement>::iterator it = _standardised_names.begin();
+             it != _standardised_names.end();
+             ++it)
+            standardisedNames.push_back(StandardisedName(*it));
+    }
     
     Name& Spouse::getName() { return name; }
     void Spouse::setName(Name name) { this->name = name; }
-    std::list<StandardisedName>& Spouse::getStandardisedNames() { return standardisedNames; }
+    list<StandardisedName>& Spouse::getStandardisedNames() { return standardisedNames; }
     
-    std::ostream& operator<< (std::ostream& os, Spouse& spouse) {
+    ostream& operator<< (ostream& os, Spouse& spouse) {
         os << "1 SPOU " << spouse.name << "\r\n";
-        std::list<StandardisedName>::iterator iter;
+        list<StandardisedName>::iterator iter;
         for (iter=spouse.standardisedNames.begin(); iter!=spouse.standardisedNames.end(); ++iter)
             os << "2 " << *iter;
         return os;
     }
     
-    std::istream& operator>> (std::istream& is, Spouse& spouse) {
+    istream& operator>> (istream& is, Spouse& spouse) {
         // stream is now a NAME part
         is >> spouse.name;
         while (is.good()) {
@@ -36,7 +52,7 @@ namespace FamilySearch { namespace GEDCOM {
                 is.unget();
                 break;
             } else if (c=='2') {
-                std::string line_type;
+                string line_type;
                 is >> line_type;
                 
                 if (line_type=="STGN") {
@@ -50,17 +66,53 @@ namespace FamilySearch { namespace GEDCOM {
                     stsn.setGivenName(false);
                     spouse.standardisedNames.push_back(stsn);
                 } else {
-                    std::cout << "Unknown line type \"" << line_type << "\"" << std::endl;
+                    cout << "Unknown line type \"" << line_type << "\"" << endl;
                     inspect_stream(is);
-                    throw new std::exception();
+                    throw new exception();
                 }
             } else {
-                std::cout << "Unknown escalation type!" << std::endl;
+                cout << "Unknown escalation type!" << endl;
                 inspect_stream(is);
-                throw new std::exception();
+                throw new exception();
             }
         }
         return is;
+    }
+    
+    BSONObj Spouse::asBSON() {
+        BSONObjBuilder b;
+        b << "name" << name;
+        BSONArrayBuilder a;
+        a<<standardisedNames;
+        b.appendArray("standardisedNames", a.done());
+        b << "attribute" << (Attribute&)*this;
+        return b.obj();
+    }
+    
+    BSONArrayBuilder& operator<< (BSONArrayBuilder& a, list<Spouse>& spouses) {
+        for (list<Spouse>::iterator it = spouses.begin();
+             it != spouses.end();
+             ++it) {
+            a << *it;
+        }
+        return a;
+    }
+    
+    BSONArrayBuilder& operator<< (BSONArrayBuilder& a, Spouse& spouse) {
+        a.append(spouse.asBSON());
+        return a;
+    }
+    
+    BSONObjBuilder& operator<< (BSONObjBuilderValueStream& bv, list<Spouse>& spouses) {
+        
+        BSONArrayBuilder a;
+        a << spouses;
+        return bv << a.done();
+        
+    }
+    
+    BSONObjBuilder& operator<< (BSONObjBuilderValueStream& bv, Spouse& spouse) {
+        return bv << spouse.asBSON();
     }
     
 } }

@@ -6,6 +6,8 @@
 // stl
 #include <iostream>
 #include <list>
+// mongo
+#include "bson/bson.h"
 // familysearch
 #include "Attribute.hpp"
 #include "Name.hpp"
@@ -13,6 +15,9 @@
 
 #ifndef __SPOUSE_HPP_
 #define __SPOUSE_HPP_
+
+using namespace std;
+using namespace mongo;
 
 namespace FamilySearch { namespace GEDCOM {
     
@@ -25,21 +30,34 @@ namespace FamilySearch { namespace GEDCOM {
     class Spouse : public Attribute {
     private:
         Name name;        
-        std::list<StandardisedName> standardisedNames;
+        list<StandardisedName> standardisedNames;
         
     public:
         Spouse();
+        Spouse(BSONElement);
+        Spouse(BSONObj);
         
         Name& getName();
         void setName(Name);
-        std::list<StandardisedName>& getStandardisedNames();
+        list<StandardisedName>& getStandardisedNames();
         
-        friend std::ostream& operator<< (std::ostream&, Spouse&);
-        friend std::istream& operator>> (std::istream&, Spouse&);
+        // gedcom serialisation
+        friend ostream& operator<< (ostream&, Spouse&);
+        friend istream& operator>> (istream&, Spouse&);
+        
+        // bson serialisation
+        BSONObj asBSON();
+        friend BSONArrayBuilder& operator<< (BSONArrayBuilder&, Spouse&);
+        friend BSONObjBuilder& operator<< (BSONObjBuilderValueStream&, Spouse&);
     };
     
-    std::ostream& operator<< (std::ostream&, Spouse&);
-    std::istream& operator>> (std::istream&, Spouse&);
+    ostream& operator<< (ostream&, Spouse&);
+    istream& operator>> (istream&, Spouse&);
+    
+    BSONArrayBuilder& operator<< (BSONArrayBuilder&, list<Spouse>&);
+    BSONArrayBuilder& operator<< (BSONArrayBuilder&, Spouse&);
+    BSONObjBuilder& operator<< (BSONObjBuilderValueStream&, list<Spouse>&);
+    BSONObjBuilder& operator<< (BSONObjBuilderValueStream&, Spouse&);
     
 } }
 

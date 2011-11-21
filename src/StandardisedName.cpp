@@ -32,24 +32,26 @@ namespace FamilySearch { namespace GEDCOM {
         return is;
     }
     
+    BSONObj StandardisedName::asBSON() {
+        return BSON("given_name" << givenName << "standardised_name" << standardisedName << "attribute" << (Attribute&)*this );
+    }
+    
     BSONObjBuilder& operator<< (BSONObjBuilderValueStream& stream,
                                 StandardisedName& standardised_name) {
-        return stream << BSON("given_name" << standardised_name.givenName << "standardised_name" << standardised_name.standardisedName << "attribute" << (Attribute&)standardised_name );
+        return stream << standardised_name.asBSON();
     }
     
     BSONArrayBuilder& operator<< (BSONArrayBuilder& builder,
                                   StandardisedName& standardised_name) {
-        return builder << BSON("given_name" << standardised_name.givenName << "standardised_name" << standardised_name.standardisedName << "attribute" << (Attribute&)standardised_name );
+        return builder << standardised_name.asBSON();
     }
     
     BSONArrayBuilder& operator<< (BSONArrayBuilder& builder,
                                   list<StandardisedName>& standardised_names) {
         for (list<StandardisedName>::iterator it = standardised_names.begin();
              it != standardised_names.end();
-             ++it) {
-            StandardisedName standardised_name = *it;
-            builder.append(BSON("given_name" << standardised_name.isGivenName() << "standardised_name" << standardised_name.getStandardisedName() << "attribute" << (Attribute&)standardised_name ));
-        }
+             ++it)
+            builder.append(it->asBSON());
         return builder;
     }
         
