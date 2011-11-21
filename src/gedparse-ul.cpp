@@ -67,7 +67,7 @@ int main(int argc, char **argv)
             cout << "Input file was not set." << endl;
             die=true;
         }
-    
+        
         if (!vm["ro"].as<bool>()) {
       
             readonly = vm["ro"].as<bool>();
@@ -109,7 +109,7 @@ int main(int argc, char **argv)
     
     GedparseULDelegate * dg = new GedparseULDelegate();
     
-    if (readonly) {
+    if (!readonly) {
         DBClientConnection * conn = new DBClientConnection;
         conn->connect("localhost");
         string colstring;
@@ -118,6 +118,7 @@ int main(int argc, char **argv)
         colstring.append(collection);
         dg->setCollection(colstring);
         dg->setConnection(*conn);
+        dg->setUsingDb(true);
     }
 
     auto_ptr<ifstream> inputFile(new ifstream(infile.c_str(), ifstream::in));

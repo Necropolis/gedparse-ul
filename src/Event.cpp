@@ -58,6 +58,8 @@ namespace FamilySearch { namespace GEDCOM {
             }
         }
         
+        event.set(true);
+        
         return is;
     }
     

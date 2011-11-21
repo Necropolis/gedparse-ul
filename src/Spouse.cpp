@@ -76,6 +76,9 @@ namespace FamilySearch { namespace GEDCOM {
                 throw new exception();
             }
         }
+        
+        spouse.set(true);
+        
         return is;
     }
     
