@@ -20,7 +20,7 @@ using namespace mongo;
 
 namespace FamilySearch { namespace GEDCOM {
     
-    class Marriage {
+    class Marriage : public Attribute {
     private:
         Place place;
         Date date;
@@ -47,8 +47,6 @@ namespace FamilySearch { namespace GEDCOM {
     ostream& operator<< (ostream&, Marriage&);
     istream& operator>> (istream&, Marriage&);
     
-    BSONArrayBuilder& operator<< (BSONArrayBuilder&, list<Marriage>&);
-    BSONArrayBuilder& operator<< (BSONArrayBuilder&, Marriage&);
     BSONObjBuilder& operator<< (BSONObjBuilderValueStream&, Marriage&);
     
 } }

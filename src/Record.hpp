@@ -38,9 +38,9 @@ namespace FamilySearch { namespace GEDCOM {
     class Record {
     private:
         string type;
-        list<Spouse> spouses;
-        list<Marriage> marriages;
-        list<Event> events;
+        Spouse spouse;
+        Marriage marriage;
+        Event event;
         Name name, father, mother;
         Gender gender;
         Miscelleneous misc;
@@ -74,9 +74,12 @@ namespace FamilySearch { namespace GEDCOM {
       
         string& getType();
         void setType(string);
-        list<Spouse>& getSpouses();
-        list<Marriage>& getMarriages();
-        list<Event>& getEvents();
+        Spouse& getSpouse();
+        void setSpouse(Spouse&);
+        Marriage& getMarriage();
+        void setMarriage(Marriage&);
+        Event& getEvent();
+        void setEvent(Event&);
         Name& getName();
         void setName(Name);
         Gender& getGender();

@@ -109,7 +109,7 @@ int main(int argc, char **argv)
     
     GedparseULDelegate * dg = new GedparseULDelegate();
     
-    if (!readonly) {
+    if (readonly) {
         DBClientConnection * conn = new DBClientConnection;
         conn->connect("localhost");
         string colstring;

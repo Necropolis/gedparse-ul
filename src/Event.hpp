@@ -53,8 +53,6 @@ namespace FamilySearch { namespace GEDCOM {
     ostream& operator<< (ostream&, Event&);
     istream& operator>> (istream&, Event&);
     
-    BSONArrayBuilder& operator<< (BSONArrayBuilder&, list<Event>&);
-    BSONArrayBuilder& operator<< (BSONArrayBuilder&, Event&);
     BSONObjBuilder& operator<< (BSONObjBuilderValueStream&, Event&);
     
 } }

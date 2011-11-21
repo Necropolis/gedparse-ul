@@ -8,13 +8,13 @@
 namespace FamilySearch { namespace GEDCOM {
 
     Marriage::Marriage() {}
-    Marriage::Marriage(BSONElement elem): place(elem["place"]), date(elem["date"]) { }
-    Marriage::Marriage(BSONObj obj): place(obj["place"]), date(obj["date"]) { }
+    Marriage::Marriage(BSONElement elem): place(elem["place"]), date(elem["date"]), Attribute(elem["attribute"]) { }
+    Marriage::Marriage(BSONObj obj): place(obj["place"]), date(obj["date"]), Attribute(obj["attribute"]) { }
     
     Place& Marriage::getPlace() { return this->place; }
-    void Marriage::setPlace(Place place) { this->place = place; }
+    void Marriage::setPlace(Place place) { this->place = place; set(true); }
     Date& Marriage::getDate() { return date; }
-    void Marriage::setDate(Date date) { this->date = date; }
+    void Marriage::setDate(Date date) { this->date = date; set(true); }
     
     ostream& operator<< (ostream& os, Marriage& marr) {
         
@@ -60,21 +60,10 @@ namespace FamilySearch { namespace GEDCOM {
     
     BSONObj Marriage::asBSON() {
         BSONObjBuilder b;
-        b   << "place"  << place
-            << "date"   << date;
+        b   << "place"      << place
+            << "date"       << date
+            << "attribute"  << (Attribute&)*this;
         return b.obj();
-    }
-    
-    BSONArrayBuilder& operator<< (BSONArrayBuilder& a, list<Marriage>& marriages) {
-        for (list<Marriage>::iterator it = marriages.begin();
-             it != marriages.end();
-             ++it)
-            a << *it;
-        return a;
-    }
-    
-    BSONArrayBuilder& operator<< (BSONArrayBuilder& a, Marriage& marr) {
-        return a << marr.asBSON();
     }
     
     BSONObjBuilder& operator<< (BSONObjBuilderValueStream& bv, Marriage& marr) {

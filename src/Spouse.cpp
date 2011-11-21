@@ -89,28 +89,6 @@ namespace FamilySearch { namespace GEDCOM {
         return b.obj();
     }
     
-    BSONArrayBuilder& operator<< (BSONArrayBuilder& a, list<Spouse>& spouses) {
-        for (list<Spouse>::iterator it = spouses.begin();
-             it != spouses.end();
-             ++it) {
-            a << *it;
-        }
-        return a;
-    }
-    
-    BSONArrayBuilder& operator<< (BSONArrayBuilder& a, Spouse& spouse) {
-        a.append(spouse.asBSON());
-        return a;
-    }
-    
-    BSONObjBuilder& operator<< (BSONObjBuilderValueStream& bv, list<Spouse>& spouses) {
-        
-        BSONArrayBuilder a;
-        a << spouses;
-        return bv << a.done();
-        
-    }
-    
     BSONObjBuilder& operator<< (BSONObjBuilderValueStream& bv, Spouse& spouse) {
         return bv << spouse.asBSON();
     }

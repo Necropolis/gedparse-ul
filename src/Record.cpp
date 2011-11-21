@@ -15,57 +15,18 @@ namespace FamilySearch { namespace GEDCOM {
     
     Record::Record() { }
     
-    Record::Record(BSONElement elem): type(elem["type"].String()), name(elem["name"]), father(elem["father"]), mother(elem["mother"]), gender(elem["gender"]), misc(elem["misc"]), batch(elem["batch"]) {
-        // spouses
-        /*
-         vector<BSONElement> _givenNames = obj["given_names"].Array();
-         vector<BSONElement>::iterator it;
-         for (it = _givenNames.begin(); it != _givenNames.end(); ++it) givenNames.push_back(it->String());
-         vector<BSONElement> _stadardisedNames = obj["standardised_names"].Array();
-         for (it = _stadardisedNames.begin(); it != _stadardisedNames.end(); ++it) standardisedNames.push_back(StandardisedName(it->Obj()));
-
-         */
-        vector<BSONElement> _spouses = elem["spouses"].Array();
-        for (vector<BSONElement>::iterator it = _spouses.begin();
-             it != _spouses.end();
-             ++it)
-            spouses.push_back(Spouse(*it));
-        vector<BSONElement> _marriages = elem["marriages"].Array();
-        for (vector<BSONElement>::iterator it = _marriages.begin();
-             it != _marriages.end();
-             ++it)
-            marriages.push_back(Marriage(*it));
-        vector<BSONElement> _events = elem["events"].Array();
-        for (vector<BSONElement>::iterator it = _events.begin();
-             it != _events.end();
-             ++it)
-            events.push_back(Event(*it));
-    }
+    Record::Record(BSONElement elem): type(elem["type"].String()), name(elem["name"]), father(elem["father"]), mother(elem["mother"]), gender(elem["gender"]), misc(elem["misc"]), batch(elem["batch"]), marriage(elem["marriage"]), spouse(elem["spouse"]), event(elem["event"]) { }
     
-    Record::Record(BSONObj obj): type(obj["type"].String()), name(obj["name"]), father(obj["father"]), mother(obj["mother"]), gender(obj["gender"]), misc(obj["misc"]), batch(obj["batch"]) {
-        // spouses
-        vector<BSONElement> _spouses = obj["spouses"].Array();
-        for (vector<BSONElement>::iterator it = _spouses.begin();
-             it != _spouses.end();
-             ++it)
-            spouses.push_back(Spouse(*it));
-        vector<BSONElement> _marriages = obj["marriages"].Array();
-        for (vector<BSONElement>::iterator it = _marriages.begin();
-             it != _marriages.end();
-             ++it)
-            marriages.push_back(Marriage(*it));
-        vector<BSONElement> _events = obj["events"].Array();
-        for (vector<BSONElement>::iterator it = _events.begin();
-             it != _events.end();
-             ++it)
-            events.push_back(Event(*it));
-    }
+    Record::Record(BSONObj obj): type(obj["type"].String()), name(obj["name"]), father(obj["father"]), mother(obj["mother"]), gender(obj["gender"]), misc(obj["misc"]), batch(obj["batch"]), marriage(obj["marriage"]), spouse(obj["spouse"]), event(obj["event"]) { }
     
     string& Record::getType() { return type; }
     void Record::setType(string type) { this->type = type; }
-    list<Spouse>& Record::getSpouses() { return spouses; }
-    list<Marriage>& Record::getMarriages() { return marriages; }
-    list<Event>& Record::getEvents() { return events; }
+    Spouse& Record::getSpouse() { return spouse; }
+    void Record::setSpouse(Spouse& spouse) { this->spouse = spouse; }
+    Marriage& Record::getMarriage() { return marriage; }
+    void Record::setMarriage(Marriage& marriage) { this->marriage = marriage; }
+    Event& Record::getEvent() { return event; }
+    void Record::setEvent(Event& event) { this->event = event; }
     Name& Record::getName() { return name; }
     void Record::setName(Name name) { this->name = name; }
     Gender& Record::getGender() { return gender; }
@@ -152,9 +113,9 @@ namespace FamilySearch { namespace GEDCOM {
         if (rec.gender.isSet()) os << "1 " << rec.gender;
         if (rec.father.isSet()) os << "1 FATH " << rec.father;
         if (rec.mother.isSet()) os << "1 MOTH " << rec.mother;
-        for (list<Event>::iterator it = rec.events.begin(); it != rec.events.end(); ++it) os << *it;
-        for (list<Spouse>::iterator it = rec.spouses.begin(); it != rec.spouses.end(); ++it) os << *it;
-        for (list<Marriage>::iterator it = rec.marriages.begin(); it != rec.marriages.end(); ++it) os << *it;
+        if (rec.event.isSet()) os << rec.event;
+        if (rec.spouse.isSet()) os << rec.spouse;
+        if (rec.marriage.isSet()) os << rec.marriage;
         if (rec.misc.isSet()) os << "1 " << rec.misc;
         if (rec.batch.isSet()) os << "1 " << rec.batch;
         return os;
@@ -182,13 +143,9 @@ namespace FamilySearch { namespace GEDCOM {
                 if (line_type=="SEX") { // Gender
                     is >> rec.gender;
                 } else if (line_type=="SPOU") { // Spouse
-                    Spouse s;
-                    is >> s;
-                    rec.spouses.push_back(s);
+                    is >> rec.spouse;
                 } else if (line_type=="MARR") { // Marriage
-                    Marriage m;
-                    is >> m;
-                    rec.marriages.push_back(m);
+                    is >> rec.marriage;
                 } else if (line_type=="MISC") { // Miscellenous
                     is >> rec.misc;
                 } else if (line_type=="BATC") { // Batch Number
@@ -203,9 +160,7 @@ namespace FamilySearch { namespace GEDCOM {
                     rec.mother.setStandalone(true);
                     is >> rec.mother;
                 } else if (line_type=="EVEN") { // Event
-                    Event e;
-                    is >> e;
-                    rec.events.push_back(e);
+                    is >> rec.event;
                 } else {
                     cout << "Unknown line type \"" << line_type << "\"" << endl;
                     inspect_stream(is);
@@ -250,17 +205,11 @@ namespace FamilySearch { namespace GEDCOM {
             << "name"       << name
             << "father"     << father
             << "mother"     << mother
-            << "gender"     << gender;
-        BSONArrayBuilder as;
-        as << spouses;
-        b.appendArray("spouses", as.done());
-        BSONArrayBuilder am;
-        am << marriages;
-        b.appendArray("marriages", am.done());
-        BSONArrayBuilder ae;
-        ae << events;
-        b.appendArray("events", ae.done());
-        b   << "misc"       << misc
+            << "gender"     << gender
+            << "marriage"   << marriage
+            << "spouse"     << spouse
+            << "event"      << event
+            << "misc"       << misc
             << "batch"      << batch;
         return b.obj();
     }

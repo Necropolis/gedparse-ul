@@ -70,18 +70,6 @@ namespace FamilySearch { namespace GEDCOM {
         return b.obj();
     }
     
-    BSONArrayBuilder& operator<< (BSONArrayBuilder& a, list<Event>& events) {
-        for (list<Event>::iterator it = events.begin();
-             it != events.end();
-             ++it)
-            a << *it;
-        return a;
-    }
-    
-    BSONArrayBuilder& operator<< (BSONArrayBuilder& a, Event& event) {
-        return a << event.asBSON();
-    }
-    
     BSONObjBuilder& operator<< (BSONObjBuilderValueStream& bv, Event& event) {
         return bv << event.asBSON();
     }
