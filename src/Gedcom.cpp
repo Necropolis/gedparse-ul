@@ -43,7 +43,8 @@ namespace FamilySearch { namespace GEDCOM {
                 r->setType(str);
           
                 is >> *r;
-                ged.records->push_back(r);
+                // commented out because of massive memory issues.
+//                ged.records->push_back(r);
                 ++records;
                 
                 if (ged.dg.get())

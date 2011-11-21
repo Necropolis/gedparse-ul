@@ -27,6 +27,7 @@ namespace FamilySearch { namespace GEDCOM {
         size_t records;
         shared_ptr<DBClientConnection> conn;
         string collection;
+        bool useDb;
         
     public:
         GedparseULDelegate();
@@ -40,6 +41,8 @@ namespace FamilySearch { namespace GEDCOM {
         void setConnection(DBClientConnection&);
         string& getCollection();
         void setCollection(string);
+        bool isUsingDb();
+        void setUsingDb(bool);
     };
     
 } }

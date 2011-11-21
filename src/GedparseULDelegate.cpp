@@ -7,7 +7,7 @@
 
 namespace FamilySearch { namespace GEDCOM {
     
-    GedparseULDelegate::GedparseULDelegate(): records(0), collection("") { }
+    GedparseULDelegate::GedparseULDelegate(): records(0), collection(""), useDb(false) { }
     
     void GedparseULDelegate::parsedRecord(Gedcom& ged,
                                           Record& r,
@@ -16,7 +16,7 @@ namespace FamilySearch { namespace GEDCOM {
         ++ records;
         
         cout << "[[ WIN ]] Now treating record " << records << endl;
-        cout << "          " << (double)current/(double)length*100.0f << "% of the way done\r";
+        cout << "          " << (double)current/(double)length*100.0f << "% of the way done" << endl;
         
 #ifdef DEBUG
         if (r.validate_parse()) {
@@ -28,7 +28,7 @@ namespace FamilySearch { namespace GEDCOM {
         }
 #endif
         
-        if (conn==shared_ptr<DBClientConnection>() && collection!="") {
+        if (useDb) {
             // insert the record
             conn->insert(collection, r.asBSON());
             cout << "          " << "[[ WIN ]] Inserted into DB Successfully" << endl;
@@ -37,8 +37,10 @@ namespace FamilySearch { namespace GEDCOM {
     }
     
     DBClientConnection& GedparseULDelegate::getConnection() { return *conn; }
-    void GedparseULDelegate::setConnection(DBClientConnection& conn) { this->conn.reset(&conn); }
+    void GedparseULDelegate::setConnection(DBClientConnection& conn) { this->conn.reset(&conn); useDb = true; }
     string& GedparseULDelegate::getCollection() { return collection; }
-    void GedparseULDelegate::setCollection(string collection) { this->collection = collection; }
+    void GedparseULDelegate::setCollection(string collection) { this->collection = collection; useDb = true; }
+    bool GedparseULDelegate::isUsingDb() { return useDb; }
+    void GedparseULDelegate::setUsingDb(bool _useDb) { useDb = _useDb; }
     
 } }

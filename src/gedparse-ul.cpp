@@ -107,12 +107,12 @@ int main(int argc, char **argv)
         return 1;
     }
     
-    shared_ptr<DBClientConnection> conn;
-    string colstring;
     GedparseULDelegate * dg = new GedparseULDelegate();
     
     if (!readonly) {
-        conn.reset(new DBClientConnection("localhost"));
+        DBClientConnection * conn = new DBClientConnection;
+        conn->connect("localhost");
+        string colstring;
         colstring.append(database);
         colstring.append(".");
         colstring.append(collection);
