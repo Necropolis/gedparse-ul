@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA8A8125147AD6420004922E /* GedparseULDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA8A8124147AD6420004922E /* GedparseULDelegate.cpp */; };
 		DAB317501472E39800F9F8F5 /* gedparse-ul.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAB3174F1472E39800F9F8F5 /* gedparse-ul.cpp */; };
 		DAB317701472E40200F9F8F5 /* Date.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAB3175E1472E40200F9F8F5 /* Date.cpp */; };
 		DAB317711472E40200F9F8F5 /* Event.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAB317601472E40200F9F8F5 /* Event.cpp */; };
@@ -42,6 +43,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		DA8A8122147AD6350004922E /* GedparseULDelegate.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GedparseULDelegate.hpp; sourceTree = "<group>"; };
+		DA8A8124147AD6420004922E /* GedparseULDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GedparseULDelegate.cpp; sourceTree = "<group>"; };
 		DAB3174B1472E39800F9F8F5 /* gedparse-ul */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "gedparse-ul"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAB3174F1472E39800F9F8F5 /* gedparse-ul.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "gedparse-ul.cpp"; sourceTree = "<group>"; };
 		DAB3175D1472E40200F9F8F5 /* Attribute.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Attribute.hpp; path = src/Attribute.hpp; sourceTree = SOURCE_ROOT; };
@@ -161,6 +164,7 @@
 				DAC0C56014740DC700130A60 /* Miscelleneous.hpp */,
 				DAC0C5671474513F00130A60 /* Batch.hpp */,
 				DAC0C56414744BDF00130A60 /* Util.hpp */,
+				DA8A8122147AD6350004922E /* GedparseULDelegate.hpp */,
 			);
 			name = Headers;
 			sourceTree = "<group>";
@@ -182,6 +186,7 @@
 				DAC0C56214740F2600130A60 /* Miscelleneous.cpp */,
 				DAC0C568147451CD00130A60 /* Batch.cpp */,
 				DAC0C56514744C1600130A60 /* Util.cpp */,
+				DA8A8124147AD6420004922E /* GedparseULDelegate.cpp */,
 			);
 			name = Implementation;
 			sourceTree = "<group>";
@@ -252,6 +257,7 @@
 				DAC0C56614744C1600130A60 /* Util.cpp in Sources */,
 				DAC0C569147451CD00130A60 /* Batch.cpp in Sources */,
 				DAC12B7F14755D7400DE7292 /* Attribute.cpp in Sources */,
+				DA8A8125147AD6420004922E /* GedparseULDelegate.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

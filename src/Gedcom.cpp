@@ -12,6 +12,8 @@ namespace FamilySearch { namespace GEDCOM {
     Gedcom::Gedcom(): records(new vector<shared_ptr<Record> >()) { }
   
     vector<shared_ptr<Record> >& Gedcom::getRecords() { return *records; }
+    GedcomParseDelegate& Gedcom::getDelegate() { return *dg; }
+    void Gedcom::setDelegate(GedcomParseDelegate& dg) { this->dg.reset(&dg); }
   
     istream& operator>> (istream &is, Gedcom &ged) {
         istream::pos_type tmp = is.tellg();
@@ -43,18 +45,12 @@ namespace FamilySearch { namespace GEDCOM {
                 is >> *r;
                 ged.records->push_back(r);
                 ++records;
-          
-#ifdef DEBUG
-                if (r->validate_parse()) {
-                    cout << "[[ WIN ]] Record No. " << records << " Parsed Successfully ";
-                    cout << (double)is.tellg()/(double)length*100.0f << "% of the way done\r";
-                    r->clearRaw();
-                } else {
-                    cout << endl << "[[ FAIL ]] Record No. " << ged.records->size() << " Didn't Parse Right" << endl;
-                    r->output_debug_info(cout);
-                    fail("Crap, a parse failed.", is);
-                }
-#endif
+                
+                if (ged.dg.get())
+                    ged.dg->parsedRecord(ged,
+                                         *r,
+                                         is.tellg(),
+                                         length);
             } else {
                 // all is not well in zion, yea, zion doth not prosper.
                 fail("Record found which is not of type FAM or INDI", is);

@@ -53,6 +53,7 @@ namespace FamilySearch { namespace GEDCOM {
     class Gedcom {
     private:
         scoped_ptr<vector<shared_ptr<Record> > > records;
+        scoped_ptr<GedcomParseDelegate> dg;
       
     public:
         Gedcom();
@@ -60,6 +61,8 @@ namespace FamilySearch { namespace GEDCOM {
         friend istream& operator>> (istream &is, Gedcom &ged);
       
         vector<shared_ptr<Record> >& getRecords();
+        GedcomParseDelegate& getDelegate();
+        void setDelegate(GedcomParseDelegate& dg);
     };
 
     istream& operator>> (istream &is, Gedcom &ged);

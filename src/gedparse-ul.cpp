@@ -16,6 +16,7 @@
 // familysearch gedcom
 #include "Gedcom.hpp"
 #include "Record.hpp"
+#include "GedparseULDelegate.hpp"
 
 using namespace std;
 using namespace boost;
@@ -105,9 +106,23 @@ int main(int argc, char **argv)
         cerr << "Exception of unknown type!" << endl;
         return 1;
     }
+    
+    shared_ptr<DBClientConnection> conn;
+    string colstring;
+    GedparseULDelegate * dg = new GedparseULDelegate();
+    
+    if (!readonly) {
+        conn.reset(new DBClientConnection("localhost"));
+        colstring.append(database);
+        colstring.append(".");
+        colstring.append(collection);
+        dg->setCollection(colstring);
+        dg->setConnection(*conn);
+    }
 
     auto_ptr<ifstream> inputFile(new ifstream(infile.c_str(), ifstream::in));
     auto_ptr<Gedcom> ged(new Gedcom());
+    ged->setDelegate(*dg);
     inputFile->ignore(2, '\n');
     if (inputFile->peek()!='0') {
         cerr << "Malformed GEDCOM. It should start with a \\r\\n0!" << endl;
@@ -117,14 +132,6 @@ int main(int argc, char **argv)
     *inputFile >> *ged;
 
     cout << "Record count: " << ged->getRecords().size() << endl;
-    
-    FamilySearch::GEDCOM::Record rec = *ged->getRecords()[0];
-    cout << "Record: " << endl << rec << endl;
-    BSONObj rec_low = BSON( "record" << rec );
-    cout << "JSON: " << rec_low.jsonString() << endl;
-    FamilySearch::GEDCOM::Record unrec(rec_low["record"]);
-    cout << "Record From BSON: " << endl;
-    cout << unrec << endl;
 
     return 0;
 }
