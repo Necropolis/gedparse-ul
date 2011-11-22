@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>Rakefile</string>
+	<string>src/Event.cpp</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -19,9 +19,7 @@
 					<key>filename</key>
 					<string>Rakefile</string>
 					<key>lastUsed</key>
-					<date>2011-11-21T16:45:40Z</date>
-					<key>selected</key>
-					<true/>
+					<date>2011-11-22T21:10:37Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
@@ -45,13 +43,13 @@
 					<key>filename</key>
 					<string>src/Record.hpp</string>
 					<key>lastUsed</key>
-					<date>2011-11-15T18:07:32Z</date>
+					<date>2011-11-22T21:10:39Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
 					<string>src/Record.cpp</string>
 					<key>lastUsed</key>
-					<date>2011-11-15T18:18:51Z</date>
+					<date>2011-11-22T21:16:57Z</date>
 				</dict>
 				<dict>
 					<key>children</key>
@@ -72,7 +70,7 @@
 							<key>filename</key>
 							<string>src/Name.cpp</string>
 							<key>lastUsed</key>
-							<date>2011-11-15T15:49:47Z</date>
+							<date>2011-11-22T21:14:49Z</date>
 						</dict>
 						<dict>
 							<key>filename</key>
@@ -96,7 +94,7 @@
 							<key>filename</key>
 							<string>src/Spouse.cpp</string>
 							<key>lastUsed</key>
-							<date>2011-11-15T15:30:19Z</date>
+							<date>2011-11-22T21:22:23Z</date>
 						</dict>
 						<dict>
 							<key>filename</key>
@@ -120,7 +118,7 @@
 							<key>filename</key>
 							<string>src/Place.cpp</string>
 							<key>lastUsed</key>
-							<date>2011-11-15T15:27:48Z</date>
+							<date>2011-11-22T21:19:39Z</date>
 						</dict>
 						<dict>
 							<key>filename</key>
@@ -132,7 +130,9 @@
 							<key>filename</key>
 							<string>src/Event.cpp</string>
 							<key>lastUsed</key>
-							<date>2011-11-15T17:47:15Z</date>
+							<date>2011-11-22T21:22:23Z</date>
+							<key>selected</key>
+							<true/>
 						</dict>
 						<dict>
 							<key>filename</key>
@@ -144,7 +144,7 @@
 							<key>filename</key>
 							<string>src/Gender.cpp</string>
 							<key>lastUsed</key>
-							<date>2011-11-15T18:11:56Z</date>
+							<date>2011-11-22T21:18:01Z</date>
 						</dict>
 					</array>
 					<key>expanded</key>
@@ -301,7 +301,7 @@
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>0</integer>
+			<integer>48</integer>
 		</dict>
 		<key>src/Event.hpp</key>
 		<dict>
@@ -366,7 +366,7 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>62</integer>
+				<integer>4</integer>
 				<key>line</key>
 				<integer>27</integer>
 			</dict>
@@ -401,7 +401,7 @@
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>0</integer>
+			<integer>117</integer>
 		</dict>
 		<key>src/Name.hpp</key>
 		<dict>
@@ -429,7 +429,7 @@
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>0</integer>
+			<integer>65</integer>
 		</dict>
 		<key>src/Place.hpp</key>
 		<dict>
@@ -450,14 +450,14 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>71</integer>
+				<integer>48</integer>
 				<key>line</key>
 				<integer>41</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>20</integer>
+			<integer>206</integer>
 		</dict>
 		<key>src/Record.hpp</key>
 		<dict>
@@ -477,7 +477,7 @@
 			<key>selectFrom</key>
 			<dict>
 				<key>column</key>
-				<integer>26</integer>
+				<integer>20</integer>
 				<key>line</key>
 				<integer>42</integer>
 			</dict>
@@ -515,7 +515,7 @@
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>0</integer>
+			<integer>80</integer>
 		</dict>
 		<key>src/Spouse.hpp</key>
 		<dict>
@@ -589,6 +589,6 @@
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{1124, 17}, {773, 803}}</string>
+	<string>{{316, 177}, {773, 803}}</string>
 </dict>
 </plist>
