@@ -13,16 +13,19 @@
 #include "Attribute.hpp"
 #include "Date.hpp"
 #include "Place.hpp"
+// fsdev
+#include "CSVOStream.hpp"
 
 #ifndef __EVENT_HPP_
 #define __EVENT_HPP_
 
 using namespace std;
 using namespace mongo;
+using namespace fsdev;
 
 namespace FamilySearch { namespace GEDCOM {
     
-    class Event : public Attribute {
+    class Event : public Attribute, public CSVRecord {
     private:
         string type;
         Date date;
@@ -41,6 +44,10 @@ namespace FamilySearch { namespace GEDCOM {
         BSONObj asBSON();
         friend BSONArrayBuilder& operator<< (BSONArrayBuilder&, Event&);
         friend BSONObjBuilder& operator<< (BSONObjBuilderValueStream&, Event&);
+        
+        // csv serialisation
+        void emitFieldHeaders(CSVOStream&);
+        void emitData(CSVOStream&);
         
         string& getType();
         void setType(string);

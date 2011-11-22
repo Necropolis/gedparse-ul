@@ -18,12 +18,15 @@
 #include "Batch.hpp"
 #include "Date.hpp"
 #include "Util.hpp"
+// fsdev
+#include "CSVOStream.hpp"
 
 #ifndef __RECORD_HPP_
 #define __RECORD_HPP_
 
 using namespace std;
 using namespace mongo;
+using namespace fsdev;
 
 namespace FamilySearch { namespace GEDCOM {
 
@@ -35,7 +38,7 @@ namespace FamilySearch { namespace GEDCOM {
      * 1. Every record begings with CR/LF0
      * 2. Every record is of type FAM or INDI
      */  
-    class Record {
+    class Record : public CSVRecord {
     private:
         string type;
         Spouse spouse;
@@ -64,6 +67,10 @@ namespace FamilySearch { namespace GEDCOM {
         // bson serialisation
         BSONObj asBSON();
         friend BSONObjBuilder& operator<< (BSONObjBuilderValueStream&, Record&);
+        
+        // csv serialisation
+        void emitFieldHeaders(CSVOStream&);
+        void emitData(CSVOStream&);
         
 #ifdef DEBUG
         /* show the original stream against what gedparse-ul can recreate */

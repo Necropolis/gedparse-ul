@@ -12,12 +12,15 @@
 #include "Attribute.hpp"
 #include "Name.hpp"
 #include "StandardisedName.hpp"
+// fsdev
+#include "CSVOStream.hpp"
 
 #ifndef __SPOUSE_HPP_
 #define __SPOUSE_HPP_
 
 using namespace std;
 using namespace mongo;
+using namespace fsdev;
 
 namespace FamilySearch { namespace GEDCOM {
     
@@ -27,7 +30,7 @@ namespace FamilySearch { namespace GEDCOM {
      * 2 STSN Sth
      * 2 STGN Giv'en Name
      */
-    class Spouse : public Attribute {
+    class Spouse : public Attribute, public CSVRecord {
     private:
         Name name;        
         list<StandardisedName> standardisedNames;
@@ -49,6 +52,10 @@ namespace FamilySearch { namespace GEDCOM {
         BSONObj asBSON();
         friend BSONArrayBuilder& operator<< (BSONArrayBuilder&, Spouse&);
         friend BSONObjBuilder& operator<< (BSONObjBuilderValueStream&, Spouse&);
+        
+        // csv serialisation
+        void emitFieldHeaders(CSVOStream&);
+        void emitData(CSVOStream&);
     };
     
     ostream& operator<< (ostream&, Spouse&);

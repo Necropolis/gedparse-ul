@@ -10,12 +10,15 @@
 #include "bson/bson.h"
 // familysearch
 #include "Attribute.hpp"
+// fsdev
+#include "CSVOStream.hpp"
 
 #ifndef __PLACE_HPP_
 #define __PLACE_HPP_
 
 using namespace std;
 using namespace mongo;
+using namespace fsdev;
 
 namespace FamilySearch { namespace GEDCOM {
     
@@ -32,7 +35,7 @@ namespace FamilySearch { namespace GEDCOM {
      *                 country               borough
      *     PLACE Mlot, Scotland, Midlothian, Canongate, Edinburgh
      */
-    class Place : public Attribute {
+    class Place : public Attribute, public CSVRecord {
     private:
         string countyCode;
         string country;
@@ -52,6 +55,10 @@ namespace FamilySearch { namespace GEDCOM {
         // bson serialisation
         BSONObj asBSON();
         friend BSONObjBuilder& operator<< (BSONObjBuilderValueStream&, Place&);
+        
+        // csv serialisation
+        void emitFieldHeaders(CSVOStream&);
+        void emitData(CSVOStream&);
     
         string& getCountyCode();
         void setCountyCode(string);

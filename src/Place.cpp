@@ -88,4 +88,20 @@ namespace FamilySearch { namespace GEDCOM {
         return bv << place.asBSON();
     }
     
+    void Place::emitFieldHeaders(CSVOStream& csv) {
+        csv << "countyCode"
+            << "country"
+            << "county"
+            << "town"
+            << "borough";
+    }
+    
+    void Place::emitData(CSVOStream& csv) {
+        csv << countyCode
+            << country
+            << county
+            << town
+            << borough;
+    }
+    
 } }

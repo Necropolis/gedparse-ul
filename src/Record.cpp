@@ -218,5 +218,31 @@ namespace FamilySearch { namespace GEDCOM {
     BSONObjBuilder& operator<< (BSONObjBuilderValueStream& bv, Record& rec) {
         return bv << rec.asBSON();
     }
+    
+    void Record::emitFieldHeaders(CSVOStream& csv) {
+        csv << "type";
+        Name().emitFieldHeaders(csv); // name
+        Name().emitFieldHeaders(csv); // father
+        Name().emitFieldHeaders(csv); // mother
+        Gender().emitFieldHeaders(csv); // gender
+        Marriage().emitFieldHeaders(csv); // marriage
+        Spouse().emitFieldHeaders(csv); // spouse
+        Event().emitFieldHeaders(csv); // event
+        csv << "misc"
+            << "batch";
+    }
+    
+    void Record::emitData(CSVOStream& csv) {
+        csv << type;
+        name.emitData(csv);
+        father.emitData(csv);
+        mother.emitData(csv);
+        gender.emitData(csv);
+        marriage.emitData(csv);
+        spouse.emitData(csv);
+        event.emitData(csv);
+        csv << misc.getNote()
+            << batch.getBatch();
+    }
       
 } }

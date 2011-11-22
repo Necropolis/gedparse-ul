@@ -10,16 +10,19 @@
 #include "bson/bson.h"
 // familysearch
 #include "Attribute.hpp"
+// fsdev
+#include "CSVOStream.hpp"
 
 #ifndef __GENDER_HPP_
 #define __GENDER_HPP_
 
 using namespace std;
 using namespace mongo;
+using namespace fsdev;
 
 namespace FamilySearch { namespace GEDCOM {
   
-    class Gender : public Attribute {
+    class Gender : public Attribute, public CSVRecord {
     private:
         string gender;
         
@@ -28,10 +31,16 @@ namespace FamilySearch { namespace GEDCOM {
         Gender(BSONElement);
         Gender(BSONObj);
       
+        // gedcom serialisation
         friend ostream& operator<< (ostream&, Gender&);
         friend istream& operator>> (istream&, Gender&);
         
+        // bson serialisation
         friend BSONObjBuilder& operator<< (BSONObjBuilderValueStream&, Gender&);
+        
+        // csv serialisation
+        void emitFieldHeaders(CSVOStream&);
+        void emitData(CSVOStream&);
       
         string& getGender();
         void setGender(string);

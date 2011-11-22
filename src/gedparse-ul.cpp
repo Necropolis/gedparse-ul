@@ -40,7 +40,7 @@ int main(int argc, char **argv)
     string infile;
     string database;
     string collection;
-    bool readonly=false;
+    bool readonly=true;
     bool die=false;
     try {
         program_options::options_description desc("Allowed options");

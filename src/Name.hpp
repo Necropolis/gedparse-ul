@@ -11,19 +11,22 @@
 // familysearch
 #include "Attribute.hpp"
 #include "StandardisedName.hpp"
+// fsdev
+#include "CSVOStream.hpp"
 
 #ifndef __NAME_HPP_
 #define __NAME_HPP_
 
 using namespace std;
 using namespace mongo;
+using namespace fsdev;
 
 namespace FamilySearch { namespace GEDCOM {
   
     /**
     * A name record.
     */
-    class Name : public Attribute {
+    class Name : public Attribute, public CSVRecord {
     private:
         list<string> givenNames;
         string surname;
@@ -42,6 +45,10 @@ namespace FamilySearch { namespace GEDCOM {
         // bson serialisation
         friend BSONObjBuilder& operator<< (BSONObjBuilderValueStream&, Name&);
         friend BSONObj& operator>> (BSONObj&, Name&);
+        
+        // csv serialisation
+        void emitFieldHeaders(CSVOStream&);
+        void emitData(CSVOStream&);
         
         list<string>& getGivenNames();
         string& getSurname();

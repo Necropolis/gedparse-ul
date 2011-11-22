@@ -120,4 +120,40 @@ namespace FamilySearch { namespace GEDCOM {
         return builder << b.obj();
     }
     
+    void Name::emitFieldHeaders(CSVOStream& csv) {
+        csv << "given names"
+            << "surname"
+            << "standardised given names"
+            << "standardised surnames";
+    }
+    
+    void Name::emitData(CSVOStream& csv) {
+        list<StandardisedName> stgn;
+        list<StandardisedName> stsn;
+        for (list<StandardisedName>::iterator it = standardisedNames.begin();
+             it != standardisedNames.end();
+             ++it)
+            if (it->isGivenName()) stgn.push_back(*it);
+            else stsn.push_back(*it);
+        basic_string<char> givenName;
+        basic_string<char> stgn_s;
+        basic_string<char> stsn_s;
+        for (list<string>::iterator it = givenNames.begin();
+             it != givenNames.end();
+             ++it)
+            givenName.append(*it);
+        for (list<StandardisedName>::iterator it = stgn.begin();
+             it != stgn.end();
+             ++it)
+            stgn_s.append(it->getStandardisedName());
+        for (list<StandardisedName>::iterator it = stsn.begin();
+             it != stsn.end();
+             ++it)
+            stsn_s.append(it->getStandardisedName());
+        csv << givenName
+            << surname
+            << stgn_s
+            << stsn_s;
+    }
+    
 } }

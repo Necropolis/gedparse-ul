@@ -34,6 +34,12 @@ namespace FamilySearch { namespace GEDCOM {
             cout << "          " << "[[ WIN ]] Inserted into DB Successfully" << endl;
         }
         
+        CSVOStream csv("/Users/cmiller/Desktop/tmp.csv");
+        r.emitFieldHeaders(csv);
+        csv << CSVRecordSeparator;
+        r.emitData(csv);
+        csv << CSVRecordSeparator;
+        
     }
     
     DBClientConnection& GedparseULDelegate::getConnection() { return *conn; }

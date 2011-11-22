@@ -11,16 +11,19 @@
 // familysearch
 #include "Place.hpp"
 #include "Date.hpp"
+// fsdev
+#include "CSVOStream.hpp"
 
 #ifndef __MARRIAGE_HPP_
 #define __MARRIAGE_HPP_
 
 using namespace std;
 using namespace mongo;
+using namespace fsdev;
 
 namespace FamilySearch { namespace GEDCOM {
     
-    class Marriage : public Attribute {
+    class Marriage : public Attribute, public CSVRecord {
     private:
         Place place;
         Date date;
@@ -37,6 +40,10 @@ namespace FamilySearch { namespace GEDCOM {
         BSONObj asBSON();
         friend BSONArrayBuilder& operator<< (BSONArrayBuilder&, Marriage&);
         friend BSONObjBuilder& operator<< (BSONObjBuilderValueStream&, Marriage&);
+        
+        // csv serialisation
+        void emitFieldHeaders(CSVOStream&);
+        void emitData(CSVOStream&);
         
         Place& getPlace();
         void setPlace(Place);

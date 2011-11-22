@@ -10,12 +10,15 @@
 #include "bson/bson.h"
 // familysearch
 #include "Attribute.hpp"
+// fsdev
+#include "CSVOStream.hpp"
 
 #ifndef __DATE_HPP_
 #define __DATE_HPP_
 
 using namespace std;
 using namespace mongo;
+using namespace fsdev;
 
 namespace FamilySearch { namespace GEDCOM {
     
@@ -44,6 +47,10 @@ namespace FamilySearch { namespace GEDCOM {
         // bson serialisation
         BSONObj asBSON();
         friend BSONObjBuilder& operator<< (BSONObjBuilderValueStream&, Date&);
+        
+        // csv serialisation
+        void emitFieldHeaders(CSVOStream&);
+        void emitData(CSVOStream&);
         
     };
     

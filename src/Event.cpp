@@ -76,4 +76,16 @@ namespace FamilySearch { namespace GEDCOM {
         return bv << event.asBSON();
     }
     
+    void Event::emitFieldHeaders(CSVOStream& csv) {
+        csv << "type";
+        Date().emitFieldHeaders(csv);
+        Place().emitFieldHeaders(csv);
+    }
+    
+    void Event::emitData(CSVOStream& csv) {
+        csv << type;
+        date.emitData(csv);
+        place.emitData(csv);
+    }
+    
 } }

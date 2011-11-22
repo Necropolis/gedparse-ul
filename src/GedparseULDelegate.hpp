@@ -12,6 +12,8 @@
 // familysearch
 #include "Gedcom.hpp"
 #include "Record.hpp"
+// fsdev
+#include "CSVOStream.hpp"
 
 using namespace std;
 using namespace boost;

@@ -96,4 +96,27 @@ namespace FamilySearch { namespace GEDCOM {
         return bv << spouse.asBSON();
     }
     
+    void Spouse::emitFieldHeaders(CSVOStream& csv) {
+        Name().emitFieldHeaders(csv); // name
+        csv << "standardised given names"
+            << "standardised surnames";
+    }
+    
+    void Spouse::emitData(CSVOStream& csv) {
+        name.emitData(csv);
+        basic_string<char> stgn;
+        basic_string<char> stsn;
+        for (list<StandardisedName>::iterator it = standardisedNames.begin();
+             it != standardisedNames.end();
+             ++it)
+            if (it->isGivenName())
+                stgn.append(it->getStandardisedName()).append(" ");
+            else
+                stsn.append(it->getStandardisedName()).append(" ");
+        if (stgn.length()>0)stgn.erase(stgn.length()-1, 1);
+        if (stsn.length()>0)stsn.erase(stsn.length()-1, 1);
+        csv << stgn
+            << stsn;
+    }
+    
 } }

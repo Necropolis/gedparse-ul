@@ -29,5 +29,13 @@ namespace FamilySearch { namespace GEDCOM {
     BSONObjBuilder& operator<< (BSONObjBuilderValueStream& bv, Gender& gender) {
         return bv << BSON( "gender" << gender.gender << "attribute" << (Attribute&)gender );
     }
+    
+    void Gender::emitFieldHeaders(CSVOStream& csv) {
+        csv << "gender";
+    }
+    
+    void Gender::emitData(CSVOStream& csv) {
+        csv << gender;
+    }
   
 }}

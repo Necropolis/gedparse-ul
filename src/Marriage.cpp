@@ -70,4 +70,14 @@ namespace FamilySearch { namespace GEDCOM {
         return bv << marr.asBSON();
     }
     
+    void Marriage::emitFieldHeaders(CSVOStream& csv) {
+        Place().emitFieldHeaders(csv);
+        Date().emitFieldHeaders(csv);
+    }
+    
+    void Marriage::emitData(CSVOStream& csv) {
+        place.emitData(csv);
+        date.emitData(csv);
+    }
+    
 } }
