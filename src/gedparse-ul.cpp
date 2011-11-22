@@ -17,11 +17,14 @@
 #include "Gedcom.hpp"
 #include "Record.hpp"
 #include "GedparseULDelegate.hpp"
+// fsdev
+#include "CSVOStream.hpp"
 
 using namespace std;
 using namespace boost;
 using namespace mongo;
 using namespace FamilySearch::GEDCOM;
+using namespace fsdev;
 
 /**
  * Tool to parse through an unlinked GEDCOM file and put the data into a Mongo Database.
@@ -41,6 +44,8 @@ int main(int argc, char **argv)
     string database;
     string collection;
     bool readonly=true;
+    bool csv_readonly=true;
+    string outfile;
     bool die=false;
     try {
         program_options::options_description desc("Allowed options");
@@ -48,7 +53,9 @@ int main(int argc, char **argv)
             ("if", program_options::value<std::string>(), "input file, probably a GEDCOM")
             ("db", program_options::value<std::string>(), "database to use in Mongo")
             ("col",program_options::value<std::string>(), "collection to use in Mongo")
-            ("ro", program_options::value<bool>()->default_value(false), "if yes, just parse and don't write to Mongo")
+            ("mongo-ro", program_options::value<bool>()->default_value(true), "if yes, just parse and don't write to Mongo")
+            ("csv-ro", program_options::value<bool>()->default_value(true), "if yes, just parse and don't write to a CSV file")
+            ("of", program_options::value<std::string>(), "output file, will be written as a CSV")
             ("help", "produce this here frigg'n help message")
         ;
     
@@ -68,9 +75,9 @@ int main(int argc, char **argv)
             die=true;
         }
         
-        if (!vm["ro"].as<bool>()) {
+        if (!vm["mongo-ro"].as<bool>()) {
       
-            readonly = vm["ro"].as<bool>();
+            readonly = vm["mongo-ro"].as<bool>();
       
             if (!readonly) {
         
@@ -92,6 +99,21 @@ int main(int argc, char **argv)
       
         } else {
             cout << "Running in readonly mode, all database args ignored." << endl;
+        }
+        
+        if (!vm["csv-ro"].as<bool>()) {
+            
+            csv_readonly = vm["csv-ro"].as<bool>();
+            
+            if (!csv_readonly) {
+                if (vm.count("of")) {
+                    outfile = vm["of"].as<string>();
+                } else {
+                    cout << "Outfile not set!" << endl;
+                    die = true;
+                }
+            }
+            
         }
     
         if (die) {
@@ -119,6 +141,12 @@ int main(int argc, char **argv)
         dg->setCollection(colstring);
         dg->setConnection(*conn);
         dg->setUsingDb(true);
+    }
+    
+    if (!csv_readonly) {
+        CSVOStream * csv_os = new CSVOStream(outfile.c_str());
+        dg->setCSVOStream(*csv_os);
+        dg->setUsingCSV(true);
     }
 
     auto_ptr<ifstream> inputFile(new ifstream(infile.c_str(), ifstream::in));

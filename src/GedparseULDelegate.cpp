@@ -7,7 +7,7 @@
 
 namespace FamilySearch { namespace GEDCOM {
     
-    GedparseULDelegate::GedparseULDelegate(): records(0), collection(""), useDb(false) { }
+    GedparseULDelegate::GedparseULDelegate(): records(0), collection(""), useDb(false), useCsv(false) { }
     
     void GedparseULDelegate::parsedRecord(Gedcom& ged,
                                           Record& r,
@@ -34,11 +34,10 @@ namespace FamilySearch { namespace GEDCOM {
             cout << "          " << "[[ WIN ]] Inserted into DB Successfully" << endl;
         }
         
-        CSVOStream csv("/Users/cmiller/Desktop/tmp.csv");
-        r.emitFieldHeaders(csv);
-        csv << CSVRecordSeparator;
-        r.emitData(csv);
-        csv << CSVRecordSeparator;
+        if (useCsv) {
+            r.emitData(*csv);
+            *csv << CSVRecordSeparator;
+        }
         
     }
     
@@ -46,7 +45,11 @@ namespace FamilySearch { namespace GEDCOM {
     void GedparseULDelegate::setConnection(DBClientConnection& conn) { this->conn.reset(&conn); useDb = true; }
     string& GedparseULDelegate::getCollection() { return collection; }
     void GedparseULDelegate::setCollection(string collection) { this->collection = collection; useDb = true; }
+    CSVOStream& GedparseULDelegate::getCSVOStream() { return *csv; }
+    void GedparseULDelegate::setCSVOStream(CSVOStream& csv) { this->csv.reset(&csv); useCsv = true; }
     bool GedparseULDelegate::isUsingDb() { return useDb; }
     void GedparseULDelegate::setUsingDb(bool _useDb) { useDb = _useDb; }
+    bool GedparseULDelegate::isUsingCSV() { return useCsv; }
+    void GedparseULDelegate::setUsingCSV(bool _useCsv) { useCsv = _useCsv; }
     
 } }
