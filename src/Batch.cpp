@@ -26,6 +26,7 @@ namespace FamilySearch { namespace GEDCOM {
         is.ignore();
         string st;
         getline(is, st);
+        if (st[st.length()-1]=='\r') st.erase(st.length()-1, 1);
         batch.setBatch(st);
         return is;
     }
