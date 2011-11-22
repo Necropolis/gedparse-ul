@@ -145,6 +145,7 @@ int main(int argc, char **argv)
     
     if (!csv_readonly) {
         CSVOStream * csv_os = new CSVOStream(outfile.c_str());
+        FamilySearch::GEDCOM::Record().emitFieldHeaders(*csv_os);
         dg->setCSVOStream(*csv_os);
         dg->setUsingCSV(true);
     }
