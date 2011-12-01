@@ -29,7 +29,8 @@ namespace FamilySearch { namespace GEDCOM {
         size_t records;
         shared_ptr<DBClientConnection> conn;
         string collection;
-        shared_ptr<CSVOStream> csv;
+        shared_ptr<CSVOStream> csv_fam;
+        shared_ptr<CSVOStream> csv_indi;
         bool useDb;
         bool useCsv;
         
@@ -45,8 +46,10 @@ namespace FamilySearch { namespace GEDCOM {
         void setConnection(DBClientConnection&);
         string& getCollection();
         void setCollection(string);
-        CSVOStream& getCSVOStream();
-        void setCSVOStream(CSVOStream&);
+        CSVOStream& getIndiCSVOStream();
+        void setIndiCSVOStream(CSVOStream&);
+        CSVOStream& getFamCSVOStream();
+        void setFamCSVOStream(CSVOStream&);
         bool isUsingDb();
         void setUsingDb(bool);
         bool isUsingCSV();

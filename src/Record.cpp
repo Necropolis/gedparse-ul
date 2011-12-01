@@ -13,7 +13,9 @@
 
 namespace FamilySearch { namespace GEDCOM {
     
-    Record::Record() { }
+    Record::Record(): name(true) { }
+    
+    Record::Record(string _type): type(_type) { }
     
     Record::Record(BSONElement elem): type(elem["type"].String()), name(elem["name"]), father(elem["father"]), mother(elem["mother"]), gender(elem["gender"]), misc(elem["misc"]), batch(elem["batch"]), marriage(elem["marriage"]), spouse(elem["spouse"]), event(elem["event"]) { }
     
@@ -219,15 +221,70 @@ namespace FamilySearch { namespace GEDCOM {
         return bv << rec.asBSON();
     }
     
+    /**
+     * Observations by David Barss:
+     *
+     * Field                FAM     INDI
+     * TYPE                 X       X
+     * NAME                 X       X
+     *   GIVEN NAMES        X       X
+     *   SURNAMES           X       X
+     *   STGN               X       X
+     *   STSN               X       X
+     * FATHER                       X
+     *   GIVEN NAMES                X
+     *   SURNAMES                   X
+     *   STGN                       X
+     *   STSN                       X
+     * MOTHER                       X
+     *   GIVEN NAMES                X
+     *   SURNAMES                   X
+     *   STGN                       X
+     *   STSN                       X
+     * GENDER               X
+     * MARRIAGE             X
+     *   PLACE              X
+     *     COUNTY CODE      X
+     *     COUNTRY          X
+     *     COUNTY           X
+     *     TOWN             X
+     *     BOROUGH          X
+     *   DATE               X
+     * SPOUSE               X
+     *   NAME               X
+     *     GIVEN NAMES      X
+     *     SURNAMES         X
+     *     STGN
+     *     STSN
+     *   STGN               X
+     *   STSN               X
+     * EVENT                        X
+     *   TYPE                       X
+     *   DATE                       X
+     *   PLACE                      X
+     *     COUNTY CODE              X
+     *     COUNTRY                  X
+     *     COUNTY                   X
+     *     TOWN                     X
+     *     BOROUGH                  X
+     * MISC                 X       X
+     * BATCH                X       X
+     */
+    
     void Record::emitFieldHeaders(CSVOStream& csv) {
         csv << "type";
         Name().emitFieldHeaders(csv); // name
-        Name().emitFieldHeaders(csv); // father
-        Name().emitFieldHeaders(csv); // mother
-        Gender().emitFieldHeaders(csv); // gender
-        Marriage().emitFieldHeaders(csv); // marriage
-        Spouse().emitFieldHeaders(csv); // spouse
-        Event().emitFieldHeaders(csv); // event
+        if (type=="INDI") {
+            Name().emitFieldHeaders(csv); // father
+            Name().emitFieldHeaders(csv); // mother
+        }
+        if (type=="FAM") {
+            Gender().emitFieldHeaders(csv); // gender
+            Marriage().emitFieldHeaders(csv); // marriage
+            Spouse().emitFieldHeaders(csv); // spouse
+        }
+        if (type=="INDI")
+            Event().emitFieldHeaders(csv); // event
         csv << "misc"
             << "batch";
     }
@@ -235,12 +292,17 @@ namespace FamilySearch { namespace GEDCOM {
     void Record::emitData(CSVOStream& csv) {
         csv << type;
         name.emitData(csv);
-        father.emitData(csv);
-        mother.emitData(csv);
-        gender.emitData(csv);
-        marriage.emitData(csv);
-        spouse.emitData(csv);
-        event.emitData(csv);
+        if (type=="INDI") {
+            father.emitData(csv);
+            mother.emitData(csv);
+        }
+        if (type=="FAM") {
+            gender.emitData(csv);
+            marriage.emitData(csv);
+            spouse.emitData(csv);
+        }
+        if (type=="INDI")
+            event.emitData(csv);
         csv << misc.getNote()
             << batch.getBatch();
     }

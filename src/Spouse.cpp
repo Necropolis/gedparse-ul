@@ -9,7 +9,7 @@
 
 namespace FamilySearch { namespace GEDCOM {
     
-    Spouse::Spouse(): standardisedNames(list<StandardisedName>()), name(Name()), Attribute() {}
+    Spouse::Spouse(): standardisedNames(list<StandardisedName>()), name(false), Attribute() {}
     Spouse::Spouse(BSONElement elem): name(elem["name"]), Attribute(elem["attribute"]) {
         // standardised names?
         vector<BSONElement> _standardised_names = elem["standardisedNames"].Array();

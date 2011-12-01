@@ -35,8 +35,13 @@ namespace FamilySearch { namespace GEDCOM {
         }
         
         if (useCsv) {
-            r.emitData(*csv);
-            *csv << CSVRecordSeparator;
+            if (r.getType() == "INDI") {
+                r.emitData(*csv_indi);
+                *csv_indi << CSVRecordSeparator;
+            } else {
+                r.emitData(*csv_fam);
+                *csv_fam << CSVRecordSeparator;
+            }
         }
         
     }
@@ -45,8 +50,10 @@ namespace FamilySearch { namespace GEDCOM {
     void GedparseULDelegate::setConnection(DBClientConnection& conn) { this->conn.reset(&conn); useDb = true; }
     string& GedparseULDelegate::getCollection() { return collection; }
     void GedparseULDelegate::setCollection(string collection) { this->collection = collection; useDb = true; }
-    CSVOStream& GedparseULDelegate::getCSVOStream() { return *csv; }
-    void GedparseULDelegate::setCSVOStream(CSVOStream& csv) { this->csv.reset(&csv); useCsv = true; }
+    CSVOStream& GedparseULDelegate::getIndiCSVOStream() { return *csv_indi; }
+    void GedparseULDelegate::setIndiCSVOStream(CSVOStream& csv) { this->csv_indi.reset(&csv); useCsv = true; }
+    CSVOStream& GedparseULDelegate::getFamCSVOStream() { return *csv_fam; }
+    void GedparseULDelegate::setFamCSVOStream(CSVOStream& csv) { this->csv_fam.reset(&csv); useCsv = true; }
     bool GedparseULDelegate::isUsingDb() { return useDb; }
     void GedparseULDelegate::setUsingDb(bool _useDb) { useDb = _useDb; }
     bool GedparseULDelegate::isUsingCSV() { return useCsv; }

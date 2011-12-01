@@ -57,6 +57,7 @@ namespace FamilySearch { namespace GEDCOM {
       
     public:
         Record();
+        Record(string);
         Record(BSONElement);
         Record(BSONObj);
         

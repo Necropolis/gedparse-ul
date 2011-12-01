@@ -45,7 +45,7 @@ int main(int argc, char **argv)
     string collection;
     bool readonly=true;
     bool csv_readonly=true;
-    string outfile;
+    string outfile_indi, outfile_fam;
     bool die=false;
     try {
         program_options::options_description desc("Allowed options");
@@ -55,7 +55,8 @@ int main(int argc, char **argv)
             ("col",program_options::value<std::string>(), "collection to use in Mongo")
             ("mongo-ro", program_options::value<bool>()->default_value(true), "if yes, just parse and don't write to Mongo")
             ("csv-ro", program_options::value<bool>()->default_value(true), "if yes, just parse and don't write to a CSV file")
-            ("of", program_options::value<std::string>(), "output file, will be written as a CSV")
+            ("of-indi", program_options::value<std::string>(), "output file for INDI records, will be written as a CSV")
+            ("of-fam", program_options::value<std::string>(), "output file for FAM records, will be written as a CSV")
             ("help", "produce this here frigg'n help message")
         ;
     
@@ -106,10 +107,16 @@ int main(int argc, char **argv)
             csv_readonly = vm["csv-ro"].as<bool>();
             
             if (!csv_readonly) {
-                if (vm.count("of")) {
-                    outfile = vm["of"].as<string>();
+                if (vm.count("of-indi")) {
+                    outfile_indi = vm["of-indi"].as<string>();
                 } else {
-                    cout << "Outfile not set!" << endl;
+                    cout << "Outfile for INDI records not set!" << endl;
+                    die = true;
+                }
+                if (vm.count("of-fam")) {
+                    outfile_fam = vm["of-fam"].as<string>();
+                } else {
+                    cout << "Outfile for FAM records not set!" << endl;
                     die = true;
                 }
             }
@@ -144,9 +151,14 @@ int main(int argc, char **argv)
     }
     
     if (!csv_readonly) {
-        CSVOStream * csv_os = new CSVOStream(outfile.c_str());
-        FamilySearch::GEDCOM::Record().emitFieldHeaders(*csv_os);
-        dg->setCSVOStream(*csv_os);
+        CSVOStream * csv_os_indi = new CSVOStream(outfile_indi.c_str());
+        FamilySearch::GEDCOM::Record("INDI").emitFieldHeaders(*csv_os_indi);
+        *csv_os_indi << CSVRecordSeparator;
+        dg->setIndiCSVOStream(*csv_os_indi);
+        CSVOStream * csv_os_fam = new CSVOStream(outfile_fam.c_str());
+        FamilySearch::GEDCOM::Record("FAM").emitFieldHeaders(*csv_os_fam);
+        *csv_os_fam << CSVRecordSeparator;
+        dg->setFamCSVOStream(*csv_os_fam);
         dg->setUsingCSV(true);
     }
 

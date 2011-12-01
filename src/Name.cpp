@@ -9,9 +9,9 @@
 
 namespace FamilySearch { namespace GEDCOM {
     
-    Name::Name(): surname(""), givenNames(list<string>()), Attribute(), standardisedNames(list<StandardisedName>()), standalone(false) {
-        
-    }
+    Name::Name(): surname(""), givenNames(list<string>()), Attribute(), standardisedNames(list<StandardisedName>()), standalone(false) { }
+    
+    Name::Name(bool _standalone): surname(""), givenNames(list<string>()), Attribute(), standardisedNames(list<StandardisedName>()), standalone(_standalone) { }
     
     Name::Name(BSONObj obj): surname(obj["surname"].String()), standalone(obj["standalone"].Bool()), Attribute(obj["attribute"]) {
         // pull given names and standardised names out of lists
@@ -112,48 +112,53 @@ namespace FamilySearch { namespace GEDCOM {
         BSONObjBuilder b;
         b   << "given_names" << name.getGivenNames()
             << "surname" << name.getSurname();
-        BSONArrayBuilder a;
-        a<<name.getStandardisedNames();
-        b.appendArray("standardised_names", a.done());
-        b   << "standalone" << name.isStandalone()
-            << "attribute" << (Attribute&)name;
+        if (name.standalone) {
+            BSONArrayBuilder a;
+            a<<name.getStandardisedNames();
+            b.appendArray("standardised_names", a.done());
+            b   << "standalone" << name.isStandalone()
+                << "attribute" << (Attribute&)name;
+        }
         return builder << b.obj();
     }
     
     void Name::emitFieldHeaders(CSVOStream& csv) {
         csv << "given names"
-            << "surname"
-            << "standardised given names"
-            << "standardised surnames";
+            << "surname";
+        if (standalone)
+            csv << "standardised given names"
+                << "standardised surnames";
     }
     
     void Name::emitData(CSVOStream& csv) {
-        list<StandardisedName> stgn;
-        list<StandardisedName> stsn;
-        for (list<StandardisedName>::iterator it = standardisedNames.begin();
-             it != standardisedNames.end();
-             ++it)
-            if (it->isGivenName()) stgn.push_back(*it);
-            else stsn.push_back(*it);
         basic_string<char> givenName;
-        basic_string<char> stgn_s;
-        basic_string<char> stsn_s;
         for (list<string>::iterator it = givenNames.begin();
              it != givenNames.end();
              ++it)
             givenName.append(*it);
-        for (list<StandardisedName>::iterator it = stgn.begin();
-             it != stgn.end();
-             ++it)
-            stgn_s.append(it->getStandardisedName());
-        for (list<StandardisedName>::iterator it = stsn.begin();
-             it != stsn.end();
-             ++it)
-            stsn_s.append(it->getStandardisedName());
         csv << givenName
-            << surname
-            << stgn_s
-            << stsn_s;
+            << surname;
+        if (standalone) {
+            list<StandardisedName> stgn;
+            list<StandardisedName> stsn;
+            for (list<StandardisedName>::iterator it = standardisedNames.begin();
+                 it != standardisedNames.end();
+                 ++it)
+                if (it->isGivenName()) stgn.push_back(*it);
+                else stsn.push_back(*it);        
+            basic_string<char> stgn_s;
+            basic_string<char> stsn_s;
+            for (list<StandardisedName>::iterator it = stgn.begin();
+                 it != stgn.end();
+                 ++it)
+                stgn_s.append(it->getStandardisedName());
+            for (list<StandardisedName>::iterator it = stsn.begin();
+                 it != stsn.end();
+                 ++it)
+                stsn_s.append(it->getStandardisedName());
+            csv << stgn_s
+                << stsn_s;
+        }
     }
     
 } }

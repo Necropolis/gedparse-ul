@@ -35,6 +35,7 @@ namespace FamilySearch { namespace GEDCOM {
         
     public:
         Name();
+        Name(bool);
         Name(BSONObj);
         Name(BSONElement);
         
