@@ -22,11 +22,13 @@ namespace FamilySearch { namespace GEDCOM {
         if (r.validate_parse()) {
             cout << "          " << "[[ DEBUG ]] Parsed Successfully" << endl;
             r.clearRaw();
+            cout << "\r\b";
         } else {
             cout << "          " << "[[ DEBUG ]] Parsed [[ FAILED ]]" << endl;
             r.output_debug_info(cout);
         }
 #endif
+        cout << "\r\b\r\b";
         
         if (useDb) {
             // insert the record

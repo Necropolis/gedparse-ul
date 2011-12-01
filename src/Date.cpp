@@ -74,15 +74,13 @@ namespace FamilySearch { namespace GEDCOM {
     }
     
     void Date::emitFieldHeaders(CSVOStream& csv) {
-        csv << "day"
-            << "month"
-            << "year";
+        csv << "date";
     }
     
     void Date::emitData(CSVOStream& csv) {
-        csv << day
-            << month
-            << year;
+        string str;
+        str.append(day).append(" ").append(month).append(" ").append(year);
+        csv << str;
     }
     
 } }

@@ -145,7 +145,8 @@ namespace fsdev {
     CSVOStream& operator<< (CSVOStream& csv, basic_string<char>& str) {
         replace_all(str, basic_string<char>("\""), basic_string<char>("\"\""));
         if (str.find("\"")!=basic_string<char>::npos||
-            str.find("\n")!=basic_string<char>::npos) {
+            str.find("\n")!=basic_string<char>::npos||
+            str.find(",")!=basic_string<char>::npos) {
             str.insert(str.begin(), '"');
             str.append(1, '"');
         }

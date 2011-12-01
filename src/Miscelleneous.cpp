@@ -26,7 +26,7 @@ namespace FamilySearch { namespace GEDCOM {
             misc.note.append(str);
             misc.note.append(" ");
         }
-        
+        if (*misc.note.end() == ' ') misc.note.erase(misc.note.end()-1, misc.note.end());
         misc.set(true);
         
         return is;
