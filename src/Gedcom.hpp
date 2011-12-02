@@ -16,12 +16,12 @@
 #ifndef __GEDCOM_HPP_
 #define __GEDCOM_HPP_
 
-using namespace std;
-using namespace boost;
-using namespace mongo;
-
 namespace FamilySearch { namespace GEDCOM {
 
+    using namespace std;
+    using namespace boost;
+    using namespace mongo;
+    
     class Gedcom;
     
     class GedcomParseDelegate {
@@ -52,7 +52,7 @@ namespace FamilySearch { namespace GEDCOM {
      */  
     class Gedcom {
     private:
-        scoped_ptr<vector<shared_ptr<Record> > > records;
+        scoped_ptr<vector<boost::shared_ptr<FamilySearch::GEDCOM::Record> > > records;
         scoped_ptr<GedcomParseDelegate> dg;
       
     public:
@@ -60,7 +60,7 @@ namespace FamilySearch { namespace GEDCOM {
         /** parse from a stream */
         friend istream& operator>> (istream &is, Gedcom &ged);
       
-        vector<shared_ptr<Record> >& getRecords();
+        vector<boost::shared_ptr<Record> >& getRecords();
         GedcomParseDelegate& getDelegate();
         void setDelegate(GedcomParseDelegate& dg);
     };

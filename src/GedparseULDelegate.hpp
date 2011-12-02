@@ -27,10 +27,10 @@ namespace FamilySearch { namespace GEDCOM {
     class GedparseULDelegate : public GedcomParseDelegate {
     private:
         size_t records;
-        shared_ptr<DBClientConnection> conn;
+        boost::shared_ptr<DBClientConnection> conn;
         string collection;
-        shared_ptr<CSVOStream> csv_fam;
-        shared_ptr<CSVOStream> csv_indi;
+        boost::shared_ptr<CSVOStream> csv_fam;
+        boost::shared_ptr<CSVOStream> csv_indi;
         bool useDb;
         bool useCsv;
         

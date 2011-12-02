@@ -5,6 +5,8 @@
 
 #include "Miscelleneous.hpp"
 
+#include "Util.hpp"
+
 namespace FamilySearch { namespace GEDCOM {
     
     Miscelleneous::Miscelleneous(): note(""), Attribute() {}
@@ -26,7 +28,8 @@ namespace FamilySearch { namespace GEDCOM {
             misc.note.append(str);
             misc.note.append(" ");
         }
-        if (*misc.note.end() == ' ') misc.note.erase(misc.note.end()-1, misc.note.end());
+        misc.setNote(trim(misc.getNote()));
+        // if (*misc.note.end() == ' ') misc.note.erase(misc.note.end()-1, misc.note.end());
         misc.set(true);
         
         return is;

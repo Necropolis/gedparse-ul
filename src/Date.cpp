@@ -5,6 +5,8 @@
 
 #include "Date.hpp"
 
+#include "Util.hpp"
+
 namespace FamilySearch { namespace GEDCOM {
     
     void setPart(string&, Date&);
@@ -80,7 +82,7 @@ namespace FamilySearch { namespace GEDCOM {
     void Date::emitData(CSVOStream& csv) {
         string str;
         str.append(day).append(" ").append(month).append(" ").append(year);
-        csv << str;
+        csv << trim(str).c_str();
     }
     
 } }

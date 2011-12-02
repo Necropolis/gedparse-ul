@@ -11,11 +11,13 @@
 #include <vector>
 #endif
 
+#include "Util.hpp"
+
 namespace FamilySearch { namespace GEDCOM {
     
-    Record::Record(): name(true) { }
+    Record::Record(): name(true), father(true), mother(true) { }
     
-    Record::Record(string _type): type(_type) { }
+    Record::Record(string _type): type(_type), name(true), father(true), mother(true) { }
     
     Record::Record(BSONElement elem): type(elem["type"].String()), name(elem["name"]), father(elem["father"]), mother(elem["mother"]), gender(elem["gender"]), misc(elem["misc"]), batch(elem["batch"]), marriage(elem["marriage"]), spouse(elem["spouse"]), event(elem["event"]) { }
     
@@ -303,7 +305,7 @@ namespace FamilySearch { namespace GEDCOM {
         }
         if (type=="INDI")
             event.emitData(csv);
-        csv << misc.getNote()
+        csv << trim(misc.getNote()).c_str()
             << batch.getBatch();
     }
       

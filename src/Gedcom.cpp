@@ -9,9 +9,9 @@
 
 namespace FamilySearch { namespace GEDCOM {
   
-    Gedcom::Gedcom(): records(new vector<shared_ptr<Record> >()) { }
+    Gedcom::Gedcom(): records(new vector<boost::shared_ptr<Record> >()) { }
   
-    vector<shared_ptr<Record> >& Gedcom::getRecords() { return *records; }
+    vector<boost::shared_ptr<FamilySearch::GEDCOM::Record> >& Gedcom::getRecords() { return *records; }
     GedcomParseDelegate& Gedcom::getDelegate() { return *dg; }
     void Gedcom::setDelegate(GedcomParseDelegate& dg) { this->dg.reset(&dg); }
   
@@ -39,7 +39,7 @@ namespace FamilySearch { namespace GEDCOM {
     
             if (str.compare("FAM")||str.compare("INDI")) {
                 // all is well in zion
-                shared_ptr<Record> r(new Record());
+                boost::shared_ptr<Record> r(new Record());
                 r->setType(str);
           
                 is >> *r;

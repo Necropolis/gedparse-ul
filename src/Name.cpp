@@ -136,8 +136,8 @@ namespace FamilySearch { namespace GEDCOM {
              it != givenNames.end();
              ++it)
             givenName.append(*it);
-        csv << givenName
-            << surname;
+        csv << trim(givenName).c_str()
+            << trim(surname).c_str();
         if (standalone) {
             list<StandardisedName> stgn;
             list<StandardisedName> stsn;
@@ -156,8 +156,8 @@ namespace FamilySearch { namespace GEDCOM {
                  it != stsn.end();
                  ++it)
                 stsn_s.append(it->getStandardisedName());
-            csv << stgn_s
-                << stsn_s;
+            csv << trim(stgn_s)
+                << trim(stsn_s);
         }
     }
     

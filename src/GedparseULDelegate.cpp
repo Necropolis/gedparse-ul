@@ -15,25 +15,24 @@ namespace FamilySearch { namespace GEDCOM {
                                           istream::pos_type length) {
         ++ records;
         
-        cout << "[[ WIN ]] Now treating record " << records << endl;
-        cout << "          " << (double)current/(double)length*100.0f << "% of the way done" << endl;
+//        cout << "[[ WIN ]] Now treating record " << records <<  " " << (double)current/(double)length*100.0f << "% of the way done\r";
         
 #ifdef DEBUG
         if (r.validate_parse()) {
-            cout << "          " << "[[ DEBUG ]] Parsed Successfully" << endl;
+//            cout << "          " << "[[ DEBUG ]] Parsed Successfully" << endl;
             r.clearRaw();
-            cout << "\r\b";
+//            cout << "\r\b";
         } else {
             cout << "          " << "[[ DEBUG ]] Parsed [[ FAILED ]]" << endl;
             r.output_debug_info(cout);
         }
 #endif
-        cout << "\r\b\r\b";
+//        cout << "\r\b\r\b";
         
         if (useDb) {
             // insert the record
             conn->insert(collection, r.asBSON());
-            cout << "          " << "[[ WIN ]] Inserted into DB Successfully" << endl;
+//            cout << "          " << "[[ WIN ]] Inserted into DB Successfully" << endl;
         }
         
         if (useCsv) {

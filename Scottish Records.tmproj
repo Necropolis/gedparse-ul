@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>src/Event.cpp</string>
+	<string>src/Name.cpp</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -25,13 +25,13 @@
 					<key>filename</key>
 					<string>src/Gedcom.hpp</string>
 					<key>lastUsed</key>
-					<date>2011-11-18T16:06:00Z</date>
+					<date>2011-12-01T22:45:24Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
 					<string>src/Gedcom.cpp</string>
 					<key>lastUsed</key>
-					<date>2011-11-15T18:01:46Z</date>
+					<date>2011-12-02T15:15:36Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
@@ -49,7 +49,7 @@
 					<key>filename</key>
 					<string>src/Record.cpp</string>
 					<key>lastUsed</key>
-					<date>2011-11-22T21:16:57Z</date>
+					<date>2011-12-02T15:19:05Z</date>
 				</dict>
 				<dict>
 					<key>children</key>
@@ -70,7 +70,9 @@
 							<key>filename</key>
 							<string>src/Name.cpp</string>
 							<key>lastUsed</key>
-							<date>2011-11-22T21:14:49Z</date>
+							<date>2011-12-02T15:19:08Z</date>
+							<key>selected</key>
+							<true/>
 						</dict>
 						<dict>
 							<key>filename</key>
@@ -124,15 +126,13 @@
 							<key>filename</key>
 							<string>src/Event.hpp</string>
 							<key>lastUsed</key>
-							<date>2011-11-15T17:47:18Z</date>
+							<date>2011-12-01T22:40:05Z</date>
 						</dict>
 						<dict>
 							<key>filename</key>
 							<string>src/Event.cpp</string>
 							<key>lastUsed</key>
-							<date>2011-11-22T21:22:23Z</date>
-							<key>selected</key>
-							<true/>
+							<date>2011-12-01T20:15:16Z</date>
 						</dict>
 						<dict>
 							<key>filename</key>
@@ -151,6 +151,70 @@
 					<true/>
 					<key>name</key>
 					<string>Record Pieces</string>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>src/Attribute.cpp</string>
+					<key>lastUsed</key>
+					<date>2011-12-02T15:19:08Z</date>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>src/Batch.cpp</string>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>src/Batch.hpp</string>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>src/CSVOStream.cpp</string>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>src/CSVOStream.hpp</string>
+					<key>lastUsed</key>
+					<date>2011-12-01T22:40:28Z</date>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>src/gedparse-ul.cpp</string>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>src/GedparseULDelegate.cpp</string>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>src/GedparseULDelegate.hpp</string>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>src/Marriage.cpp</string>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>src/Marriage.hpp</string>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>src/Miscelleneous.cpp</string>
+					<key>lastUsed</key>
+					<date>2011-12-01T22:44:39Z</date>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>src/Miscelleneous.hpp</string>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>src/Util.cpp</string>
+					<key>lastUsed</key>
+					<date>2011-12-01T22:41:07Z</date>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>src/Util.hpp</string>
 				</dict>
 			</array>
 			<key>expanded</key>
@@ -231,6 +295,20 @@
 			<key>firstVisibleLine</key>
 			<integer>7</integer>
 		</dict>
+		<key>src/Attribute.cpp</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>0</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
 		<key>src/Attribute.hpp</key>
 		<dict>
 			<key>caret</key>
@@ -261,6 +339,20 @@
 				<integer>17</integer>
 			</dict>
 		</dict>
+		<key>src/CSVOStream.hpp</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>0</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>40</integer>
+		</dict>
 		<key>src/Date.cpp</key>
 		<dict>
 			<key>caret</key>
@@ -288,20 +380,6 @@
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
-		</dict>
-		<key>src/Event.cpp</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>10</integer>
-				<key>line</key>
-				<integer>1</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>48</integer>
 		</dict>
 		<key>src/Event.hpp</key>
 		<dict>
@@ -338,9 +416,9 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>30</integer>
+				<integer>16</integer>
 				<key>line</key>
-				<integer>32</integer>
+				<integer>13</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -352,14 +430,14 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>2</integer>
+				<integer>17</integer>
 				<key>line</key>
-				<integer>35</integer>
+				<integer>10</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>0</integer>
+			<integer>3</integer>
 		</dict>
 		<key>src/Gender.cpp</key>
 		<dict>
@@ -389,19 +467,33 @@
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
 		</dict>
+		<key>src/Miscelleneous.cpp</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>18</integer>
+				<key>line</key>
+				<integer>7</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
 		<key>src/Name.cpp</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>9</integer>
+				<integer>0</integer>
 				<key>line</key>
-				<integer>1</integer>
+				<integer>0</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>117</integer>
+			<integer>122</integer>
 		</dict>
 		<key>src/Name.hpp</key>
 		<dict>
@@ -450,14 +542,14 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>48</integer>
+				<integer>18</integer>
 				<key>line</key>
-				<integer>41</integer>
+				<integer>13</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>206</integer>
+			<integer>270</integer>
 		</dict>
 		<key>src/Record.hpp</key>
 		<dict>
@@ -559,6 +651,20 @@
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
 		</dict>
+		<key>src/Util.cpp</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>0</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>openDocuments</key>
 	<array>
@@ -570,11 +676,14 @@
 		<string>src/RecordType.hpp</string>
 		<string>src/Record.hpp</string>
 		<string>src/Record.cpp</string>
+		<string>src/Attribute.cpp</string>
 		<string>src/Attribute.hpp</string>
 		<string>src/Gender.hpp</string>
 		<string>src/Gender.cpp</string>
 		<string>src/Name.hpp</string>
 		<string>src/Name.cpp</string>
+		<string>src/Miscelleneous.cpp</string>
+		<string>src/Util.cpp</string>
 		<string>src/Date.hpp</string>
 		<string>src/Date.cpp</string>
 		<string>src/Spouse.hpp</string>
@@ -584,11 +693,11 @@
 		<string>src/Place.hpp</string>
 		<string>src/Place.cpp</string>
 		<string>src/Event.hpp</string>
-		<string>src/Event.cpp</string>
+		<string>src/CSVOStream.hpp</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{316, 177}, {773, 803}}</string>
+	<string>{{841, 99}, {773, 803}}</string>
 </dict>
 </plist>
