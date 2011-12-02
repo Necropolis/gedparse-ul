@@ -15,7 +15,7 @@ namespace FamilySearch { namespace GEDCOM {
                                           istream::pos_type length) {
         ++ records;
         
-//        cout << "[[ WIN ]] Now treating record " << records <<  " " << (double)current/(double)length*100.0f << "% of the way done\r";
+        cout << "[[ WIN ]] Now treating record " << records <<  " " << (double)current/(double)length*100.0f << "% of the way done\033[K\r";
         
 #ifdef DEBUG
         if (r.validate_parse()) {

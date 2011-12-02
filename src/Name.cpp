@@ -156,8 +156,8 @@ namespace FamilySearch { namespace GEDCOM {
                  it != stsn.end();
                  ++it)
                 stsn_s.append(it->getStandardisedName());
-            csv << trim(stgn_s)
-                << trim(stsn_s);
+            csv << trim(stgn_s).c_str()
+                << trim(stsn_s).c_str();
         }
     }
     
