@@ -4,7 +4,7 @@ The beginning of an unlinked GEDCOM driver - code that can read and emit unlinke
 
 This mess was all written to facilitate the conversion of some old unlinked GEDCOM files to a MongoDB instance, from where they were sanitized and exported into a CSV. From there another team used another piece of software to convert that to a linked GEDCOM.
 
-This code is very specialized and wasn't intended for heavy re-use without modification.
+This code is very specialized and wasn't intended for heavy re-use without modification. It is dual-licensed 2c-BSD/MIT. While the entire Mongo DB project (GNU AGPLv3) is a submodule, the only parts of Mongo that are used on a source-linked level is the client driver, which is licensed under the Apache 2.0 license. This should not present a conflict, however, before rolling the Mongo client forward a version you should check the [MongoDB License](http://www.mongodb.org/display/DOCS/Licensing) to ensure that the licensing has not changed.
 
 ## C++
 
