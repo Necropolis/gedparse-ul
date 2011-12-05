@@ -173,7 +173,10 @@ int main(int argc, char **argv)
   
     *inputFile >> *ged;
 
-    cout << "Record count: " << ged->getRecords().size() << endl;
+    cout << "Record count:        " << dg->getRecordCount() << endl;
+    cout << "Minimum record size: " << dg->getMinBytes() << endl;
+    cout << "Maximum record size: " << dg->getMaxBytes() << endl;
+    cout << "Average record size: " << dg->getAvgBytes() << endl;
 
     return 0;
 }

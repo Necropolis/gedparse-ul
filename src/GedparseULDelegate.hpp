@@ -34,6 +34,10 @@ namespace FamilySearch { namespace GEDCOM {
         bool useDb;
         bool useCsv;
         
+        size_t max_bytes;
+        size_t min_bytes;
+        size_t avg_bytes;
+        
     public:
         GedparseULDelegate();
         
@@ -54,6 +58,11 @@ namespace FamilySearch { namespace GEDCOM {
         void setUsingDb(bool);
         bool isUsingCSV();
         void setUsingCSV(bool);
+        
+        size_t getRecordCount();
+        size_t getMaxBytes();
+        size_t getMinBytes();
+        size_t getAvgBytes();
     };
     
 } }

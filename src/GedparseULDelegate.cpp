@@ -7,7 +7,7 @@
 
 namespace FamilySearch { namespace GEDCOM {
     
-    GedparseULDelegate::GedparseULDelegate(): records(0), collection(""), useDb(false), useCsv(false) { }
+    GedparseULDelegate::GedparseULDelegate(): records(0), collection(""), useDb(false), useCsv(false), max_bytes(0), min_bytes(0xFFFFFFFF), avg_bytes(0) { }
     
     void GedparseULDelegate::parsedRecord(Gedcom& ged,
                                           Record& r,
@@ -20,6 +20,14 @@ namespace FamilySearch { namespace GEDCOM {
 #ifdef DEBUG
         if (r.validate_parse()) {
 //            cout << "          " << "[[ DEBUG ]] Parsed Successfully" << endl;
+            basic_string<char>::size_type __size = r.getRaw().size();
+            if (__size>max_bytes) max_bytes = __size;
+            if (__size<min_bytes) min_bytes = __size;
+            if (records==1) avg_bytes = __size;
+            else {
+                avg_bytes = (avg_bytes + __size) / 2;
+            }
+            
             r.clearRaw();
 //            cout << "\r\b";
         } else {
@@ -59,5 +67,10 @@ namespace FamilySearch { namespace GEDCOM {
     void GedparseULDelegate::setUsingDb(bool _useDb) { useDb = _useDb; }
     bool GedparseULDelegate::isUsingCSV() { return useCsv; }
     void GedparseULDelegate::setUsingCSV(bool _useCsv) { useCsv = _useCsv; }
+    
+    size_t GedparseULDelegate::getRecordCount() { return records; }    
+    size_t GedparseULDelegate::getMaxBytes() { return max_bytes; }
+    size_t GedparseULDelegate::getMinBytes() { return min_bytes; }
+    size_t GedparseULDelegate::getAvgBytes() { return avg_bytes; }
     
 } }
